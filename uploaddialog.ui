@@ -46,7 +46,7 @@
    <item>
     <widget class="QCheckBox" name="markUploadedCheckBox" >
      <property name="text" >
-      <string>mark as uploaded, but don't upload</string>
+      <string>Mark as uploaded, but do not upload</string>
      </property>
     </widget>
    </item>
