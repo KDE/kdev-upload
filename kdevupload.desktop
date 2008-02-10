@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Service
+Exec=blubb
+Name=KDevUpload
+Name[x-test]=xxKDevUploadxx
+GenericName=Upload Plugin
+GenericName[de]=Upload Plugin
+Comment=Upload Projectfiles to remote server
+Comment[de]=Projektdateien auf entfernte Servern raufladen
+Icon=go-up
+X-KDE-ServiceTypes=KDevelop/Plugin
+
+X-KDevelop-Plugin-Version=1
+#X-KDevelop-Plugin-Homepage=http://kdewebdev.org/
+X-KDevelop-Plugin-BugsEmailAddress=niko.sams@gmail.com
+X-KDevelop-Plugin-Copyright=(C) by Niko Sams
+
+X-KDevelop-Args=
+
+X-KDevelop-Category=Global
+X-KDE-Library=libkdevupload
+X-KDE-PluginInfo-Name=KDevUpload
+X-KDevelop-Version=4
+X-KDevelop-Properties=Quanta-Upload
+X-KDevelop-IRequired=org.kdevelop.IOutputView
