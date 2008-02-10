@@ -4,7 +4,6 @@ include_directories(
    ${KDEVPLATFORM_INCLUDE_DIR}/shell
    ${KDEVPLATFORM_INCLUDE_DIR}/project
 )
-add_definitions ( -DKDE_DEFAULT_DEBUG_AREA=24000 )
 
 #plugin
 set(kdevupload_PART_SRCS 
@@ -42,7 +41,7 @@ set(uploadpreferences_PART_SRCS
 )
 kde4_add_plugin(kcm_kdev_upload ${uploadpreferences_PART_SRCS})
 
-target_link_libraries(kcm_kdev_upload kdevuploadlib kdevquanta kdevplatforminterfaces ${KDE4_KDECORE_LIBS})
+target_link_libraries(kcm_kdev_upload kdevquanta kdevplatforminterfaces ${KDE4_KDECORE_LIBS})
 #target_link_libraries(kcm_kdev_upload kdevupload)
 
 install(TARGETS kcm_kdev_upload  DESTINATION ${PLUGIN_INSTALL_DIR})
