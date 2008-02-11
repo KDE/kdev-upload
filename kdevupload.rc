@@ -1,0 +1,8 @@
+<!DOCTYPE kpartgui>
+<kpartplugin name="upload" library="libkdevupload" version="1">
+<MenuBar>
+  <Menu name="project">
+    <Action name="project_upload" />
+  </Menu>
+</MenuBar>
+</kpartplugin>

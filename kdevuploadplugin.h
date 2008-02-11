@@ -18,6 +18,9 @@
 
 #include "iplugin.h"
 
+class QSignalMapper;
+class KActionMenu;
+class KAction;
 namespace KDevelop {
   class ProjectBaseItem;
   class IProject;
@@ -37,21 +40,43 @@ public:
     */
     QPair<QString,QList<QAction*> > requestContextMenuActions( KDevelop::Context* );
 
-public Q_SLOTS:
+private Q_SLOTS:
     /**
     * Opens the UploadDialog with the previously selected file as root.
+    * Executed from context-menu
     */
     void upload();
 
     /**
-    * Uploads the previously selected file without any futher actions needed by the user
+    * Uploads the previously selected file without any futher actions needed by the user.
+    * Executed from context-menu
     */
     void quickUpload();
 
+    /**
+    * Opens the UploadDialog for the project.
+    * Executed by the upload-action in the Project-menu
+    */
+    void projectUpload(QObject* project);
+
+    /**
+    * Called when project was opened, adds a upload-action to the project-menu.
+    */
+    void projectOpened(KDevelop::IProject*);
+
+    /**
+    * Called when project was closed, removes the upload-action from the project-menu.
+    */
+    void projectClosed(KDevelop::IProject*);
 
 private:
-    QList<KDevelop::ProjectBaseItem*> m_ctxUrlList;
-    QMap<KDevelop::IProject*, UploadProfileModel*> m_profileModels;
+    void setupActions();
+
+    QList<KDevelop::ProjectBaseItem*> m_ctxUrlList; ///< selected files when the contextmenu was requested
+
+    KActionMenu* m_projectUploadActionMenu; ///< upload ActionMenu, displayed in the Project-Menu
+    QMap<KDevelop::IProject*, KAction*> m_projectUploadActions; ///< upload actions for every open project
+    QSignalMapper* m_signalMapper; ///< signal mapper for upload actions, to get the correct project
 };
 
 #endif

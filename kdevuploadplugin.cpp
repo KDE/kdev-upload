@@ -12,12 +12,15 @@
 
 #include <QAction>
 #include <QVBoxLayout>
+#include <QSignalMapper>
 
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kparts/mainwindow.h>
+#include <kactioncollection.h>
+#include <kactionmenu.h>
 
 #include <icore.h>
 #include <iproject.h>
@@ -57,6 +60,15 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
 UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
 : KDevelop::IPlugin(UploadFactory::componentData(), parent)
 {
+    connect(core()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
+                   this, SLOT(projectOpened(KDevelop::IProject*)));
+    connect(core()->projectController(), SIGNAL(projectClosed(KDevelop::IProject*)),
+                   this, SLOT(projectClosed(KDevelop::IProject*)));
+
+    setXMLFile("kdevupload.rc");
+
+    setupActions();
+
     FilesTreeViewFactory *factory = new FilesTreeViewFactory(this);
     core()->uiController()->addToolView( i18n("Upload Profiles"), factory );
 }
@@ -65,6 +77,42 @@ UploadPlugin::~UploadPlugin()
 {
 }
 
+void UploadPlugin::setupActions()
+{
+    m_signalMapper = new QSignalMapper(this);
+    connect(m_signalMapper, SIGNAL(mapped(QObject*)),
+            this, SLOT(projectUpload(QObject*)));
+    m_projectUploadActionMenu = new KActionMenu(i18n("&Upload Project"), this);
+    m_projectUploadActionMenu->setIcon(KIcon("go-up"));
+    m_projectUploadActionMenu->setToolTip(i18n("Upload project"));
+    actionCollection()->addAction("project_upload", m_projectUploadActionMenu);
+}
+
+void UploadPlugin::projectOpened(KDevelop::IProject* project)
+{
+    KAction* action = new KAction(project->name(), m_projectUploadActionMenu);
+    connect(action, SIGNAL(triggered()), m_signalMapper, SLOT(map()));
+    m_signalMapper->setMapping(action, project);
+    m_projectUploadActions.insert(project, action);
+    m_projectUploadActionMenu->addAction(action);
+}
+void UploadPlugin::projectClosed(KDevelop::IProject* project)
+{
+    KAction* action = m_projectUploadActions.value(project);
+    if (action) {
+        m_projectUploadActionMenu->removeAction(action);
+        delete action;
+    }
+}
+
+void UploadPlugin::projectUpload(QObject* p)
+{
+    KDevelop::IProject* project = qobject_cast<KDevelop::IProject*>(p);
+    if (project) {
+        UploadDialog dialog(project, core()->uiController()->activeMainWindow());
+        dialog.exec();
+    }
+}
 
 void UploadPlugin::unload()
 {
