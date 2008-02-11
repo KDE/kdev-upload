@@ -20,6 +20,7 @@ set(kdevupload_PART_SRCS
 set(kdevupload_UI
     uploaddialog.ui
     uploadprofiledlg.ui
+    uploadpreferences.ui
 )
 kde4_add_ui_files(kdevupload_PART_SRCS ${kdevupload_UI})
 
@@ -39,6 +40,8 @@ set(uploadpreferences_PART_SRCS
    uploadprofileitem.cpp
    uploadprofiledlg.cpp
 )
+kde4_add_ui_files(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui)
+
 kde4_add_plugin(kcm_kdev_upload ${uploadpreferences_PART_SRCS})
 
 target_link_libraries(kcm_kdev_upload kdevquanta kdevplatforminterfaces ${KDE4_KDECORE_LIBS})
