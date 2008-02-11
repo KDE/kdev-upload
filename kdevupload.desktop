@@ -2,11 +2,8 @@
 Type=Service
 Exec=blubb
 Name=KDevUpload
-Name[x-test]=xxKDevUploadxx
 GenericName=Upload Plugin
-GenericName[de]=Upload Plugin
 Comment=Upload Projectfiles to remote server
-Comment[de]=Projektdateien auf entfernte Servern raufladen
 Icon=go-up
 X-KDE-ServiceTypes=KDevelop/Plugin
 
