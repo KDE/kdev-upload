@@ -3,7 +3,9 @@ Type=Service
 Exec=blubb
 Name=KDevUpload
 GenericName=Upload Plugin
+GenericName[ga]=Breiseán Uasluchtaithe
 Comment=Upload Projectfiles to remote server
+Comment[ga]=Uasluchtaigh comhaid tionscadail go cianfhreastalaí
 Icon=go-up
 X-KDE-ServiceTypes=KDevelop/Plugin
 

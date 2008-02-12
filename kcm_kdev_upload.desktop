@@ -12,4 +12,6 @@ X-KDE-ParentComponents=KDevUpload
 X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
+Name[ga]=Próifílí Uasluchtaithe
 Comment=Configure Upload Profiles
+Comment[ga]=Cumraigh Próifílí Uasluchtaithe
