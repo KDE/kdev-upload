@@ -53,6 +53,12 @@ ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
     m_tree->header()->hide();
     connect(m_tree, SIGNAL(activated(KUrl)),
             this, SLOT(openUrl(KUrl)));
+
+    //additional to activate also connect doubleClicked
+    //activated *should* be emitted on doubleclick - but for me it doesn't
+    connect(m_tree, SIGNAL(doubleClicked(QModelIndex)),
+            this, SLOT(treeDoubleClicked()));
+
     l->addWidget(m_tree);
 }
 void ProfilesFileTree::profileIndexChanged(int index)
@@ -76,9 +82,16 @@ void ProfilesFileTree::profileIndexChanged(int index)
     }
 }
 
+void ProfilesFileTree::treeDoubleClicked()
+{
+    if (m_tree->selectedUrl().isValid()) {
+        openUrl(m_tree->selectedUrl());
+    }
+}
+
 void ProfilesFileTree::openUrl(const KUrl& url)
 {
-    kDebug(24000) << "" << url;
+    kDebug(24000) << "openUrl" << url;
     KDevelop::Core::self()->documentController()->openDocument(url);
 }
 void ProfilesFileTree::dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)

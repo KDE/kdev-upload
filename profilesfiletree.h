@@ -42,6 +42,11 @@ protected Q_SLOTS:
     void openUrl(const KUrl& url);
 
     /**
+     * Slot called when on file tree is doubleclicked
+     */
+    void treeDoubleClicked();
+
+    /**
      * Slot called when current profile has changed, sets the new root-url for
      * the tree
      */
