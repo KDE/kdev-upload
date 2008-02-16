@@ -46,13 +46,22 @@ public:
     void setRootItem(KDevelop::ProjectBaseItem* item);
 
 private Q_SLOTS:
-    void buttonClicked(QAbstractButton* button);
+    /**
+     * Starts the upload
+     */
+    void startUpload();
+
+    /**
+     * Current profile changed, sets the new profile to the model
+     */
     void profileChanged(int index);
+
+    /**
+     * Opens the  UploadProfileDlg to edit the current profile
+     */
     void modifyProfile();
 
 private:
-    QModelIndex m_uploadIndex;
-
     Ui::UploadDialog* m_ui;
     KDevelop::IProject* m_project;
     UploadProjectModel* m_uploadProjectModel;

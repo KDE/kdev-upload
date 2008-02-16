@@ -43,8 +43,8 @@ UploadDialog::UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QW
     m_ui->setupUi(this);
 
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setText(i18n("&Upload"));
-    connect(m_ui->buttonBox, SIGNAL(clicked(QAbstractButton*)),
-            this, SLOT(buttonClicked(QAbstractButton*)));
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()),
+            this, SLOT(startUpload()));
 
     m_uploadProjectModel = new UploadProjectModel(project);
     m_uploadProjectModel->setSourceModel(project->projectItem()->model());
@@ -105,23 +105,21 @@ void UploadDialog::profileChanged(int index)
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }
 
-void UploadDialog::buttonClicked(QAbstractButton* button)
+void UploadDialog::startUpload()
 {
     
-    if (button == m_ui->buttonBox->button(QDialogButtonBox::Ok)) {
-        if (m_ui->profileCombobox->currentIndex() == -1) {
-            KMessageBox::sorry(this, i18n("Can't upload, no profile selected."));
-            return;
-        }
-        QWidget* p = KDevelop::Core::self()->uiController()->activeMainWindow();
-        UploadJob* job = new UploadJob(m_project, m_uploadProjectModel,
-                            p);
-        job->setOnlyMarkUploaded(m_ui->markUploadedCheckBox->checkState() == Qt::Checked);
-        job->setOutputModel(m_plugin->outputModel());
-        job->start();
-
-        hide();
+    if (m_ui->profileCombobox->currentIndex() == -1) {
+        KMessageBox::sorry(this, i18n("Can't upload, no profile selected."));
+        return;
     }
+    QWidget* p = KDevelop::Core::self()->uiController()->activeMainWindow();
+    UploadJob* job = new UploadJob(m_project, m_uploadProjectModel,
+                        p);
+    job->setOnlyMarkUploaded(m_ui->markUploadedCheckBox->checkState() == Qt::Checked);
+    job->setOutputModel(m_plugin->outputModel());
+    job->start();
+
+    hide();
 }
 
 void UploadDialog::setRootItem(KDevelop::ProjectBaseItem* item)
