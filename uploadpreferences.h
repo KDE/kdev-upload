@@ -22,6 +22,9 @@ class UploadProfileDlg;
 class UploadProfileModel;
 class UploadProfileItem;
 
+/**
+ * KCModule for upload profiles configuration
+ */
 class UploadPreferences : public KCModule
 {
     Q_OBJECT

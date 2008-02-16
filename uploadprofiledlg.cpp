@@ -48,8 +48,7 @@ int UploadProfileDlg::editProfile(UploadProfileItem* item)
   
     QStringList protocols = KProtocolInfo::protocols();
     protocols.sort();
-    Q_FOREACH (QString p, protocols)
-    {
+    Q_FOREACH (QString p, protocols) {
         KUrl u;
         u.setProtocol(p);
         if (KProtocolManager::supportsWriting(u) && KProtocolManager::supportsMakeDir(u)

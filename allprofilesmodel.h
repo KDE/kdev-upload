@@ -45,9 +45,19 @@ public:
     UploadProfileItem* uploadItem(const QModelIndex& index) const;
 
 private Q_SLOTS:
+    /**
+     * When a project is opened this adds the UploadProfileModel of the project
+     * to the sourceModels
+     */
     void projectOpened(KDevelop::IProject* p);
+
+    /**
+     * When a project is closed this removes the UploadProfileModel of the project
+     * from the sourceModels
+     */
     void projectClosed(KDevelop::IProject* p);
 
+    //translate signals from sourceModels:
     void sourceReset();
     void sourceDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
     void sourceRowsAboutToBeInserted(const QModelIndex& parent, int start, int end);
@@ -55,6 +65,11 @@ private Q_SLOTS:
     void sourceRowsAboutToBeRemoved(const QModelIndex& parent, int start, int end);
     void sourceRowsRemoved();
 
+    /**
+     * Called when upload-configuration has changed (the user opened the
+     * project-configuration and modified profiles)
+     * KSettings::Dispatcher::registerComponent is used for this.
+     */
     void reloadSettings();
 
 private:

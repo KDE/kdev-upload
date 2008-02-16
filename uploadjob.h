@@ -47,6 +47,9 @@ public:
         return m_onlyMarkUploaded;
     }
 
+    /**
+     * Sets the output model that should be used to output the log messages
+     */
     void setOutputModel(QStandardItemModel* model);
     QStandardItemModel* outputModel();
 
@@ -57,28 +60,41 @@ public Q_SLOTS:
     void start();
 
 private Q_SLOTS:
+    /**
+     * Upload the next (or first) item
+     */
     void uploadNext();
+
+    /**
+     * Called when current job is finished
+     */
     void uploadResult(KJob*);
+
+    /**
+     * Updates the progress bar
+     */
     void processedSize(KJob*, qulonglong);
+
+    /**
+     * Updates the progress text
+     */
     void uploadInfoMessage(KJob*, const QString& plain);
 private:
-    void handleError(KJob* job);
-
     /**
      * Appends a message to the current outputModel.
      * @return the QStandardItem* to modify it further (to eg. change color)
      */
     QStandardItem* appendLog(const QString& message);
     
-    QModelIndex m_uploadIndex;
+    QModelIndex m_uploadIndex; ///< current index when the upload is running
 
-    KDevelop::IProject* m_project;
+    KDevelop::IProject* m_project; ///< the project of this job
     UploadProjectModel* m_uploadProjectModel;
 
-    KProgressDialog* m_progressDialog;
-    int m_progressBytesDone;
+    KProgressDialog* m_progressDialog; ///< progress-dialog when the upload is running
+    int m_progressBytesDone; ///< uploaded bytes, incremented when a file is fully uploaded. used for progress.
 
-    bool m_onlyMarkUploaded;
+    bool m_onlyMarkUploaded; ///< if files should be only marked as uploaded
 
     QStandardItemModel* m_outputModel;
 };

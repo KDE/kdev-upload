@@ -28,11 +28,29 @@ public:
     virtual ~UploadProfileItem() {}
 
     void setUrl(const KUrl& url);
+
+    /**
+     * Set if this item is the default upload-profile.
+     * Sets default to false for all other items in this model
+     */
     void setDefault(bool isDefault);
+
+    /**
+     * Set the profile-number, which is used as group-name in the config
+     */
     void setProfileNr(const QString& nr);
+
     KUrl url() const;
     bool isDefault() const;
+
+    /**
+     * Returns the profile-number, which is used as group-name in the config
+     */
     QString profileNr() const;
+
+    /**
+     * Returns the KConfigGroup for this upload profile if one exists
+     */
     KConfigGroup profileConfigGroup() const;
 
     int type() const {

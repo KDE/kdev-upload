@@ -20,6 +20,9 @@ namespace Ui {
 }
 class UploadProfileItem;
 
+/**
+ * Dialog to edit a upload profile
+ */
 class UploadProfileDlg : public QDialog
 {
     Q_OBJECT
@@ -28,6 +31,10 @@ public:
     virtual ~UploadProfileDlg();
 
 public Q_SLOTS:
+    /**
+     * Opens the Dialog to edit an upload profile
+     * @return dialog's result code, Accepted or Rejected.
+     */
     int editProfile(UploadProfileItem* item);
 
 private:

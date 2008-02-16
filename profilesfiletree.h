@@ -24,10 +24,10 @@ class UploadPlugin;
 class AllProfilesModel;
 
 /**
-* The Profiles-File-Tree Dock
-*
-* A ComboBox to select the profile and a KFileTreeView below.
-*/
+ * The Profiles-File-Tree Dock
+ *
+ * A ComboBox to select the profile and a KFileTreeView below.
+ */
 class ProfilesFileTree : public QWidget
 {
     Q_OBJECT
@@ -37,10 +37,20 @@ public:
 
 protected Q_SLOTS:
     /**
-    * Open the Url in the editor
-    */
+     * Open the Url in the editor
+     */
     void openUrl(const KUrl& url);
+
+    /**
+     * Slot called when current profile has changed, sets the new root-url for
+     * the tree
+     */
     void profileIndexChanged(int index);
+
+    /**
+     * Slot called when data of the profile has changed, sets the new root url
+     * (if changed)
+     */
     void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
 private:
