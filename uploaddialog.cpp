@@ -130,13 +130,15 @@ void UploadDialog::startUpload()
         KMessageBox::sorry(this, i18n("Can't upload, no profile selected."));
         return;
     }
-    QWidget* p = KDevelop::Core::self()->uiController()->activeMainWindow();
-    UploadJob* job = new UploadJob(m_project, m_uploadProjectModel,
-                        p);
+    UploadJob* job = new UploadJob(m_project, m_uploadProjectModel, this);
     job->setOnlyMarkUploaded(m_ui->markUploadedCheckBox->checkState() == Qt::Checked);
     job->setOutputModel(m_plugin->outputModel());
     job->start();
+    connect(job, SIGNAL(uploadFinished()), this, SLOT(uploadFinished()));
+}
 
+void UploadDialog::uploadFinished()
+{
     hide();
 }
 

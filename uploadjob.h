@@ -79,6 +79,13 @@ private Q_SLOTS:
      * Updates the progress text
      */
     void uploadInfoMessage(KJob*, const QString& plain);
+
+Q_SIGNALS:
+    /**
+     * Signal is emitted when the upload sucessfully finished
+     */
+    void uploadFinished();
+
 private:
     /**
      * Appends a message to the current outputModel.

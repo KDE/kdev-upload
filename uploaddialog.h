@@ -62,6 +62,11 @@ private Q_SLOTS:
      */
     void modifyProfile();
 
+    /**
+     * Called when the upload successfully finished, closes the UploadDialog
+     */
+    void uploadFinished();
+
 protected:
     /**
      * Event-filter for tree context-menu.

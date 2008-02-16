@@ -79,6 +79,7 @@ void UploadJob::uploadNext()
         //last index reached - completed
         appendLog(i18n("Upload completed"));
         m_progressDialog->close();
+        emit uploadFinished();
         delete this;
         return;
     }
@@ -168,6 +169,7 @@ void UploadJob::uploadResult(KJob* job)
         appendLog(i18n("Upload error: %1", job->errorString()));
         m_progressDialog->close();
         qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
+        delete this;
         return;
     }
 
