@@ -45,6 +45,7 @@ UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args 
     }
     Q_ASSERT(project);
 
+
     setButtons(Help | Apply);
 
     QVBoxLayout * l = new QVBoxLayout( this );
@@ -96,6 +97,9 @@ void UploadPreferences::load()
 void UploadPreferences::addProfile()
 {
     UploadProfileItem* i = new UploadProfileItem();
+    if (m_model->rowCount() == 0) {
+        i->setDefault(true);
+    }
     m_model->appendRow(i);
     if (m_dlg->editProfile(i) == QDialog::Rejected) {
         m_model->removeRow(i->index().row());
