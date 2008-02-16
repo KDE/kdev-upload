@@ -37,12 +37,12 @@ UploadJob::UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWi
                                             i18n("Uploading files"),
                                             i18n("Preparing..."));
     m_progressDialog->setWindowModality(Qt::WindowModal);
-    m_progressDialog->setAttribute(Qt::WA_DeleteOnClose, true);
     m_progressDialog->setAutoClose(false);
 }
 
 UploadJob::~UploadJob()
 {
+    delete m_progressDialog;
 }
 
 void UploadJob::start()
@@ -73,6 +73,8 @@ void UploadJob::start()
 
 void UploadJob::uploadNext()
 {
+    if (m_progressDialog->wasCancelled()) return;
+
     m_uploadIndex = m_uploadProjectModel->nextRecursionIndex(m_uploadIndex);
 
     if (!m_uploadIndex.isValid()) {
@@ -153,18 +155,27 @@ void UploadJob::uploadNext()
             this, SLOT(processedSize(KJob*, qulonglong)));
     connect(job, SIGNAL(infoMessage(KJob*, QString)),
             this, SLOT(uploadInfoMessage(KJob*, QString)));
+
     connect(m_progressDialog, SIGNAL(cancelClicked()),
+            this, SLOT(cancelClicked()));
+    connect(m_progressDialog, SIGNAL(rejected()),
             job, SLOT(kill()));
     job->start();
 }
+
+void UploadJob::cancelClicked()
+{
+    appendLog(i18n("Upload canceled"));
+}
+
 
 void UploadJob::uploadResult(KJob* job)
 {
     if (job->error()) {
         if (job->error() == KIO::ERR_USER_CANCELED) {
-            appendLog(i18n("Upload canceled"));
             m_progressDialog->close();
             delete this;
+            return;
         }
         appendLog(i18n("Upload error: %1", job->errorString()));
         m_progressDialog->close();

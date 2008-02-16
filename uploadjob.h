@@ -80,6 +80,11 @@ private Q_SLOTS:
      */
     void uploadInfoMessage(KJob*, const QString& plain);
 
+    /**
+     * Cancel button in the ProgressDialog clicked
+     */
+    void cancelClicked();
+
 Q_SIGNALS:
     /**
      * Signal is emitted when the upload sucessfully finished
