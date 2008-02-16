@@ -20,6 +20,8 @@ namespace KDevelop {
     class IProject;
     class ProjectBaseItem;
 }
+class QStandardItemModel;
+class QStandardItem;
 class UploadProjectModel;
 class UploadPlugin;
 
@@ -45,6 +47,9 @@ public:
         return m_onlyMarkUploaded;
     }
 
+    void setOutputModel(QStandardItemModel* model);
+    QStandardItemModel* outputModel();
+
 public Q_SLOTS:
     /**
      * Starts the upload
@@ -56,9 +61,14 @@ private Q_SLOTS:
     void uploadResult(KJob*);
     void processedSize(KJob*, qulonglong);
     void uploadInfoMessage(KJob*, const QString& plain);
-
 private:
     void handleError(KJob* job);
+
+    /**
+     * Appends a message to the current outputModel.
+     * @return the QStandardItem* to modify it further (to eg. change color)
+     */
+    QStandardItem* appendLog(const QString& message);
     
     QModelIndex m_uploadIndex;
 
@@ -69,6 +79,8 @@ private:
     int m_progressBytesDone;
 
     bool m_onlyMarkUploaded;
+
+    QStandardItemModel* m_outputModel;
 };
 
 

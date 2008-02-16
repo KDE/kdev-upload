@@ -34,9 +34,10 @@
 #include "uploadprofileitem.h"
 #include "uploadprofiledlg.h"
 #include "uploadjob.h"
+#include "kdevuploadplugin.h"
 
-UploadDialog::UploadDialog(KDevelop::IProject* project, QWidget *parent)
-    : QDialog(parent), m_project(project), m_editProfileDlg(0)
+UploadDialog::UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QWidget *parent)
+    : QDialog(parent), m_project(project), m_editProfileDlg(0), m_plugin(plugin)
 {
     m_ui = new Ui::UploadDialog();
     m_ui->setupUi(this);
@@ -116,6 +117,7 @@ void UploadDialog::buttonClicked(QAbstractButton* button)
         UploadJob* job = new UploadJob(m_project, m_uploadProjectModel,
                             p);
         job->setOnlyMarkUploaded(m_ui->markUploadedCheckBox->checkState() == Qt::Checked);
+        job->setOutputModel(m_plugin->outputModel());
         job->start();
 
         hide();

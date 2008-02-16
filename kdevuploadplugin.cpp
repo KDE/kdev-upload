@@ -13,6 +13,8 @@
 #include <QAction>
 #include <QVBoxLayout>
 #include <QSignalMapper>
+#include <QStandardItemModel>
+#include <QItemDelegate>
 
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
@@ -28,6 +30,9 @@
 #include <iuicontroller.h>
 #include <context.h>
 #include <projectmodel.h>
+#include <core.h>
+#include <ioutputview.h>
+#include <plugincontroller.h>
 
 #include "uploaddialog.h"
 #include "profilesfiletree.h"
@@ -58,7 +63,7 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
 };
 
 UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
-: KDevelop::IPlugin(UploadFactory::componentData(), parent)
+: KDevelop::IPlugin(UploadFactory::componentData(), parent),  m_outputModel(0)
 {
     connect(core()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
                    this, SLOT(projectOpened(KDevelop::IProject*)));
@@ -109,7 +114,7 @@ void UploadPlugin::projectUpload(QObject* p)
 {
     KDevelop::IProject* project = qobject_cast<KDevelop::IProject*>(p);
     if (project) {
-        UploadDialog dialog(project, core()->uiController()->activeMainWindow());
+        UploadDialog dialog(project, this, core()->uiController()->activeMainWindow());
         dialog.exec();
     }
 }
@@ -152,7 +157,7 @@ void UploadPlugin::upload()
     if (m_ctxUrlList.isEmpty()) return;
     KDevelop::IProject* project = m_ctxUrlList.at(0)->project();
 
-    UploadDialog dialog(project, core()->uiController()->activeMainWindow());
+    UploadDialog dialog(project, this, core()->uiController()->activeMainWindow());
     dialog.setRootItem(m_ctxUrlList.at(0));
     dialog.exec();
 }
@@ -179,7 +184,27 @@ void UploadPlugin::quickUpload()
     }
 
     UploadJob* job = new UploadJob(project, model, core()->uiController()->activeMainWindow());
+    job->setOutputModel(outputModel());
     job->start();
+}
+
+QStandardItemModel* UploadPlugin::outputModel()
+{
+    if (m_outputModel) return m_outputModel;
+    IPlugin* plugin = core()->pluginController()->pluginForExtension( "org.kdevelop.IOutputView" );
+    Q_ASSERT(plugin);
+    if (plugin) {
+        KDevelop::IOutputView* view = plugin->extension<KDevelop::IOutputView>();
+        int id = view->registerView(i18n("Upload"), KDevelop::IOutputView::AllowUserClose | KDevelop::IOutputView::AutoScroll);
+
+        m_outputModel = new QStandardItemModel(this);
+
+        view->setModel(id, m_outputModel);
+        view->setDelegate(id, new QItemDelegate(m_outputModel));
+
+        return m_outputModel;
+    }
+    return 0;
 }
 
 #include "kdevuploadplugin.moc"

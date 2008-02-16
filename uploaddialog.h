@@ -29,14 +29,20 @@ namespace Ui {
     class UploadDialog;
 }
 
+/**
+ * Dialog where the user can select the files to upload
+ */
 class UploadDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    UploadDialog(KDevelop::IProject* project, QWidget *parent = 0);
+    UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QWidget *parent = 0);
     virtual ~UploadDialog();
 
+    /**
+     * Set the root-item, only items below this are displayed
+     */
     void setRootItem(KDevelop::ProjectBaseItem* item);
 
 private Q_SLOTS:
@@ -52,9 +58,7 @@ private:
     UploadProjectModel* m_uploadProjectModel;
     UploadProfileModel* m_profileModel;
     UploadProfileDlg* m_editProfileDlg;
-
-    QProgressDialog* m_progressDialog;
-    int m_progressBytesDone;
+    UploadPlugin* m_plugin;
 };
 
 

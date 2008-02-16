@@ -3,6 +3,7 @@ include_directories(
    ${KDEVPLATFORM_INCLUDE_DIR}/interfaces
    ${KDEVPLATFORM_INCLUDE_DIR}/shell
    ${KDEVPLATFORM_INCLUDE_DIR}/project
+   ${KDEVPLATFORM_INCLUDE_DIR}/outputview
 )
 
 #plugin
@@ -20,7 +21,6 @@ set(kdevupload_PART_SRCS
 set(kdevupload_UI
     uploaddialog.ui
     uploadprofiledlg.ui
-    uploadpreferences.ui
 )
 kde4_add_ui_files(kdevupload_PART_SRCS ${kdevupload_UI})
 

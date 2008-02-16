@@ -19,6 +19,7 @@
 #include "iplugin.h"
 
 class QSignalMapper;
+class QStandardItemModel;
 class KActionMenu;
 class KAction;
 namespace KDevelop {
@@ -39,6 +40,12 @@ public:
     * Returns the Upload-Action for the Contextmenu.
     */
     QPair<QString,QList<QAction*> > requestContextMenuActions( KDevelop::Context* );
+
+    /**
+    * Returns (and creates) the outputModel used for UploadPlugin.
+    * Creates the output-view (only the first time called)
+    */
+    QStandardItemModel* outputModel();
 
 private Q_SLOTS:
     /**
@@ -77,6 +84,7 @@ private:
     KActionMenu* m_projectUploadActionMenu; ///< upload ActionMenu, displayed in the Project-Menu
     QMap<KDevelop::IProject*, KAction*> m_projectUploadActions; ///< upload actions for every open project
     QSignalMapper* m_signalMapper; ///< signal mapper for upload actions, to get the correct project
+    QStandardItemModel* m_outputModel; ///< model for log-output
 };
 
 #endif

@@ -21,7 +21,6 @@
 UploadProjectModel::UploadProjectModel(KDevelop::IProject* project, QObject *parent)
     : QSortFilterProxyModel(parent), m_project(project), m_rootItem(0)
 {
-    m_projectConfig = m_project->projectConfiguration();
 }
 
 UploadProjectModel::~UploadProjectModel()
@@ -214,6 +213,16 @@ void UploadProjectModel::setRootItem(KDevelop::ProjectBaseItem* item)
 {
     m_rootItem = item;
     reset();
+}
+
+QString UploadProjectModel::currentProfileName()
+{
+    return m_profileConfigGroup.readEntry("name", QString());
+}
+
+KUrl UploadProjectModel::currentProfileUrl()
+{
+    return m_profileConfigGroup.readEntry("url", KUrl());
 }
 
 #include "uploadprojectmodel.moc"

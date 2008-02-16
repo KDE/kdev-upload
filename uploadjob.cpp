@@ -11,6 +11,7 @@
 
 #include <QPushButton>
 #include <QHeaderView>
+#include <QStandardItemModel>
 
 #include <kprogressdialog.h>
 #include <kconfiggroup.h>
@@ -22,7 +23,6 @@
 #include <kio/netaccess.h>
 #include <klocale.h>
 
-#include <icore.h>
 #include <iproject.h>
 #include <iprojectcontroller.h>
 #include <projectmodel.h>
@@ -30,11 +30,12 @@
 #include "uploadprojectmodel.h"
 
 UploadJob::UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWidget *parent)
-    : QObject(parent), m_project(project), m_uploadProjectModel(model), m_onlyMarkUploaded(false)
+    : QObject(parent), m_project(project), m_uploadProjectModel(model),
+      m_onlyMarkUploaded(false), m_outputModel(0)
 {
     m_progressDialog = new KProgressDialog(parent,
                                             i18n("Uploading files"),
-                                            i18n("Prepearing..."));
+                                            i18n("Preparing..."));
     m_progressDialog->setWindowModality(Qt::WindowModal);
     m_progressDialog->setAttribute(Qt::WA_DeleteOnClose, true);
     m_progressDialog->setAutoClose(false);
@@ -69,12 +70,14 @@ void UploadJob::start()
     m_uploadIndex = QModelIndex();
     uploadNext();
 }
+
 void UploadJob::uploadNext()
 {
     m_uploadIndex = m_uploadProjectModel->nextRecursionIndex(m_uploadIndex);
 
     if (!m_uploadIndex.isValid()) {
-        //last index reached - finished
+        //last index reached - completed
+        appendLog(i18n("Upload completed"));
         m_progressDialog->close();
         delete this;
         return;
@@ -93,7 +96,7 @@ void UploadJob::uploadNext()
         return;
     }
 
-    KUrl dest = m_uploadProjectModel->profileConfigGroup().readEntry("url", KUrl());
+    KUrl dest = m_uploadProjectModel->currentProfileUrl();
     dest.addPath(KUrl::relativeUrl(m_project->folder(), url));
 
     KIO::Job* job = 0;
@@ -105,18 +108,28 @@ void UploadJob::uploadNext()
         uploadNext();
         return;
     } else if (item->file()) {
+        appendLog(i18n("Uploading to %1: %2",
+                            m_uploadProjectModel->currentProfileName(),
+                            KUrl::relativeUrl(m_project->folder(), url)));
         kDebug() << "file_copy" << url << dest;
         job = KIO::file_copy(url, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
         m_progressDialog->setLabelText(i18n("Uploading %1...", KUrl::relativeUrl(m_project->folder(), url)));
                 //don't upload project root
     } else if (m_uploadIndex.parent().isValid() && item->folder()) {
         if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, m_progressDialog)) {
+            appendLog(i18n("Directory in %1 allready exists: %2", 
+                                m_uploadProjectModel->currentProfileName(),
+                                KUrl::relativeUrl(m_project->folder(), url)));
             m_uploadProjectModel->profileConfigGroup()
                     .writeEntry(KUrl::relativeUrl(m_project->folder(), url),
                                 QDateTime::currentDateTime());
             uploadNext();
             return;
         } else {
+
+            appendLog(i18n("Creating directory in %1: %2", 
+                                m_uploadProjectModel->currentProfileName(),
+                                KUrl::relativeUrl(m_project->folder(), url)));
             kDebug() << "mkdir" << dest;
             job = KIO::mkdir(dest);
         }
@@ -141,9 +154,12 @@ void UploadJob::uploadResult(KJob* job)
 {
     if (job->error()) {
         if (job->error() == KIO::ERR_USER_CANCELED) {
+            appendLog(i18n("Upload canceled"));
             m_progressDialog->close();
             delete this;
         }
+        appendLog(i18n("Upload error: ", job->errorString()));
+        m_progressDialog->close();
         qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
         return;
     }
@@ -176,6 +192,25 @@ void UploadJob::processedSize(KJob*, qulonglong size)
 void UploadJob::uploadInfoMessage(KJob*, const QString& plain)
 {
     m_progressDialog->setLabelText(plain);
+}
+
+void UploadJob::setOutputModel(QStandardItemModel* model)
+{
+    m_outputModel = model;
+}
+QStandardItemModel* UploadJob::outputModel()
+{
+    return m_outputModel;
+}
+QStandardItem* UploadJob::appendLog(const QString& message)
+{
+    if (m_outputModel) {
+        QStandardItem* item = new QStandardItem(message);
+        m_outputModel->appendRow(item);
+        return item;
+    } else {
+        return 0;
+    }
 }
 
 #include "uploadjob.moc"
