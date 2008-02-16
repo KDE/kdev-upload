@@ -83,6 +83,12 @@ void UploadJob::uploadNext()
         return;
     }
 
+    if (!m_uploadIndex.parent().isValid()) {
+        //don't upload project root
+        uploadNext();
+        return;
+    }
+
     KDevelop::ProjectBaseItem* item = m_uploadProjectModel->item(m_uploadIndex);
 
     Qt::CheckState checked = static_cast<Qt::CheckState>(m_uploadProjectModel
@@ -102,6 +108,9 @@ void UploadJob::uploadNext()
     KIO::Job* job = 0;
 
     if (m_onlyMarkUploaded) {
+        appendLog(i18n("Marked as uploaded for %1: %2",
+                            m_uploadProjectModel->currentProfileName(),
+                            KUrl::relativeUrl(m_project->folder(), url)));
         m_uploadProjectModel->profileConfigGroup()
                 .writeEntry(KUrl::relativeUrl(m_project->folder(), url),
                             QDateTime::currentDateTime());
@@ -114,8 +123,7 @@ void UploadJob::uploadNext()
         kDebug() << "file_copy" << url << dest;
         job = KIO::file_copy(url, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
         m_progressDialog->setLabelText(i18n("Uploading %1...", KUrl::relativeUrl(m_project->folder(), url)));
-                //don't upload project root
-    } else if (m_uploadIndex.parent().isValid() && item->folder()) {
+    } else if (item->folder()) {
         if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, m_progressDialog)) {
             appendLog(i18n("Directory in %1 allready exists: %2", 
                                 m_uploadProjectModel->currentProfileName(),
@@ -126,7 +134,6 @@ void UploadJob::uploadNext()
             uploadNext();
             return;
         } else {
-
             appendLog(i18n("Creating directory in %1: %2", 
                                 m_uploadProjectModel->currentProfileName(),
                                 KUrl::relativeUrl(m_project->folder(), url)));
@@ -158,7 +165,7 @@ void UploadJob::uploadResult(KJob* job)
             m_progressDialog->close();
             delete this;
         }
-        appendLog(i18n("Upload error: ", job->errorString()));
+        appendLog(i18n("Upload error: %1", job->errorString()));
         m_progressDialog->close();
         qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
         return;
