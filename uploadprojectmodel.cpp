@@ -64,8 +64,8 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
      if (indx.isValid() && role == Qt::CheckStateRole) {
         KDevelop::ProjectBaseItem* i = item(indx);
         if (i->file() && m_profileConfigGroup.isValid()) {
-            if (m_checkStates.contains(i->file()->url())) {
-                return m_checkStates.value(i->file()->url());
+            if (m_checkStates.contains(indx)) {
+                return m_checkStates.value(indx);
             } else {
                 QString url = KUrl::relativeUrl(m_project->folder(), i->file()->url());
                 KDateTime uploadTime = KDateTime(m_profileConfigGroup.readEntry(url, QDateTime()));
@@ -84,8 +84,8 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
         } else if (i->folder() && m_profileConfigGroup.isValid()) {
             if (!rowCount(indx)) {
                 //empty folder - should be uploaded too
-                if (m_checkStates.contains(i->folder()->url())) {
-                    return m_checkStates.value(i->folder()->url());
+                if (m_checkStates.contains(indx)) {
+                    return m_checkStates.value(indx);
                 } else {
                     //don't check for ModificationTime as we do for files
                     QString url = KUrl::relativeUrl(m_project->folder(), i->folder()->url());
@@ -128,7 +128,7 @@ bool UploadProjectModel::setData ( const QModelIndex & indx, const QVariant & va
         KDevelop::ProjectBaseItem* i = item(indx);
         if (i->file()) {
             Qt::CheckState s = static_cast<Qt::CheckState>(value.toInt());
-            m_checkStates.insert(i->file()->url(), s);
+            m_checkStates.insert(indx, s);
 
             //all parent nodes might have changed (the folders)
             QModelIndex parent = indx;
@@ -141,7 +141,7 @@ bool UploadProjectModel::setData ( const QModelIndex & indx, const QVariant & va
             if (!rowCount(indx)) {
                 //empty folder - should be uploaded too
                 Qt::CheckState s = static_cast<Qt::CheckState>(value.toInt());
-                m_checkStates.insert(i->folder()->url(), s);
+                m_checkStates.insert(indx, s);
                 emit dataChanged(indx, indx);
             } else {
                 //recursive check/uncheck
@@ -223,6 +223,35 @@ QString UploadProjectModel::currentProfileName()
 KUrl UploadProjectModel::currentProfileUrl()
 {
     return m_profileConfigGroup.readEntry("url", KUrl());
+}
+
+void UploadProjectModel::checkAll()
+{
+    setData(index(0, 0), Qt::Checked, Qt::CheckStateRole);
+}
+
+void UploadProjectModel::checkModified()
+{
+    QMapIterator<QModelIndex, Qt::CheckState> i(m_checkStates);
+    m_checkStates.clear();
+    while (i.hasNext()) {
+        i.next();
+        emit dataChanged(i.key(), i.key());
+    }
+}
+
+void UploadProjectModel::checkInvert()
+{
+    QModelIndex index;
+    while((index = nextRecursionIndex(index)).isValid()) {
+        KDevelop::ProjectBaseItem* i = item(index);
+        if (!(i->folder() && rowCount(index) > 0)) {
+            //invert files and empty folders
+            Qt::CheckState v = static_cast<Qt::CheckState>(data(index, Qt::CheckStateRole).toInt());
+            if (v == Qt::Unchecked) v = Qt::Checked; else v = Qt::Unchecked;
+            setData(index, v, Qt::CheckStateRole);
+        }
+    }
 }
 
 #include "uploadprojectmodel.moc"

@@ -12,6 +12,8 @@
 #include <QPushButton>
 #include <QHeaderView>
 #include <QProgressDialog>
+#include <QMenu>
+#include <QContextMenuEvent>
 
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
@@ -68,6 +70,22 @@ UploadDialog::UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QW
 
     connect(m_ui->modifyProfileButton, SIGNAL(clicked()),
             this, SLOT(modifyProfile()));
+
+
+    m_treeContextMenu = new QMenu(this);
+    KAction* action = new KAction(i18n("All"), this);
+    connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkAll()));
+    m_treeContextMenu->addAction(action);
+
+    action = new KAction(i18n("Modified"), this);
+    connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkModified()));
+    m_treeContextMenu->addAction(action);
+
+    action = new KAction(i18n("Invert"), this);
+    connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkInvert()));
+    m_treeContextMenu->addAction(action);
+
+    m_ui->projectTree->installEventFilter(this);
 }
 
 UploadDialog::~UploadDialog()
@@ -131,6 +149,18 @@ void UploadDialog::setRootItem(KDevelop::ProjectBaseItem* item)
             m_ui->projectTree->expand(i);
             i = i.parent();
         }
+    }
+}
+
+bool UploadDialog::eventFilter(QObject* obj, QEvent* event)
+{
+    if (event->type() == QEvent::ContextMenu) {
+        QContextMenuEvent *menuEvent = static_cast<QContextMenuEvent*>(event);
+        m_treeContextMenu->exec(menuEvent->globalPos());
+        return true;
+    } else {
+        // standard event processing
+        return QObject::eventFilter(obj, event);
     }
 }
 

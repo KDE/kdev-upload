@@ -16,6 +16,7 @@
 
 class QAbstractButton;
 class QProgressDialog;
+class QMenu;
 class KJob;
 namespace KDevelop {
     class IProject;
@@ -61,6 +62,12 @@ private Q_SLOTS:
      */
     void modifyProfile();
 
+protected:
+    /**
+     * Event-filter for tree context-menu.
+     */
+    bool eventFilter(QObject* obj, QEvent* event);
+
 private:
     Ui::UploadDialog* m_ui;
     KDevelop::IProject* m_project;
@@ -68,6 +75,7 @@ private:
     UploadProfileModel* m_profileModel;
     UploadProfileDlg* m_editProfileDlg;
     UploadPlugin* m_plugin;
+    QMenu* m_treeContextMenu;
 };
 
 

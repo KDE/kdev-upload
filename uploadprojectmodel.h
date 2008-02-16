@@ -83,10 +83,26 @@ public:
      */
     KUrl currentProfileUrl();
 
+public Q_SLOTS:    
+    /**
+     * Checks all items
+     */
+    void checkAll();
+
+    /**
+     * Checks all modified items
+     */
+    void checkModified();
+
+    /**
+     * Inverts the checkStatus of all items
+     */
+    void checkInvert();
+
 private:
     KDevelop::IProject* m_project; ///< current project
     KConfigGroup m_profileConfigGroup; ///< KConfigGroup for active upload-profile
-    QMap<KUrl, Qt::CheckState> m_checkStates; ///< holds the user-modified states of the checkboxes
+    QMap<QModelIndex, Qt::CheckState> m_checkStates; ///< holds the user-modified states of the checkboxes
     KDevelop::ProjectBaseItem* m_rootItem; ///< rootItem, tree is only displayed from here
 };
 
