@@ -13,5 +13,11 @@ X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
 Name[ga]=Próifílí Uasluchtaithe
+Name[pt]=Perfis de Envio
+Name[pt_BR]=Perfis de Envio
+Name[tr]=Gönderme Profilleri
 Comment=Configure Upload Profiles
 Comment[ga]=Cumraigh Próifílí Uasluchtaithe
+Comment[pt]=Configurar os Perfis de Envio
+Comment[pt_BR]=Configurar os Perfis de Envio
+Comment[tr]=Gönderme Profillerini Yapılandır
