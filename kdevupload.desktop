@@ -7,11 +7,13 @@ GenericName[ga]=Breiseán Uasluchtaithe
 GenericName[pt]='Plugin' de Envio
 GenericName[pt_BR]='Plugin' de Envio
 GenericName[tr]=Gönderme Eklentisi
+GenericName[zh_TW]=上傳外掛程式
 Comment=Upload Projectfiles to remote server
 Comment[ga]=Uasluchtaigh comhaid tionscadail go cianfhreastalaí
 Comment[pt]=Enviar os ficheiros de projecto para um servidor remoto
 Comment[pt_BR]=Enviar os ficheiros de projecto para um servidor remoto
 Comment[tr]=Proje dosyalarını uzak sunuculara gönderir
+Comment[zh_TW]=上傳專案檔到遠端伺服器
 Icon=go-up
 X-KDE-ServiceTypes=KDevelop/Plugin
 
