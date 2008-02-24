@@ -180,8 +180,7 @@ void UploadJob::uploadResult(KJob* job)
 {
     if (job->error()) {
         if (job->error() == KIO::ERR_USER_CANCELED) {
-            m_progressDialog->close();
-            delete this;
+            cancelClicked();
             return;
         }
         appendLog(i18n("Upload error: %1", job->errorString()));
