@@ -166,6 +166,7 @@ void UploadJob::uploadNext()
 void UploadJob::cancelClicked()
 {
     appendLog(i18n("Upload canceled"));
+    deleteLater();
 }
 
 
