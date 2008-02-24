@@ -13,6 +13,7 @@
 #include <QComboBox>
 #include <QHeaderView>
 #include <QLabel>
+#include <QPushButton>
 
 #include <kdebug.h>
 #include <kfiletreeview.h>
@@ -24,22 +25,34 @@
 
 #include "allprofilesmodel.h"
 #include "uploadprofileitem.h"
+#include "uploadprofiledlg.h"
 
 ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
-    : QWidget(parent), m_plugin(plugin)
+    : QWidget(parent), m_plugin(plugin), m_editProfileDlg(0)
 {
     QVBoxLayout *l = new QVBoxLayout();
     setLayout(l);
 
-    m_profilesModel = new AllProfilesModel(plugin);
+    QHBoxLayout *hl = new QHBoxLayout();
+    l->addLayout(hl);
 
+    m_profilesModel = new AllProfilesModel(plugin);
     m_profilesCombo = new QComboBox;
     m_profilesCombo->setModel(m_profilesModel);
-    l->addWidget(m_profilesCombo);
+    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    sizePolicy.setHorizontalStretch(1);
+    m_profilesCombo->setSizePolicy(sizePolicy);
+    hl->addWidget(m_profilesCombo);
+
     connect(m_profilesCombo, SIGNAL(currentIndexChanged(int)),
             this, SLOT(profileIndexChanged(int)));
     connect(m_profilesModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
             this, SLOT(dataChanged(QModelIndex, QModelIndex)));
+
+    QPushButton* editButton = new QPushButton("...");    
+    hl->addWidget(editButton);
+
+    connect(editButton, SIGNAL(clicked()), this, SLOT(modifyProfile()));
 
     m_pleaseSelectLabel = new QLabel(i18n("Please choose an upload profile."));
     m_pleaseSelectLabel->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
@@ -101,5 +114,17 @@ void ProfilesFileTree::dataChanged(const QModelIndex& topLeft, const QModelIndex
     profileIndexChanged(m_profilesCombo->currentIndex());
 }
 
+void ProfilesFileTree::modifyProfile()
+{
+    UploadProfileItem* i = m_profilesModel->uploadItem(m_profilesCombo->currentIndex());
+    if (i) {
+        if (!m_editProfileDlg) {
+            m_editProfileDlg = new UploadProfileDlg(this);
+        }
+        if (m_editProfileDlg->editProfile(i) == QDialog::Accepted) {
+            i->model()->submit();
+        }
+    }
+}
 #include "profilesfiletree.moc"
 // kate: space-indent on; indent-width 4; tab-width 4; replace-tabs on

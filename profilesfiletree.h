@@ -22,6 +22,7 @@ class KFileTreeView;
 
 class UploadPlugin;
 class AllProfilesModel;
+class UploadProfileDlg;
 
 /**
  * The Profiles-File-Tree Dock
@@ -58,6 +59,11 @@ protected Q_SLOTS:
      */
     void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
+    /**
+     * Modify the current profile
+     */
+    void modifyProfile();
+
 private:
     UploadPlugin* m_plugin;
     AllProfilesModel* m_profilesModel;
@@ -65,6 +71,7 @@ private:
     QComboBox* m_profilesCombo;
     QLabel* m_pleaseSelectLabel;
     KFileTreeView* m_tree;
+    UploadProfileDlg* m_editProfileDlg;
 };
 
 

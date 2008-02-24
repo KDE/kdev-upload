@@ -174,5 +174,10 @@ UploadProfileItem* AllProfilesModel::uploadItem(const QModelIndex& index) const
     return 0;
 }
 
+UploadProfileItem* AllProfilesModel::uploadItem(int row, int column) const
+{
+    return uploadItem(index(row, column));
+}
+
 #include "allprofilesmodel.moc"
 // kate: space-indent on; indent-width 4; tab-width 4; replace-tabs on

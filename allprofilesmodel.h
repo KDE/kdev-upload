@@ -44,6 +44,11 @@ public:
      */
     UploadProfileItem* uploadItem(const QModelIndex& index) const;
 
+    /**
+     * Returns a UploadProfileItem for a row
+     */
+    UploadProfileItem* uploadItem(int row, int column = 0) const;
+
 private Q_SLOTS:
     /**
      * When a project is opened this adds the UploadProfileModel of the project
