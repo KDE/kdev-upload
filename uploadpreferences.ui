@@ -63,7 +63,7 @@
  <tabstops>
   <tabstop>profilesList</tabstop>
   <tabstop>addProfileButton</tabstop>
-  <tabstop>removeProfile</tabstop>
+  <tabstop>removeProfileButton</tabstop>
   <tabstop>modifyProfileButton</tabstop>
  </tabstops>
  <resources/>
