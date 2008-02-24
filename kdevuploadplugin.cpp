@@ -184,6 +184,7 @@ void UploadPlugin::quickUpload()
     }
 
     UploadJob* job = new UploadJob(project, model, core()->uiController()->activeMainWindow());
+    job->setQuickUpload(true);
     job->setOutputModel(outputModel());
     job->start();
 }

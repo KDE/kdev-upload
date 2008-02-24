@@ -48,6 +48,14 @@ public:
     }
 
     /**
+     * Sets if the upload is a quick upload.
+     * If true, unmodified files will be logged too
+     */
+    void setQuickUpload(bool q);
+    bool isQuickUpload();
+
+
+    /**
      * Sets the output model that should be used to output the log messages
      */
     void setOutputModel(QStandardItemModel* model);
@@ -107,6 +115,7 @@ private:
     int m_progressBytesDone; ///< uploaded bytes, incremented when a file is fully uploaded. used for progress.
 
     bool m_onlyMarkUploaded; ///< if files should be only marked as uploaded
+    bool m_quickUpload; ///< if it is a quick upload
 
     QStandardItemModel* m_outputModel;
 };

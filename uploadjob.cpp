@@ -31,7 +31,7 @@
 
 UploadJob::UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWidget *parent)
     : QObject(parent), m_project(project), m_uploadProjectModel(model),
-      m_onlyMarkUploaded(false), m_outputModel(0)
+      m_onlyMarkUploaded(false), m_quickUpload(false), m_outputModel(0)
 {
     m_progressDialog = new KProgressDialog(parent,
                                             i18n("Uploading files"),
@@ -99,6 +99,12 @@ void UploadJob::uploadNext()
     KUrl url;
     if (item->folder()) url = item->folder()->url();
     else if (item->file()) url = item->file()->url();
+
+    if (isQuickUpload() && checked == Qt::Unchecked) {
+        appendLog(i18n("File was not modified for %1: %2",
+                            m_uploadProjectModel->currentProfileName(),
+                            KUrl::relativeUrl(m_project->folder(), url)));
+    }
 
     if (!(item->file() || item->folder()) || checked == Qt::Unchecked) {
         uploadNext();
@@ -232,6 +238,15 @@ QStandardItem* UploadJob::appendLog(const QString& message)
     } else {
         return 0;
     }
+}
+void UploadJob::setQuickUpload(bool v)
+{
+    m_quickUpload = v;
+}
+
+bool UploadJob::isQuickUpload()
+{
+    return m_quickUpload;
 }
 
 #include "uploadjob.moc"
