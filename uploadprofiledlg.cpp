@@ -15,37 +15,21 @@
 #include <kprotocolmanager.h>
 #include <kprotocolinfo.h>
 #include <kurl.h>
+#include <kdirselectdialog.h>
 
 #include "ui_uploadprofiledlg.h"
 #include "uploadprofileitem.h"
 
-UploadProfileDlg::UploadProfileDlg( QWidget *parent)
-    : QDialog ( parent )
+UploadProfileDlg::UploadProfileDlg(QWidget *parent)
+    : KDialog (parent)
 {
+    QWidget* widget = new QWidget(this);
     m_ui = new Ui::UploadProfileDlg();
-    m_ui->setupUi(this);
-}
+    m_ui->setupUi(widget);
 
-UploadProfileDlg::~UploadProfileDlg( )
-{
-    delete m_ui;
-}
+    m_ui->browseButton->setIcon(KIcon("document-open"));
+    connect(m_ui->browseButton, SIGNAL(clicked()), this, SLOT(browse()));
 
-int UploadProfileDlg::editProfile(UploadProfileItem* item)
-{
-    KUrl url = item->url();
-
-    m_ui->lineProfileName->setText(item->text());
-    m_ui->lineHost->setText(url.host());
-    m_ui->lineUser->setText(url.userName());
-    m_ui->linePath->setText(url.path());
-    if (url.port() > 0) {
-        m_ui->port->setText(QString::number(url.port()));
-    } else {
-        m_ui->port->setText("");
-    }
-    QString def_p = url.scheme();
-  
     QStringList protocols = KProtocolInfo::protocols();
     protocols.sort();
     Q_FOREACH (QString p, protocols) {
@@ -54,25 +38,65 @@ int UploadProfileDlg::editProfile(UploadProfileItem* item)
         if (KProtocolManager::supportsWriting(u) && KProtocolManager::supportsMakeDir(u)
             && KProtocolManager::supportsDeleting(u)) {
             m_ui->comboProtocol->addItem(p);
-            if ( p == def_p )
-                m_ui->comboProtocol->setCurrentIndex(m_ui->comboProtocol->count()-1 );
         }
     }
 
+    setMainWidget(widget);
+    setCaption(i18n("Upload Profile"));
+    setButtons(KDialog::Close | KDialog::Ok);
+}
+
+UploadProfileDlg::~UploadProfileDlg()
+{
+    delete m_ui;
+}
+
+int UploadProfileDlg::editProfile(UploadProfileItem* item)
+{
+    m_ui->lineProfileName->setText(item->text());
     m_ui->defaultProfile->setChecked(item->isDefault());
+    updateUrl(item->url());
 
     int result = exec();
     if (result == QDialog::Accepted) {
         item->setText(m_ui->lineProfileName->text());
-        url.setHost(m_ui->lineHost->text());
-        url.setUserName(m_ui->lineUser->text());
-        url.setPath(m_ui->linePath->text());
-        if (m_ui->port->text().toInt() > 0) url.setPort(m_ui->port->text().toInt());
-        url.setScheme(m_ui->comboProtocol->currentText());
-        item->setUrl(url);
+        item->setUrl(currentUrl());
         item->setDefault(m_ui->defaultProfile->checkState() == Qt::Checked);
     }
     return result;
+}
+
+KUrl UploadProfileDlg::currentUrl()
+{
+    KUrl url;
+    url.setHost(m_ui->lineHost->text());
+    url.setUserName(m_ui->lineUser->text());
+    url.setPath(m_ui->linePath->text());
+    if (m_ui->port->text().toInt() > 0) url.setPort(m_ui->port->text().toInt());
+    url.setScheme(m_ui->comboProtocol->currentText());
+    return url;
+}
+
+void UploadProfileDlg::updateUrl(const KUrl& url)
+{
+    m_ui->lineHost->setText(url.host());
+    m_ui->lineUser->setText(url.userName());
+    m_ui->linePath->setText(url.path());
+    if (url.port() > 0) {
+        m_ui->port->setText(QString::number(url.port()));
+    } else {
+        m_ui->port->setText("");
+    }
+    int index = m_ui->comboProtocol->findData(url.scheme(), Qt::DisplayRole);
+    m_ui->comboProtocol->setCurrentIndex(index);
+}
+
+void UploadProfileDlg::browse()
+{
+    KDirSelectDialog dialog(currentUrl(), false, this);
+    if (dialog.exec() == QDialog::Accepted && dialog.url().isValid()) {
+        updateUrl(dialog.url());
+    }
 }
 
 #include "uploadprofiledlg.moc"

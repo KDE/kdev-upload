@@ -11,7 +11,7 @@
 #ifndef UPLOADPROFILEDLG_H
 #define UPLOADPROFILEDLG_H
 
-#include <QDialog>
+#include <kdialog.h>
 
 class KUrl;
 class QListWidgetItem;
@@ -23,7 +23,7 @@ class UploadProfileItem;
 /**
  * Dialog to edit a upload profile
  */
-class UploadProfileDlg : public QDialog
+class UploadProfileDlg : public KDialog
 {
     Q_OBJECT
 public:
@@ -37,7 +37,23 @@ public Q_SLOTS:
      */
     int editProfile(UploadProfileItem* item);
 
+private Q_SLOTS:
+    /**
+     * Opens a directory browser to select the path
+     */
+    void browse();
+
 private:
+    /**
+     * Builds the Url from the current entered data
+     */
+    KUrl currentUrl();
+
+    /**
+     * Sets the values of the widgets to the given url
+     */
+    void updateUrl(const KUrl& url);
+
     Ui::UploadProfileDlg* m_ui;
 };
 
