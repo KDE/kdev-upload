@@ -31,6 +31,8 @@ AllProfilesModel::AllProfilesModel(UploadPlugin* plugin, QObject *parent)
     connect(KDevelop::Core::self()->projectController(),
             SIGNAL(projectClosed(KDevelop::IProject*)),
                    this, SLOT(projectClosed(KDevelop::IProject*)));
+
+    KSettings::Dispatcher::registerComponent(KComponentData("KDevUpload"), this, "reloadSettings");
 }
 
 AllProfilesModel::~AllProfilesModel()
@@ -86,8 +88,6 @@ void AllProfilesModel::projectOpened(KDevelop::IProject* p)
 
     m_sourceModels.insert(p, model);
     reset();
-
-    KSettings::Dispatcher::registerComponent(KComponentData("KDevUpload"), this, "reloadSettings");
 }
 
 void AllProfilesModel::reloadSettings()
