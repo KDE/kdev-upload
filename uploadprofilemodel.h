@@ -13,8 +13,9 @@
 
 #include <QStandardItemModel>
 
-#include <ksharedconfig.h>
-
+namespace KDevelop {
+    class IProject;
+}
 class UploadProfileItem;
 
 /**
@@ -42,13 +43,13 @@ public:
     UploadProfileItem* uploadItem(const QModelIndex& index) const;
 
     /**
-     * Set the ProjectConfig for this model
+     * Set the Project for this model
      */
-    void setConfig(KSharedConfig::Ptr config);
+    void setProject(KDevelop::IProject* project);
     /**
-     * Returns the project-config used for this model
+     * Returns the project used for this model
      */
-    KSharedConfig::Ptr config();
+    KDevelop::IProject* project();
 
     /**
      * Reverts all changes made to the model
@@ -61,7 +62,7 @@ public:
     bool submit();
 
 private:
-    KSharedConfig::Ptr m_config; ///< the project-config
+    KDevelop::IProject* m_project; ///< the project
     QStringList m_deltedProfileNrs; ///< deleted profiles
 };
 

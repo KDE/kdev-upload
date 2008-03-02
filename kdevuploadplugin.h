@@ -27,6 +27,8 @@ namespace KDevelop {
   class IProject;
 }
 class UploadProfileModel;
+class FilesTreeViewFactory;
+class AllProfilesModel;
 
 class UploadPlugin : public KDevelop::IPlugin
 {
@@ -76,6 +78,11 @@ private Q_SLOTS:
     */
     void projectClosed(KDevelop::IProject*);
 
+    /**
+    * Checks if there are any upload profiles, hides the ProfilesFileTree if there are none.
+    */
+    void profilesRowChanged();
+
 private:
     void setupActions();
 
@@ -83,8 +90,12 @@ private:
 
     KActionMenu* m_projectUploadActionMenu; ///< upload ActionMenu, displayed in the Project-Menu
     QMap<KDevelop::IProject*, KAction*> m_projectUploadActions; ///< upload actions for every open project
+    QMap<KDevelop::IProject*, UploadProfileModel*> m_projectProfileModels; ///< UploadProfileModels for every open project
     QSignalMapper* m_signalMapper; ///< signal mapper for upload actions, to get the correct project
     QStandardItemModel* m_outputModel; ///< model for log-output
+    FilesTreeViewFactory* m_filesTreeViewFactory; ///< factory for ProjectFilesTree
+    AllProfilesModel* m_allProfilesModel; ///< model for all profiles
+
 };
 
 #endif

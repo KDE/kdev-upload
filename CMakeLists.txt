@@ -45,7 +45,7 @@ kde4_add_ui_files(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofile
 
 kde4_add_plugin(kcm_kdev_upload ${uploadpreferences_PART_SRCS})
 
-target_link_libraries(kcm_kdev_upload kdevquanta kdevplatforminterfaces ${KDE4_KDECORE_LIBS})
+target_link_libraries(kcm_kdev_upload kdevquanta kdevplatforminterfaces ${KDE4_KDECORE_LIBS} ${KDE4_KUTILS_LIBS})
 
 install(TARGETS kcm_kdev_upload  DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES  kcm_kdev_upload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})

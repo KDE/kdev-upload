@@ -57,7 +57,7 @@ UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args 
     m_ui->setupUi(w);
 
     m_model = new UploadProfileModel();
-    m_model->setConfig(project->projectConfiguration());
+    m_model->setProject(project);
     m_ui->profilesList->setModel(m_model);
 
     connect(m_model, SIGNAL(dataChanged(QModelIndex, QModelIndex)),

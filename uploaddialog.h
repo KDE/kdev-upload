@@ -46,6 +46,11 @@ public:
      */
     void setRootItem(KDevelop::ProjectBaseItem* item);
 
+    /**
+     * Set the UploadProfileModel
+     */
+    void setProfileModel(UploadProfileModel* model);
+
 private Q_SLOTS:
     /**
      * Starts the upload

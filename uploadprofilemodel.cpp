@@ -14,11 +14,14 @@
 #include <ksettings/dispatcher.h>
 #include <kcomponentdata.h>
 
+#include <iproject.h>
+
 #include "uploadprofileitem.h"
 
 UploadProfileModel::UploadProfileModel(QObject* parent)
     : QStandardItemModel(parent)
 {
+    KSettings::Dispatcher::registerComponent(KComponentData("KDevUpload"), this, "revert");
 }
 
 bool UploadProfileModel::removeRow(int row, const QModelIndex & parent)
@@ -46,19 +49,19 @@ UploadProfileItem* UploadProfileModel::uploadItem(const QModelIndex& index) cons
     }
     return 0;
 }
-void UploadProfileModel::setConfig(KSharedConfig::Ptr config)
+void UploadProfileModel::setProject(KDevelop::IProject* project)
 {
-    m_config = config;
+    m_project = project;
     revert();
 }
-KSharedConfig::Ptr UploadProfileModel::config()
+KDevelop::IProject* UploadProfileModel::project()
 {
-    return m_config;
+    return m_project;
 }
 
 void UploadProfileModel::revert()
 {
-    KConfigGroup group = m_config->group("Upload");
+    KConfigGroup group = m_project->projectConfiguration()->group("Upload");
     QString defProfile = group.readEntry("default", QString());
     int row = 0;
     Q_FOREACH (QString g, group.groupList()) {
@@ -84,7 +87,7 @@ void UploadProfileModel::revert()
 
 bool UploadProfileModel::submit()
 {
-    KConfigGroup group = m_config->group("Upload");
+    KConfigGroup group = m_project->projectConfiguration()->group("Upload");
     Q_FOREACH (QString i, m_deltedProfileNrs) {
         group.group("Profile" + i).deleteGroup();
     }
@@ -114,6 +117,7 @@ bool UploadProfileModel::submit()
     group.writeEntry("default", defaultProfileNr);
     return true;
 }
+
 
 #include "uploadprofilemodel.moc"
 // kate: space-indent on; indent-width 4; tab-width 4; replace-tabs on

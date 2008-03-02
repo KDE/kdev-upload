@@ -13,6 +13,8 @@
 #include <kicon.h>
 #include <kconfiggroup.h>
 
+#include <iproject.h>
+
 #include "uploadprofilemodel.h"
 
 UploadProfileItem::UploadProfileItem()
@@ -68,7 +70,7 @@ KConfigGroup UploadProfileItem::profileConfigGroup() const
 {
     UploadProfileModel* m = 0;
     if (!profileNr().isEmpty() && model() && (m = dynamic_cast<UploadProfileModel*>(model()))) {
-        return m->config()->group("Upload").group("Profile"+profileNr());
+        return m->project()->projectConfiguration()->group("Upload").group("Profile"+profileNr());
     }
     return KConfigGroup();
 }

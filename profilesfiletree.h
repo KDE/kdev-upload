@@ -36,6 +36,11 @@ class ProfilesFileTree : public QWidget
 public:
     ProfilesFileTree( UploadPlugin* plugin, QWidget *parent = 0 );
 
+    /**
+     * Sets the Model for this widget
+     */
+    void setModel(AllProfilesModel* model);
+
 protected Q_SLOTS:
     /**
      * Open the Url in the editor

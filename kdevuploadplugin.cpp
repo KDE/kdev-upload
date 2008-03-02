@@ -40,17 +40,21 @@
 #include "uploadprojectmodel.h"
 #include "uploadprofilemodel.h"
 #include "uploadprofileitem.h"
+#include "allprofilesmodel.h"
 
 K_PLUGIN_FACTORY(UploadFactory, registerPlugin<UploadPlugin>(); )
 K_EXPORT_PLUGIN(UploadFactory("kdevupload"))
 
 class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
   public:
-    FilesTreeViewFactory(UploadPlugin *plugin): m_plugin(plugin) {}
+    FilesTreeViewFactory(UploadPlugin* plugin, AllProfilesModel* model)
+                : m_plugin(plugin), m_allProfilesModel(model) {}
 
     virtual QWidget* create(QWidget *parent = 0)
     {
-        return new ProfilesFileTree(m_plugin, parent);
+        ProfilesFileTree* w = new ProfilesFileTree(m_plugin, parent);
+        w->setModel(m_allProfilesModel);
+        return w;
     }
 
     virtual Qt::DockWidgetArea defaultPosition(const QString &/*areaName*/)
@@ -58,12 +62,13 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
         return Qt::RightDockWidgetArea;
     }
 
-  private:
-      UploadPlugin *m_plugin;
+    private:
+        UploadPlugin* m_plugin;
+        AllProfilesModel* m_allProfilesModel;
 };
 
 UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
-: KDevelop::IPlugin(UploadFactory::componentData(), parent),  m_outputModel(0)
+: KDevelop::IPlugin(UploadFactory::componentData(), parent),  m_outputModel(0), m_filesTreeViewFactory(0)
 {
     connect(core()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
                    this, SLOT(projectOpened(KDevelop::IProject*)));
@@ -72,10 +77,15 @@ UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
 
     setXMLFile("kdevupload.rc");
 
-    setupActions();
+    m_allProfilesModel = new AllProfilesModel(this);
+    connect(m_allProfilesModel, SIGNAL(rowsInserted(QModelIndex, int, int)),
+                    this, SLOT(profilesRowChanged()));
+    connect(m_allProfilesModel, SIGNAL(rowsRemoved(QModelIndex, int, int)),
+                    this, SLOT(profilesRowChanged()));
+    connect(m_allProfilesModel, SIGNAL(modelReset()),
+                    this, SLOT(profilesRowChanged()));
 
-    FilesTreeViewFactory *factory = new FilesTreeViewFactory(this);
-    core()->uiController()->addToolView( i18n("Upload Profiles"), factory );
+    setupActions();
 }
 
 UploadPlugin::~UploadPlugin()
@@ -90,23 +100,32 @@ void UploadPlugin::setupActions()
     m_projectUploadActionMenu = new KActionMenu(i18n("&Upload Project"), this);
     m_projectUploadActionMenu->setIcon(KIcon("go-up"));
     m_projectUploadActionMenu->setToolTip(i18n("Upload project"));
+    m_projectUploadActionMenu->setVisible(false); //make it visible when there are upload profiles
     actionCollection()->addAction("project_upload", m_projectUploadActionMenu);
 }
 
 void UploadPlugin::projectOpened(KDevelop::IProject* project)
 {
-    KAction* action = new KAction(project->name(), m_projectUploadActionMenu);
-    connect(action, SIGNAL(triggered()), m_signalMapper, SLOT(map()));
-    m_signalMapper->setMapping(action, project);
-    m_projectUploadActions.insert(project, action);
-    m_projectUploadActionMenu->addAction(action);
+    
+    UploadProfileModel* model = new UploadProfileModel();
+    model->setProject(project);
+    m_projectProfileModels.insert(project, model);
+    m_allProfilesModel->addModel(model);
 }
+
 void UploadPlugin::projectClosed(KDevelop::IProject* project)
 {
     KAction* action = m_projectUploadActions.value(project);
     if (action) {
+        m_projectUploadActions.remove(project);
         m_projectUploadActionMenu->removeAction(action);
         delete action;
+    }
+    UploadProfileModel* model = m_projectProfileModels.value(project);
+    if (model) {
+        m_projectProfileModels.remove(project);
+        m_allProfilesModel->removeModel(model);
+        delete model;
     }
 }
 
@@ -115,6 +134,8 @@ void UploadPlugin::projectUpload(QObject* p)
     KDevelop::IProject* project = qobject_cast<KDevelop::IProject*>(p);
     if (project) {
         UploadDialog dialog(project, this, core()->uiController()->activeMainWindow());
+        UploadProfileModel* model = m_projectProfileModels.value(project);
+        dialog.setProfileModel(model);
         dialog.exec();
     }
 }
@@ -135,17 +156,21 @@ QPair<QString,QList<QAction*> > UploadPlugin::requestContextMenuActions(KDevelop
                 }
             }
             if (!m_ctxUrlList.isEmpty()) {
-                QList<QAction*> actions;
-                QAction *action;
-                action = new QAction(i18n("Upload..."), this);
-                connect(action, SIGNAL(triggered()), this, SLOT(upload()));
-                actions << action;
-
-                action = new QAction(i18n("Quick Upload"), this);
-                connect(action, SIGNAL(triggered()), this, SLOT(quickUpload()));
-                actions << action;
-
-                return qMakePair(QString("Upload"), actions);
+                KDevelop::IProject* project = m_ctxUrlList.at(0)->project();
+                UploadProfileModel* model = m_projectProfileModels.value(project);
+                if (model->rowCount()) {
+                    QList<QAction*> actions;
+                    QAction *action;
+                    action = new QAction(i18n("Upload..."), this);
+                    connect(action, SIGNAL(triggered()), this, SLOT(upload()));
+                    actions << action;
+    
+                    action = new QAction(i18n("Quick Upload"), this);
+                    connect(action, SIGNAL(triggered()), this, SLOT(quickUpload()));
+                    actions << action;
+    
+                    return qMakePair(QString("Upload"), actions);
+                }
             }
         }
     }
@@ -158,6 +183,8 @@ void UploadPlugin::upload()
     KDevelop::IProject* project = m_ctxUrlList.at(0)->project();
 
     UploadDialog dialog(project, this, core()->uiController()->activeMainWindow());
+    UploadProfileModel* model = m_projectProfileModels.value(project);
+    dialog.setProfileModel(model);
     dialog.setRootItem(m_ctxUrlList.at(0));
     dialog.exec();
 }
@@ -170,8 +197,7 @@ void UploadPlugin::quickUpload()
     model->setSourceModel(project->projectItem()->model());
     model->setRootItem(m_ctxUrlList.at(0));
 
-    UploadProfileModel* profileModel = new UploadProfileModel();
-    profileModel->setConfig(project->projectConfiguration());
+    UploadProfileModel* profileModel = m_projectProfileModels.value(project);
     for (int i = 0; i < profileModel->rowCount(); i++) {
         UploadProfileItem* item = profileModel->uploadItem(i);
         if (item->isDefault()) {
@@ -206,6 +232,47 @@ QStandardItemModel* UploadPlugin::outputModel()
         return m_outputModel;
     }
     return 0;
+}
+
+void UploadPlugin::profilesRowChanged()
+{
+    if (m_allProfilesModel->rowCount()) {
+        if (!m_filesTreeViewFactory) {
+            m_filesTreeViewFactory = new FilesTreeViewFactory(this, m_allProfilesModel);
+            core()->uiController()->addToolView(i18n("Upload Profiles"), m_filesTreeViewFactory);
+        }
+    } else {
+        if (m_filesTreeViewFactory) {
+            core()->uiController()->removeToolView(m_filesTreeViewFactory);
+            m_filesTreeViewFactory = 0;
+        }
+    }
+    Q_FOREACH(UploadProfileModel* model, m_projectProfileModels) {
+        KDevelop::IProject* project = model->project();
+        
+        if (model->rowCount()) {
+            if (!m_projectUploadActions.contains(project)) {
+                KAction* action = new KAction(project->name(), m_projectUploadActionMenu);
+                connect(action, SIGNAL(triggered()), m_signalMapper, SLOT(map()));
+                m_signalMapper->setMapping(action, project);
+                m_projectUploadActions.insert(project, action);
+                m_projectUploadActionMenu->addAction(action);
+                m_projectUploadActionMenu->setVisible(true);
+            }
+        } else {
+            if (m_projectUploadActions.contains(project)) {
+                KAction* action = m_projectUploadActions.value(project);
+                m_projectUploadActions.remove(project);
+                m_projectUploadActionMenu->removeAction(action);
+                m_signalMapper->removeMappings(action);
+                delete action;
+            }
+        }
+    }
+    
+    if (m_projectUploadActions.isEmpty()) {
+        m_projectUploadActionMenu->setVisible(false);
+    }
 }
 
 #include "kdevuploadplugin.moc"

@@ -12,7 +12,7 @@
 #define ALLPROFILESMODEL_H
 
 #include <QAbstractListModel>
-#include <QMap>
+#include <QList>
 
 namespace KDevelop {
     class IProject;
@@ -37,7 +37,7 @@ public:
     virtual ~AllProfilesModel();
 
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-    int rowCount(const QModelIndex & parent) const;
+    int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
     /**
      * Returns a UploadProfileItem for a ModelIndex.
@@ -49,19 +49,17 @@ public:
      */
     UploadProfileItem* uploadItem(int row, int column = 0) const;
 
+    /**
+     * Adds a UploadProfileModel, usually called when a project was opened
+     */
+    void addModel(UploadProfileModel* m);
+
+    /**
+     * Removes a UploadProfileModel, usually called when a project was closed
+     */
+    void removeModel(UploadProfileModel* m);
+
 private Q_SLOTS:
-    /**
-     * When a project is opened this adds the UploadProfileModel of the project
-     * to the sourceModels
-     */
-    void projectOpened(KDevelop::IProject* p);
-
-    /**
-     * When a project is closed this removes the UploadProfileModel of the project
-     * from the sourceModels
-     */
-    void projectClosed(KDevelop::IProject* p);
-
     //translate signals from sourceModels:
     void sourceReset();
     void sourceDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
@@ -70,15 +68,8 @@ private Q_SLOTS:
     void sourceRowsAboutToBeRemoved(const QModelIndex& parent, int start, int end);
     void sourceRowsRemoved();
 
-    /**
-     * Called when upload-configuration has changed (the user opened the
-     * project-configuration and modified profiles)
-     * KSettings::Dispatcher::registerComponent is used for this.
-     */
-    void reloadSettings();
-
 private:
-    QMap<KDevelop::IProject*, UploadProfileModel*> m_sourceModels;
+    QList<UploadProfileModel*> m_sourceModels;
     UploadPlugin* m_plugin;
 };
 

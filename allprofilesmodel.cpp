@@ -20,19 +20,10 @@
 #include <kfileitem.h>
 #include <kdatetime.h>
 #include <kdebug.h>
-#include <ksettings/dispatcher.h>
 
 AllProfilesModel::AllProfilesModel(UploadPlugin* plugin, QObject *parent)
     : QAbstractListModel(parent), m_plugin(plugin)
 {
-    connect(KDevelop::Core::self()->projectController(),
-            SIGNAL(projectOpened(KDevelop::IProject*)),
-                   this, SLOT(projectOpened(KDevelop::IProject*)));
-    connect(KDevelop::Core::self()->projectController(),
-            SIGNAL(projectClosed(KDevelop::IProject*)),
-                   this, SLOT(projectClosed(KDevelop::IProject*)));
-
-    KSettings::Dispatcher::registerComponent(KComponentData("KDevUpload"), this, "reloadSettings");
 }
 
 AllProfilesModel::~AllProfilesModel()
@@ -43,14 +34,12 @@ QVariant AllProfilesModel::data(const QModelIndex & index, int role) const
 {
     if (!index.isValid() || index.parent().isValid()) return QVariant();
     int rowOffset = 0;
-    QMapIterator<KDevelop::IProject*, UploadProfileModel*> it(m_sourceModels);
-    while (it.hasNext()) {
-        UploadProfileModel* model = it.next().value();
+    Q_FOREACH (UploadProfileModel* model, m_sourceModels) {
         int rowCount = model->rowCount(index.parent());
         if (index.row() - rowOffset < rowCount) {
             QVariant ret =  model->data(model->index(index.row() - rowOffset, index.column()), role);
             if (role == Qt::DisplayRole) {
-                ret = it.key()->name() + ": " + ret.toString();
+                ret = model->project()->name() + ": " + ret.toString();
             }
             return ret;
         }
@@ -69,10 +58,8 @@ int AllProfilesModel::rowCount(const QModelIndex & parent) const
     return ret;
 }
 
-void AllProfilesModel::projectOpened(KDevelop::IProject* p)
+void AllProfilesModel::addModel(UploadProfileModel* model)
 {
-    UploadProfileModel* model = new UploadProfileModel();
-    model->setConfig(p->projectConfiguration());
     connect(model, SIGNAL(modelReset()), this, SLOT(sourceReset()));
     connect(model, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
             this, SLOT(sourceDataChanged(QModelIndex, QModelIndex)));
@@ -84,19 +71,15 @@ void AllProfilesModel::projectOpened(KDevelop::IProject* p)
             this, SLOT(sourceRowsAboutToBeRemoved(QModelIndex, int, int)));
     connect(model, SIGNAL(rowsRemoved(QModelIndex, int, int)),
             this, SLOT(sourceRowsRemoved()));
-    void sourceRowsAboutToBeInserted(const QModelIndex& parent, int start, int end);
 
-    m_sourceModels.insert(p, model);
+    m_sourceModels.append(model);
     reset();
 }
 
-void AllProfilesModel::reloadSettings()
+void AllProfilesModel::removeModel(UploadProfileModel* model)
 {
-    QMapIterator<KDevelop::IProject*, UploadProfileModel*> i(m_sourceModels);
-    while (i.hasNext()) {
-        i.next();
-        i.value()->setConfig(i.key()->projectConfiguration());
-    }
+    m_sourceModels.removeAt(m_sourceModels.indexOf(model));
+    reset();
 }
 
 void AllProfilesModel::sourceReset()
@@ -152,12 +135,6 @@ void AllProfilesModel::sourceRowsAboutToBeRemoved(const QModelIndex& parent, int
 void AllProfilesModel::sourceRowsRemoved()
 {
     emit endRemoveRows();
-}
-
-void AllProfilesModel::projectClosed(KDevelop::IProject* p)
-{
-    m_sourceModels.remove(p);
-    reset();
 }
 
 UploadProfileItem* AllProfilesModel::uploadItem(const QModelIndex& index) const

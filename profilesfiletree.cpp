@@ -36,9 +36,7 @@ ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
     QHBoxLayout *hl = new QHBoxLayout();
     l->addLayout(hl);
 
-    m_profilesModel = new AllProfilesModel(plugin);
     m_profilesCombo = new QComboBox;
-    m_profilesCombo->setModel(m_profilesModel);
     QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     sizePolicy.setHorizontalStretch(1);
     m_profilesCombo->setSizePolicy(sizePolicy);
@@ -46,8 +44,6 @@ ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
 
     connect(m_profilesCombo, SIGNAL(currentIndexChanged(int)),
             this, SLOT(profileIndexChanged(int)));
-    connect(m_profilesModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
-            this, SLOT(dataChanged(QModelIndex, QModelIndex)));
 
     QPushButton* editButton = new QPushButton("...");    
     hl->addWidget(editButton);
@@ -126,5 +122,17 @@ void ProfilesFileTree::modifyProfile()
         }
     }
 }
+
+void ProfilesFileTree::setModel(AllProfilesModel* model)
+{
+    m_profilesModel = model;
+
+    m_profilesCombo->setModel(m_profilesModel);
+    connect(m_profilesModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+            this, SLOT(dataChanged(QModelIndex, QModelIndex)));
+}
+    
+    
+
 #include "profilesfiletree.moc"
 // kate: space-indent on; indent-width 4; tab-width 4; replace-tabs on
