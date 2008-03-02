@@ -16,6 +16,8 @@
 #include <kprotocolinfo.h>
 #include <kurl.h>
 #include <kdirselectdialog.h>
+#include <kio/netaccess.h>
+#include <kmessagebox.h>
 
 #include "ui_uploadprofiledlg.h"
 #include "uploadprofileitem.h"
@@ -97,6 +99,15 @@ void UploadProfileDlg::browse()
     if (dialog.exec() == QDialog::Accepted && dialog.url().isValid()) {
         updateUrl(dialog.url());
     }
+}
+void UploadProfileDlg::slotButtonClicked(int button) {
+    if (button == KDialog::Ok) {
+        if (!KIO::NetAccess::exists(currentUrl(), KIO::NetAccess::DestinationSide, this)) {
+            KMessageBox::sorry(this, i18n("The specified url does not exist."));
+            return;
+        }
+    }
+    KDialog::slotButtonClicked(button);
 }
 
 #include "uploadprofiledlg.moc"

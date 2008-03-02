@@ -43,6 +43,12 @@ private Q_SLOTS:
      */
     void browse();
 
+protected Q_SLOTS:
+    /**
+     * Implemented to accept() not if the entered url does not exist
+     */
+    virtual void slotButtonClicked(int button);
+
 private:
     /**
      * Builds the Url from the current entered data
