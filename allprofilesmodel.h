@@ -25,7 +25,7 @@ class UploadPlugin;
  * Model that lists upload-profiles of all open projects.
  *
  * Signals from the individual UploadProfileModels are translated
- * to the new index and emited (reset, dataChange, rowInsert*, rowRemove*).
+ * to the new index and emitted (reset, dataChange, rowInsert*, rowRemove*).
  * This translation works only for single-row models - like UploadProfileModels.
  */
 class AllProfilesModel : public QAbstractListModel

@@ -134,7 +134,7 @@ void UploadJob::uploadNext()
         m_progressDialog->setLabelText(i18n("Uploading %1...", KUrl::relativeUrl(m_project->folder(), url)));
     } else if (item->folder()) {
         if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, m_progressDialog)) {
-            appendLog(i18n("Directory in %1 allready exists: %2", 
+            appendLog(i18n("Directory in %1 already exists: %2", 
                                 m_uploadProjectModel->currentProfileName(),
                                 KUrl::relativeUrl(m_project->folder(), url)));
             m_uploadProjectModel->profileConfigGroup()

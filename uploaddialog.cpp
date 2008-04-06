@@ -63,7 +63,7 @@ UploadDialog::UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QW
 
 
     m_treeContextMenu = new QMenu(this);
-    KAction* action = new KAction(i18n("All"), this);
+    KAction* action = new KAction(i18nc("Select all items in the tree", "All"), this);
     connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkAll()));
     m_treeContextMenu->addAction(action);
 
@@ -117,7 +117,7 @@ void UploadDialog::startUpload()
 {
     
     if (m_ui->profileCombobox->currentIndex() == -1) {
-        KMessageBox::sorry(this, i18n("Can't upload, no profile selected."));
+        KMessageBox::sorry(this, i18n("Can not upload, no profile selected."));
         return;
     }
     UploadJob* job = new UploadJob(m_project, m_uploadProjectModel, this);

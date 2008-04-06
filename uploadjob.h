@@ -95,7 +95,7 @@ private Q_SLOTS:
 
 Q_SIGNALS:
     /**
-     * Signal is emitted when the upload sucessfully finished
+     * Signal is emitted when the upload successfully finished
      */
     void uploadFinished();
 

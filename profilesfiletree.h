@@ -8,8 +8,8 @@
 *                                                                         *
 ***************************************************************************/
 
-#ifndef PRILFESFILETREE_H
-#define PRILFESFILETREE_H
+#ifndef PROFILESFILETREE_H
+#define PROFILESFILETREE_H
 
 #include <QWidget>
 
