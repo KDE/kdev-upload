@@ -29,6 +29,7 @@
 #include <iprojectcontroller.h>
 #include <iuicontroller.h>
 #include <context.h>
+#include <contextmenuextension.h>
 #include <projectmodel.h>
 #include <core.h>
 #include <ioutputview.h>
@@ -144,9 +145,10 @@ void UploadPlugin::unload()
 {
 }
 
-QPair<QString,QList<QAction*> > UploadPlugin::requestContextMenuActions(KDevelop::Context* context)
+KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Context* context)
 {
     if (context->type() == KDevelop::Context::ProjectItemContext) {
+        KDevelop::ContextMenuExtension cmExtension;
         KDevelop::ProjectItemContext *itemCtx = dynamic_cast<KDevelop::ProjectItemContext*>(context);
         if (itemCtx) {
             m_ctxUrlList.clear();
@@ -159,22 +161,21 @@ QPair<QString,QList<QAction*> > UploadPlugin::requestContextMenuActions(KDevelop
                 KDevelop::IProject* project = m_ctxUrlList.at(0)->project();
                 UploadProfileModel* model = m_projectProfileModels.value(project);
                 if (model->rowCount()) {
-                    QList<QAction*> actions;
                     QAction *action;
                     action = new QAction(i18n("Upload..."), this);
                     connect(action, SIGNAL(triggered()), this, SLOT(upload()));
-                    actions << action;
+                    cmExtension.addAction(KDevelop::ContextMenuExtension::ProjectGroup, action);
     
                     action = new QAction(i18n("Quick Upload"), this);
                     connect(action, SIGNAL(triggered()), this, SLOT(quickUpload()));
-                    actions << action;
-    
-                    return qMakePair(QString("Upload"), actions);
+                    cmExtension.addAction(KDevelop::ContextMenuExtension::ProjectGroup, action);
+                    
+                    return cmExtension;
                 }
             }
         }
     }
-    return KDevelop::IPlugin::requestContextMenuActions(context);
+    return KDevelop::IPlugin::contextMenuExtension(context);
 }
 
 void UploadPlugin::upload()

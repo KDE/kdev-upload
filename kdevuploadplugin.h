@@ -16,7 +16,7 @@
 
 #include <kurl.h>
 
-#include "iplugin.h"
+#include <iplugin.h>
 
 class QSignalMapper;
 class QStandardItemModel;
@@ -41,7 +41,7 @@ public:
     /**
     * Returns the Upload-Action for the Contextmenu.
     */
-    QPair<QString,QList<QAction*> > requestContextMenuActions( KDevelop::Context* );
+    KDevelop::ContextMenuExtension contextMenuExtension(KDevelop::Context *context);
 
     /**
     * Returns (and creates) the outputModel used for UploadPlugin.
