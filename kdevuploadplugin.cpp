@@ -164,11 +164,11 @@ KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Cont
                     QAction *action;
                     action = new QAction(i18n("Upload..."), this);
                     connect(action, SIGNAL(triggered()), this, SLOT(upload()));
-                    cmExtension.addAction(KDevelop::ContextMenuExtension::ProjectGroup, action);
+                    cmExtension.addAction(KDevelop::ContextMenuExtension::FileGroup, action);
     
                     action = new QAction(i18n("Quick Upload"), this);
                     connect(action, SIGNAL(triggered()), this, SLOT(quickUpload()));
-                    cmExtension.addAction(KDevelop::ContextMenuExtension::ProjectGroup, action);
+                    cmExtension.addAction(KDevelop::ContextMenuExtension::FileGroup, action);
                     
                     return cmExtension;
                 }
