@@ -223,8 +223,8 @@ QStandardItemModel* UploadPlugin::outputModel()
     Q_ASSERT(plugin);
     if (plugin) {
         KDevelop::IOutputView* view = plugin->extension<KDevelop::IOutputView>();
-        int id = view->registerView(i18n("Upload"), KDevelop::IOutputView::AllowUserClose | KDevelop::IOutputView::AutoScroll);
-
+        int tvid = view->registerToolView(i18n("Upload"));
+        int id = view->registerOutputInToolView(tvid, i18n("Output"), KDevelop::IOutputView::AllowUserClose | KDevelop::IOutputView::AutoScroll);
         m_outputModel = new QStandardItemModel(this);
 
         view->setModel(id, m_outputModel);
