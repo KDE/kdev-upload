@@ -58,7 +58,12 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
         return w;
     }
 
-    virtual Qt::DockWidgetArea defaultPosition(const QString &/*areaName*/)
+    virtual QString id() const
+    {
+        return "org.quanta.UploadFactory";
+    }
+
+    virtual Qt::DockWidgetArea defaultPosition()
     {
         return Qt::RightDockWidgetArea;
     }
