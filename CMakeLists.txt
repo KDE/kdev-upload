@@ -27,7 +27,7 @@ kde4_add_ui_files(kdevupload_PART_SRCS ${kdevupload_UI})
 kde4_add_plugin(kdevupload WITH_PREFIX ${kdevupload_PART_SRCS})
 
 
-target_link_libraries(kdevupload kdevquanta kdevplatforminterfaces kdevplatformproject ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS})
+target_link_libraries(kdevupload kdevquanta kdevplatforminterfaces kdevplatformproject ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${KDE4_KFILE_LIBS} kdevplatformshell ${KDE4_KTEXTEDITOR_LIBS})
 
 install(TARGETS kdevupload  DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES  kdevupload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
@@ -45,7 +45,7 @@ kde4_add_ui_files(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofile
 
 kde4_add_plugin(kcm_kdev_upload ${uploadpreferences_PART_SRCS})
 
-target_link_libraries(kcm_kdev_upload kdevquanta kdevplatforminterfaces ${KDE4_KDECORE_LIBS} ${KDE4_KUTILS_LIBS})
+target_link_libraries(kcm_kdev_upload kdevquanta kdevplatforminterfaces ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} kdevplatformshell ${KDE4_KFILE_LIBS})
 
 install(TARGETS kcm_kdev_upload  DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES  kcm_kdev_upload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
