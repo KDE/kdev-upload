@@ -1,9 +1,9 @@
 include_directories(
-   ${KDEVPLATFORM_INCLUDE_DIR}
-   ${KDEVPLATFORM_INCLUDE_DIR}/interfaces
-   ${KDEVPLATFORM_INCLUDE_DIR}/shell
-   ${KDEVPLATFORM_INCLUDE_DIR}/project
-   ${KDEVPLATFORM_INCLUDE_DIR}/outputview
+   ${KDevPlatform_INCLUDE_DIR}
+   ${KDevPlatform_INCLUDE_DIR}/interfaces
+   ${KDevPlatform_INCLUDE_DIR}/shell
+   ${KDevPlatform_INCLUDE_DIR}/project
+   ${KDevPlatform_INCLUDE_DIR}/outputview
 )
 
 #plugin
