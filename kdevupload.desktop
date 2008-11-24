@@ -56,5 +56,5 @@ X-KDevelop-Category=Global
 X-KDE-Library=libkdevupload
 X-KDE-PluginInfo-Name=KDevUpload
 X-KDevelop-Version=6
-X-KDevelop-Properties=Quanta-Upload
 X-KDevelop-IRequired=org.kdevelop.IOutputView
+X-KDevelop-Mode=GUI
