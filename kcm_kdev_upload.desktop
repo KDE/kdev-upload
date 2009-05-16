@@ -11,6 +11,7 @@ X-KDE-ParentComponents=KDevUpload
 X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
+Name[ca]=Perfils de pujada
 Name[da]=Upload-profiler
 Name[de]=Upload-Profile
 Name[el]=Αποστολή προφίλ
@@ -36,6 +37,7 @@ Name[x-test]=xxUpload Profilesxx
 Name[zh_CN]=上传配置文件
 Name[zh_TW]=上傳設定檔
 Comment=Configure Upload Profiles
+Comment[ca]=Configura els perfils de pujada
 Comment[da]=Indstil upload-profiler
 Comment[de]=Upload-Profile einrichten
 Comment[el]=Ρύθμιση αποστολής προφίλ
