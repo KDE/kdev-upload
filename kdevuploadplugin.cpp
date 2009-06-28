@@ -165,7 +165,7 @@ KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Cont
             if (!m_ctxUrlList.isEmpty()) {
                 KDevelop::IProject* project = m_ctxUrlList.at(0)->project();
                 UploadProfileModel* model = m_projectProfileModels.value(project);
-                if (model->rowCount()) {
+                if (model && model->rowCount()) {
                     QAction *action;
                     action = new QAction(i18n("Upload..."), this);
                     connect(action, SIGNAL(triggered()), this, SLOT(upload()));
