@@ -28,12 +28,11 @@
 #include <iproject.h>
 #include <iprojectcontroller.h>
 #include <iuicontroller.h>
+#include <iplugincontroller.h>
 #include <context.h>
 #include <contextmenuextension.h>
 #include <projectmodel.h>
-#include <core.h>
 #include <ioutputview.h>
-#include <plugincontroller.h>
 
 #include "uploaddialog.h"
 #include "profilesfiletree.h"

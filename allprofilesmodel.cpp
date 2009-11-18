@@ -14,7 +14,6 @@
 #include <iproject.h>
 #include <projectmodel.h>
 #include <iprojectcontroller.h>
-#include <core.h>
 
 #include <kconfiggroup.h>
 #include <kfileitem.h>

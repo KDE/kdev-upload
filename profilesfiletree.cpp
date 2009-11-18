@@ -19,7 +19,7 @@
 #include <kfiletreeview.h>
 #include <klocale.h>
 
-#include <core.h>
+#include <icore.h>
 #include <idocument.h>
 #include <idocumentcontroller.h>
 
@@ -101,7 +101,7 @@ void ProfilesFileTree::treeDoubleClicked()
 void ProfilesFileTree::openUrl(const KUrl& url)
 {
     kDebug(24000) << "openUrl" << url;
-    KDevelop::Core::self()->documentController()->openDocument(url);
+    KDevelop::ICore::self()->documentController()->openDocument(url);
 }
 void ProfilesFileTree::dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
 {

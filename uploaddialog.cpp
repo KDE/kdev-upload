@@ -24,7 +24,7 @@
 #include <kio/netaccess.h>
 #include <kparts/mainwindow.h>
 
-#include <core.h>
+#include <icore.h>
 #include <iuicontroller.h>
 #include <iproject.h>
 #include <iprojectcontroller.h>

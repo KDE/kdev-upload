@@ -17,7 +17,7 @@
 #include <kurl.h>
 #include <kdebug.h>
 
-#include <core.h>
+#include <icore.h>
 #include <iplugincontroller.h>
 #include <iprojectcontroller.h>
 #include <iproject.h>
@@ -37,7 +37,7 @@ UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args 
     : KCModule( UploadPreferencesFactory::componentData(), parent, args )
 {
     IProject* project = 0;
-    Q_FOREACH (IProject* p, KDevelop::Core::self()->projectController()->projects()) {
+    Q_FOREACH (IProject* p, KDevelop::ICore::self()->projectController()->projects()) {
         if (p->projectFileUrl() == args.at(1).toString()) {
             project = p;
             break;
