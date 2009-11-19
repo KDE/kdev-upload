@@ -25,6 +25,7 @@ class KAction;
 namespace KDevelop {
   class ProjectBaseItem;
   class IProject;
+  class IDocument;
 }
 class UploadProfileModel;
 class FilesTreeViewFactory;
@@ -68,6 +69,8 @@ private Q_SLOTS:
     */
     void projectUpload(QObject* project);
 
+    void quickUploadCurrentFile();
+
     /**
     * Called when project was opened, adds a upload-action to the project-menu.
     */
@@ -83,19 +86,22 @@ private Q_SLOTS:
     */
     void profilesRowChanged();
 
+    void documentActivated(KDevelop::IDocument*);
+    void documentClosed(KDevelop::IDocument*);
+
 private:
     void setupActions();
 
     QList<KDevelop::ProjectBaseItem*> m_ctxUrlList; ///< selected files when the contextmenu was requested
 
     KActionMenu* m_projectUploadActionMenu; ///< upload ActionMenu, displayed in the Project-Menu
+    KAction* m_quickUploadCurrentFile;
     QMap<KDevelop::IProject*, KAction*> m_projectUploadActions; ///< upload actions for every open project
     QMap<KDevelop::IProject*, UploadProfileModel*> m_projectProfileModels; ///< UploadProfileModels for every open project
     QSignalMapper* m_signalMapper; ///< signal mapper for upload actions, to get the correct project
     QStandardItemModel* m_outputModel; ///< model for log-output
     FilesTreeViewFactory* m_filesTreeViewFactory; ///< factory for ProjectFilesTree
     AllProfilesModel* m_allProfilesModel; ///< model for all profiles
-
 };
 
 #endif

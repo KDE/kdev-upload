@@ -41,6 +41,7 @@
 #include "uploadprofilemodel.h"
 #include "uploadprofileitem.h"
 #include "allprofilesmodel.h"
+#include <idocumentcontroller.h>
 
 K_PLUGIN_FACTORY(UploadFactory, registerPlugin<UploadPlugin>(); )
 K_EXPORT_PLUGIN(UploadFactory("kdevupload"))
@@ -79,6 +80,10 @@ UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
                    this, SLOT(projectOpened(KDevelop::IProject*)));
     connect(core()->projectController(), SIGNAL(projectClosed(KDevelop::IProject*)),
                    this, SLOT(projectClosed(KDevelop::IProject*)));
+    connect(core()->documentController(), SIGNAL(documentActivated(KDevelop::IDocument*)),
+                SLOT(documentActivated(KDevelop::IDocument*)));
+    connect(core()->documentController(), SIGNAL(documentClosed(KDevelop::IDocument*)),
+                SLOT(documentClosed(KDevelop::IDocument*)));
 
     setXMLFile("kdevupload.rc");
 
@@ -107,15 +112,22 @@ void UploadPlugin::setupActions()
     m_projectUploadActionMenu->setToolTip(i18n("Upload project"));
     m_projectUploadActionMenu->setVisible(false); //make it visible when there are upload profiles
     actionCollection()->addAction("project_upload", m_projectUploadActionMenu);
+
+    m_quickUploadCurrentFile = actionCollection()->addAction("quick_upload_current_file");
+    m_quickUploadCurrentFile->setText( i18n("&Quick Upload Current File") );
+    m_quickUploadCurrentFile->setIcon(KIcon("go-up"));
+    m_projectUploadActionMenu->setEnabled(false);
+    connect(m_quickUploadCurrentFile, SIGNAL(triggered(bool)), SLOT(quickUploadCurrentFile()));
 }
 
 void UploadPlugin::projectOpened(KDevelop::IProject* project)
 {
-    
     UploadProfileModel* model = new UploadProfileModel();
     model->setProject(project);
     m_projectProfileModels.insert(project, model);
     m_allProfilesModel->addModel(model);
+
+    documentActivated(core()->documentController()->activeDocument());
 }
 
 void UploadPlugin::projectClosed(KDevelop::IProject* project)
@@ -133,6 +145,39 @@ void UploadPlugin::projectClosed(KDevelop::IProject* project)
         delete model;
     }
 }
+
+
+void UploadPlugin::documentActivated(KDevelop::IDocument* doc)
+{
+    if (!doc) {
+        m_quickUploadCurrentFile->setEnabled(false);
+        return;
+    }
+    KDevelop::IProject* project = core()->projectController()->findProjectForUrl(doc->url());
+    if (!project) {
+        m_quickUploadCurrentFile->setEnabled(false);
+        return;
+    }
+    QList<KDevelop::ProjectFileItem*> files = project->filesForUrl(doc->url());
+    if (files.isEmpty()) {
+        m_quickUploadCurrentFile->setEnabled(false);
+        return;
+    }
+    UploadProfileModel* profileModel = m_projectProfileModels.value(project);
+    if (!profileModel->rowCount()) {
+        m_quickUploadCurrentFile->setEnabled(false);
+        return;
+    }
+
+    m_quickUploadCurrentFile->setEnabled(true);
+}
+
+
+void UploadPlugin::documentClosed(KDevelop::IDocument* )
+{
+    m_quickUploadCurrentFile->setEnabled(false);
+}
+
 
 void UploadPlugin::projectUpload(QObject* p)
 {
@@ -167,10 +212,12 @@ KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Cont
                 if (model && model->rowCount()) {
                     QAction *action;
                     action = new QAction(i18n("Upload..."), this);
+                    action->setIcon(KIcon("go-up"));
                     connect(action, SIGNAL(triggered()), this, SLOT(upload()));
                     cmExtension.addAction(KDevelop::ContextMenuExtension::FileGroup, action);
     
                     action = new QAction(i18n("Quick Upload"), this);
+                    action->setIcon(KIcon("go-up"));
                     connect(action, SIGNAL(triggered()), this, SLOT(quickUpload()));
                     cmExtension.addAction(KDevelop::ContextMenuExtension::FileGroup, action);
                     
@@ -219,6 +266,40 @@ void UploadPlugin::quickUpload()
     job->setOutputModel(outputModel());
     job->start();
 }
+
+
+void UploadPlugin::quickUploadCurrentFile()
+{
+    KDevelop::IDocument* doc = core()->documentController()->activeDocument();
+    if (!doc) return;
+    KDevelop::IProject* project = KDevelop::ICore::self()->projectController()->findProjectForUrl(doc->url());
+    if (!project) return;
+    QList<KDevelop::ProjectFileItem*> files = project->filesForUrl(doc->url());
+    if (files.isEmpty()) return;
+
+    UploadProjectModel* model = new UploadProjectModel(project);
+    model->setSourceModel(project->projectItem()->model());
+    model->setRootItem(files.first());
+
+    UploadProfileModel* profileModel = m_projectProfileModels.value(project);
+    for (int i = 0; i < profileModel->rowCount(); i++) {
+        UploadProfileItem* item = profileModel->uploadItem(i);
+        if (item->isDefault()) {
+            KConfigGroup c = item->profileConfigGroup();
+            if (c.isValid()) {
+                model->setProfileConfigGroup(c);
+            }
+            break;
+        }
+    }
+
+    UploadJob* job = new UploadJob(project, model, core()->uiController()->activeMainWindow());
+    job->setQuickUpload(true);
+    job->setOutputModel(outputModel());
+    job->start();
+
+}
+
 
 QStandardItemModel* UploadPlugin::outputModel()
 {
