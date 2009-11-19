@@ -29,6 +29,7 @@ Name[zh_CN]=KDevUpload
 Name[zh_TW]=KDevUpload
 GenericName=Upload Plugin
 GenericName[ca]=Connector de pujades
+GenericName[cs]=Odeslat modul
 GenericName[da]=Upload-plugin
 GenericName[de]=Upload-Modul
 GenericName[el]=Πρόσθετο αποστολής
