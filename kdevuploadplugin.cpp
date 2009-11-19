@@ -164,7 +164,7 @@ void UploadPlugin::documentActivated(KDevelop::IDocument* doc)
         return;
     }
     UploadProfileModel* profileModel = m_projectProfileModels.value(project);
-    if (!profileModel->rowCount()) {
+    if (!profileModel || !profileModel->rowCount()) {
         m_quickUploadCurrentFile->setEnabled(false);
         return;
     }
