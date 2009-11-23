@@ -31,6 +31,7 @@ bool UploadProjectModel::filterAcceptsRow(int sourceRow, const QModelIndex & sou
 {
     QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
     KDevelop::ProjectBaseItem* item = projectModel()->item(index);
+    if (!item) return false;
     if (item->project() != m_project) return false;
     if (!m_rootItem) return true;
 
