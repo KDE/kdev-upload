@@ -14,6 +14,11 @@ GenericName[sv]=Insticksprogram för uppladdning
 GenericName[uk]=Додаток вивантаження
 GenericName[x-test]=xxUpload Pluginxx
 Comment=Upload project files to a remote server
+Comment[en_GB]=Upload project files to a remote server
+Comment[pt]=Enviar os ficheiros de projecto para um servidor remoto
+Comment[sv]=Ladda upp projektfiler till en fjärrserver
+Comment[uk]=Вивантаження файлів проекту на віддалений сервер
+Comment[x-test]=xxUpload project files to a remote serverxx
 Icon=go-up
 X-KDE-ServiceTypes=KDevelop/Plugin
 
