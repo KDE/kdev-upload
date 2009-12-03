@@ -11,14 +11,17 @@ X-KDE-ParentComponents=KDevUpload
 X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
+Name[cs]=Odeslat profily
 Name[en_GB]=Upload Profiles
 Name[pt]=Perfis de Envio
+Name[pt_BR]=Perfis de envio
 Name[sv]=Uppladdningsprofiler
 Name[uk]=Вивантажити профілі
 Name[x-test]=xxUpload Profilesxx
 Comment=Configure Upload Profiles
 Comment[en_GB]=Configure Upload Profiles
 Comment[pt]=Configurar os Perfis de Envio
+Comment[pt_BR]=Configura os perfis de envio
 Comment[sv]=Anpassa uppladdningsprofiler
 Comment[uk]=Налаштувати вивантаження профілів
 Comment[x-test]=xxConfigure Upload Profilesxx
