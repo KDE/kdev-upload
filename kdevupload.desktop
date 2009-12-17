@@ -42,6 +42,6 @@ X-KDevelop-Args=
 X-KDevelop-Category=Global
 X-KDE-Library=libkdevupload
 X-KDE-PluginInfo-Name=KDevUpload
-X-KDevelop-Version=7
+X-KDevelop-Version=8
 X-KDevelop-IRequired=org.kdevelop.IOutputView
 X-KDevelop-Mode=GUI
