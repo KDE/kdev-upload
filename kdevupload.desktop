@@ -2,6 +2,7 @@
 Type=Service
 Exec=blubb
 Name=KDevUpload
+Name[de]=KDevUpload
 Name[en_GB]=KDevUpload
 Name[es]=KDevUpload
 Name[pt]=KDevUpload
@@ -12,6 +13,7 @@ Name[x-test]=xxKDevUploadxx
 Name[zh_TW]=KDevUpload
 GenericName=Upload Plugin
 GenericName[cs]=Odeslat modul
+GenericName[de]=Upload-Modul
 GenericName[en_GB]=Upload Plugin
 GenericName[es]=Complemento de envío
 GenericName[pt]='Plugin' de Envio
