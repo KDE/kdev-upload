@@ -17,10 +17,10 @@
 #include <kurl.h>
 #include <kdebug.h>
 
-#include <icore.h>
-#include <iplugincontroller.h>
-#include <iprojectcontroller.h>
-#include <iproject.h>
+#include <interfaces/icore.h>
+#include <interfaces/iplugincontroller.h>
+#include <interfaces/iprojectcontroller.h>
+#include <interfaces/iproject.h>
 
 #include "uploadprofilemodel.h"
 #include "ui_uploadpreferences.h"

@@ -14,7 +14,7 @@
 #include <ksettings/dispatcher.h>
 #include <kcomponentdata.h>
 
-#include <iproject.h>
+#include <interfaces/iproject.h>
 
 #include "uploadprofileitem.h"
 

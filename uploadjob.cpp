@@ -23,9 +23,9 @@
 #include <kio/netaccess.h>
 #include <klocale.h>
 
-#include <iproject.h>
-#include <iprojectcontroller.h>
-#include <projectmodel.h>
+#include <interfaces/iproject.h>
+#include <interfaces/iprojectcontroller.h>
+#include <project/projectmodel.h>
 
 #include "uploadprojectmodel.h"
 

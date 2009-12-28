@@ -11,9 +11,9 @@
 #include "uploadprofilemodel.h"
 #include "kdevuploadplugin.h"
 
-#include <iproject.h>
-#include <projectmodel.h>
-#include <iprojectcontroller.h>
+#include <interfaces/iproject.h>
+#include <project/projectmodel.h>
+#include <interfaces/iprojectcontroller.h>
 
 #include <kconfiggroup.h>
 #include <kfileitem.h>

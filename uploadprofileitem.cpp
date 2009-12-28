@@ -13,7 +13,7 @@
 #include <kicon.h>
 #include <kconfiggroup.h>
 
-#include <iproject.h>
+#include <interfaces/iproject.h>
 
 #include "uploadprofilemodel.h"
 

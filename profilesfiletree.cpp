@@ -19,9 +19,9 @@
 #include <kfiletreeview.h>
 #include <klocale.h>
 
-#include <icore.h>
-#include <idocument.h>
-#include <idocumentcontroller.h>
+#include <interfaces/icore.h>
+#include <interfaces/idocument.h>
+#include <interfaces/idocumentcontroller.h>
 
 #include "allprofilesmodel.h"
 #include "uploadprofileitem.h"

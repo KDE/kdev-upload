@@ -16,7 +16,7 @@
 
 #include <kurl.h>
 
-#include <iplugin.h>
+#include <interfaces/iplugin.h>
 
 class QSignalMapper;
 class QStandardItemModel;

@@ -24,11 +24,11 @@
 #include <kio/netaccess.h>
 #include <kparts/mainwindow.h>
 
-#include <icore.h>
-#include <iuicontroller.h>
-#include <iproject.h>
-#include <iprojectcontroller.h>
-#include <projectmodel.h>
+#include <interfaces/icore.h>
+#include <interfaces/iuicontroller.h>
+#include <interfaces/iproject.h>
+#include <interfaces/iprojectcontroller.h>
+#include <project/projectmodel.h>
 
 #include "ui_uploaddialog.h"
 #include "uploadprojectmodel.h"

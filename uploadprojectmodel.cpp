@@ -14,9 +14,9 @@
 #include <kdatetime.h>
 #include <kdebug.h>
 
-#include <iproject.h>
+#include <interfaces/iproject.h>
 
-#include <projectmodel.h>
+#include <project/projectmodel.h>
 
 UploadProjectModel::UploadProjectModel(KDevelop::IProject* project, QObject *parent)
     : QSortFilterProxyModel(parent), m_project(project), m_rootItem(0)

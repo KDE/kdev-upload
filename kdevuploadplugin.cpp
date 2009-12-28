@@ -24,15 +24,15 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 
-#include <icore.h>
-#include <iproject.h>
-#include <iprojectcontroller.h>
-#include <iuicontroller.h>
-#include <iplugincontroller.h>
-#include <context.h>
-#include <contextmenuextension.h>
-#include <projectmodel.h>
-#include <ioutputview.h>
+#include <interfaces/icore.h>
+#include <interfaces/iproject.h>
+#include <interfaces/iprojectcontroller.h>
+#include <interfaces/iuicontroller.h>
+#include <interfaces/iplugincontroller.h>
+#include <interfaces/context.h>
+#include <interfaces/contextmenuextension.h>
+#include <project/projectmodel.h>
+#include <outputview/ioutputview.h>
 
 #include "uploaddialog.h"
 #include "profilesfiletree.h"
@@ -41,7 +41,7 @@
 #include "uploadprofilemodel.h"
 #include "uploadprofileitem.h"
 #include "allprofilesmodel.h"
-#include <idocumentcontroller.h>
+#include <interfaces/idocumentcontroller.h>
 
 K_PLUGIN_FACTORY(UploadFactory, registerPlugin<UploadPlugin>(); )
 K_EXPORT_PLUGIN(UploadFactory("kdevupload"))
