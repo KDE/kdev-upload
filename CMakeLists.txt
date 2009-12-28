@@ -2,16 +2,10 @@ PROJECT(upload)
 
 find_package(KDE4 REQUIRED)
 
-find_package(KDevPlatform REQUIRED)
-
 include_directories(
    ${KDE4_INCLUDES}
    ${CMAKE_CURRENT_BINARY_DIR}
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${KDEVPLATFORM_INCLUDE_DIR}
-   ${KDEVPLATFORM_INCLUDE_DIR}/interfaces
-   ${KDEVPLATFORM_INCLUDE_DIR}/project
-   ${KDEVPLATFORM_INCLUDE_DIR}/outputview
 )
 
 #plugin
