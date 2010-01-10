@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
 Name[ca]=Perfils de pujada
+Name[ca@valencia]=Perfils de pujada
 Name[cs]=Odeslat profily
 Name[de]=Upload-Profile
 Name[en_GB]=Upload Profiles
@@ -26,6 +27,7 @@ Name[x-test]=xxUpload Profilesxx
 Name[zh_TW]=上傳設定檔
 Comment=Configure Upload Profiles
 Comment[ca]=Configura els perfils de pujada
+Comment[ca@valencia]=Configura els perfils de pujada
 Comment[de]=Upload-Profile einrichten
 Comment[en_GB]=Configure Upload Profiles
 Comment[es]=Configurar los perfiles de envío
