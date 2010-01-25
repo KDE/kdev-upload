@@ -1,9 +1,0 @@
-<!DOCTYPE kpartgui>
-<kpartplugin name="upload" library="libkdevupload" version="2">
-<MenuBar>
-  <Menu name="project">
-    <Action name="project_upload" />
-    <Action name="quick_upload_current_file" />
-  </Menu>
-</MenuBar>
-</kpartplugin>
