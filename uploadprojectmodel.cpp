@@ -30,7 +30,7 @@ UploadProjectModel::~UploadProjectModel()
 bool UploadProjectModel::filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const
 {
     QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-    KDevelop::ProjectBaseItem* item = projectModel()->item(index);
+    KDevelop::ProjectBaseItem* item = projectModel()->itemFromIndex(index);
     if (!item) return false;
     if (item->project() != m_project) return false;
     if (!m_rootItem) return true;
@@ -186,7 +186,7 @@ KDevelop::ProjectModel* UploadProjectModel::projectModel() const
 
 KDevelop::ProjectBaseItem* UploadProjectModel::item(const QModelIndex& index) const
 {
-    return projectModel()->item(mapToSource(index));
+    return projectModel()->itemFromIndex(mapToSource(index));
 }
 
 QModelIndex UploadProjectModel::nextRecursionIndex(const QModelIndex& current, const QModelIndex& root) const
