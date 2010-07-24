@@ -75,8 +75,6 @@ UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args 
             this, SLOT(modifyProfile()));
 
     m_dlg = new UploadProfileDlg(this);
-
-    load();
 }
 
 UploadPreferences::~UploadPreferences( )
@@ -87,11 +85,6 @@ UploadPreferences::~UploadPreferences( )
 void UploadPreferences::save()
 {
     m_model->submit();
-}
-
-void UploadPreferences::load()
-{
-    m_model->revert();
 }
 
 void UploadPreferences::addProfile()

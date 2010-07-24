@@ -34,7 +34,6 @@ public:
     virtual ~UploadPreferences();
 
     void save();
-    void load();
 
 private Q_SLOTS:
     void addProfile();
