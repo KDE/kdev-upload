@@ -7,7 +7,7 @@ X-KDE-ModuleType=Library
 X-KDE-Library=kcm_kdev_upload
 X-KDE-FactoryName=kcm_kdev_upload
 X-KDE-ParentApp=kdevplatformproject
-X-KDE-ParentComponents=kdevplatformproject
+X-KDE-ParentComponents=kdevplatformproject,kdevupload
 X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles

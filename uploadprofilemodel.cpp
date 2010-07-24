@@ -21,7 +21,7 @@
 UploadProfileModel::UploadProfileModel(QObject* parent)
     : QStandardItemModel(parent)
 {
-    KSettings::Dispatcher::registerComponent(KComponentData("KDevUpload"), this, "revert");
+    KSettings::Dispatcher::registerComponent(KComponentData("kdevupload"), this, "revert");
 }
 
 bool UploadProfileModel::removeRow(int row, const QModelIndex & parent)
