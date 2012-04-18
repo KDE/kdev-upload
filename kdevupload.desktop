@@ -2,8 +2,26 @@
 Type=Service
 Exec=blubb
 Name=KDevUpload
+Name[cs]=KDevUpload
+Name[pt]=KDevUpload
+Name[pt_BR]=KDevUpload
+Name[sv]=Kdevupload
+Name[uk]=KDevUpload
+Name[x-test]=xxKDevUploadxx
 GenericName=Upload Plugin
+GenericName[cs]=Modul odesílání
+GenericName[pt]='Plugin' de Envio
+GenericName[pt_BR]=Plugin de envio
+GenericName[sv]=Insticksprogram för uppladdning
+GenericName[uk]=Додаток вивантаження
+GenericName[x-test]=xxUpload Pluginxx
 Comment=Upload project files to a remote server
+Comment[cs]=Odeslat soubory projektu na vzdálený server
+Comment[pt]=Enviar os ficheiros do projecto para um servidor remoto
+Comment[pt_BR]=Enviar os arquivos do projeto para um servidor remoto
+Comment[sv]=Ladda upp projektfiler till en fjärrserver
+Comment[uk]=Вивантаження файлів проекту на віддалений сервер
+Comment[x-test]=xxUpload project files to a remote serverxx
 Icon=go-up
 X-KDE-ServiceTypes=KDevelop/Plugin
 
