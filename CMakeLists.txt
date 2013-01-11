@@ -1,7 +1,17 @@
 PROJECT(upload)
 
+set(KDEVUPLOAD_VERSION_MAJOR 1)
+set(KDEVUPLOAD_VERSION_MINOR 4)
+set(KDEVUPLOAD_VERSION_PATCH 60)
+
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/version.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/version.h"
+  @ONLY
+)
+
 find_package(KDE4 REQUIRED)
-find_package(KDevPlatform 0.9.97 REQUIRED)
+find_package(KDevPlatform 1.4.60 REQUIRED)
 
 include_directories(${KDEVPLATFORM_INCLUDE_DIR})
 

@@ -43,8 +43,10 @@
 #include "allprofilesmodel.h"
 #include <interfaces/idocumentcontroller.h>
 
+#include "version.h"
+
 K_PLUGIN_FACTORY(UploadFactory, registerPlugin<UploadPlugin>(); )
-K_EXPORT_PLUGIN(UploadFactory(KAboutData("kdevupload", "kdevupload", ki18n("Upload"), "0.1", ki18n("Upload project files to a remote server"), KAboutData::License_GPL)
+K_EXPORT_PLUGIN(UploadFactory(KAboutData("kdevupload", "kdevupload", ki18n("Upload"), KDEVUPLOAD_VERSION_STR, ki18n("Upload project files to a remote server"), KAboutData::License_GPL)
     .addAuthor(ki18n("Niko Sams"), ki18n("Author"), "niko.sams@gmail.com", "http://nikosams.blogspot.com")
 ))
 
