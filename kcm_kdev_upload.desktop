@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
 Name[cs]=Profily odesílání
+Name[de]=Upload-Profile
 Name[es]=Perfiles de envío
 Name[et]=Üleslaadimisprofiilid
 Name[fr]=Envoi de profils
@@ -29,6 +30,7 @@ Name[uk]=Профілі вивантаження
 Name[x-test]=xxUpload Profilesxx
 Comment=Configure Upload Profiles
 Comment[cs]=Nastavit profily odesílání
+Comment[de]=Upload-Profile einrichten
 Comment[es]=Configurar perfiles de envío
 Comment[et]=Üleslaadimisprofiilide seadistamine
 Comment[fr]=Configure les envois de profils
