@@ -11,6 +11,7 @@ X-KDE-ParentComponents=kdevplatformproject,kdevupload
 X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
+Name[bs]=Pošalji profilie
 Name[cs]=Profily odesílání
 Name[de]=Upload-Profile
 Name[es]=Perfiles de envío
@@ -30,6 +31,7 @@ Name[tr]=Yükleme Profilleri
 Name[uk]=Профілі вивантаження
 Name[x-test]=xxUpload Profilesxx
 Comment=Configure Upload Profiles
+Comment[bs]=Podešavanje slanja profila
 Comment[cs]=Nastavit profily odesílání
 Comment[de]=Upload-Profile einrichten
 Comment[es]=Configurar perfiles de envío
