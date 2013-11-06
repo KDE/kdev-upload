@@ -1,5 +1,7 @@
 PROJECT(upload)
 
+cmake_minimum_required(VERSION 2.8)
+
 find_package(KDE4 REQUIRED)
 find_package(KDevPlatform 1.5.60 REQUIRED)
 
