@@ -54,7 +54,9 @@ target_link_libraries(kdevupload
 )
 
 install(TARGETS kdevupload  DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES  kdevupload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+
+configure_file(kdevupload.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES  kdevupload.rc DESTINATION ${DATA_INSTALL_DIR}/kdevupload)
 
 
