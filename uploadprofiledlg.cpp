@@ -10,6 +10,7 @@
 #include "uploadprofiledlg.h"
 
 #include <QListWidgetItem>
+#include <KLocalizedString>
 
 #include <kdebug.h>
 #include <kprotocolmanager.h>
@@ -29,7 +30,7 @@ UploadProfileDlg::UploadProfileDlg(QWidget *parent)
     m_ui = new Ui::UploadProfileDlg();
     m_ui->setupUi(widget);
 
-    m_ui->browseButton->setIcon(KIcon("document-open"));
+    m_ui->browseButton->setIcon(QIcon::fromTheme("document-open"));
     connect(m_ui->browseButton, SIGNAL(clicked()), this, SLOT(browse()));
 
     QStringList protocols = KProtocolInfo::protocols();

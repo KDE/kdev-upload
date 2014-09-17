@@ -78,7 +78,7 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
 };
 
 UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
-: KDevelop::IPlugin(UploadFactory::componentData(), parent),  m_outputModel(0), m_filesTreeViewFactory(0)
+: KDevelop::IPlugin(QStringLiteral("uploadplugin"), parent),  m_outputModel(0), m_filesTreeViewFactory(0)
 {
     connect(core()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
                    this, SLOT(projectOpened(KDevelop::IProject*)));
@@ -112,14 +112,14 @@ void UploadPlugin::setupActions()
     connect(m_signalMapper, SIGNAL(mapped(QObject*)),
             this, SLOT(projectUpload(QObject*)));
     m_projectUploadActionMenu = new KActionMenu(i18n("&Upload Project"), this);
-    m_projectUploadActionMenu->setIcon(KIcon("go-up"));
+    m_projectUploadActionMenu->setIcon(QIcon::fromTheme("go-up"));
     m_projectUploadActionMenu->setToolTip(i18n("Upload project"));
     m_projectUploadActionMenu->setVisible(false); //make it visible when there are upload profiles
     actionCollection()->addAction("project_upload", m_projectUploadActionMenu);
 
     m_quickUploadCurrentFile = actionCollection()->addAction("quick_upload_current_file");
     m_quickUploadCurrentFile->setText( i18n("&Quick Upload Current File") );
-    m_quickUploadCurrentFile->setIcon(KIcon("go-up"));
+    m_quickUploadCurrentFile->setIcon(QIcon::fromTheme("go-up"));
     m_projectUploadActionMenu->setEnabled(false);
     connect(m_quickUploadCurrentFile, SIGNAL(triggered(bool)), SLOT(quickUploadCurrentFile()));
 }
@@ -136,7 +136,7 @@ void UploadPlugin::projectOpened(KDevelop::IProject* project)
 
 void UploadPlugin::projectClosed(KDevelop::IProject* project)
 {
-    KAction* action = m_projectUploadActions.value(project);
+    QAction* action = m_projectUploadActions.value(project);
     if (action) {
         m_projectUploadActions.remove(project);
         m_projectUploadActionMenu->removeAction(action);
@@ -216,12 +216,12 @@ KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Cont
                 if (model && model->rowCount()) {
                     QAction *action;
                     action = new QAction(i18n("Upload..."), this);
-                    action->setIcon(KIcon("go-up"));
+                    action->setIcon(QIcon::fromTheme("go-up"));
                     connect(action, SIGNAL(triggered()), this, SLOT(upload()));
                     cmExtension.addAction(KDevelop::ContextMenuExtension::FileGroup, action);
     
                     action = new QAction(i18n("Quick Upload"), this);
-                    action->setIcon(KIcon("go-up"));
+                    action->setIcon(QIcon::fromTheme("go-up"));
                     connect(action, SIGNAL(triggered()), this, SLOT(quickUpload()));
                     cmExtension.addAction(KDevelop::ContextMenuExtension::FileGroup, action);
                     
@@ -342,7 +342,7 @@ void UploadPlugin::profilesRowChanged()
         
         if (model->rowCount()) {
             if (!m_projectUploadActions.contains(project)) {
-                KAction* action = new KAction(project->name(), m_projectUploadActionMenu);
+                QAction* action = new QAction(project->name(), m_projectUploadActionMenu);
                 connect(action, SIGNAL(triggered()), m_signalMapper, SLOT(map()));
                 m_signalMapper->setMapping(action, project);
                 m_projectUploadActions.insert(project, action);
@@ -351,7 +351,7 @@ void UploadPlugin::profilesRowChanged()
             }
         } else {
             if (m_projectUploadActions.contains(project)) {
-                KAction* action = m_projectUploadActions.value(project);
+                QAction* action = m_projectUploadActions.value(project);
                 m_projectUploadActions.remove(project);
                 m_projectUploadActionMenu->removeAction(action);
                 m_signalMapper->removeMappings(action);

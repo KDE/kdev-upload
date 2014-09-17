@@ -21,7 +21,7 @@
 class QSignalMapper;
 class QStandardItemModel;
 class KActionMenu;
-class KAction;
+class QAction;
 namespace KDevelop {
   class ProjectBaseItem;
   class IProject;
@@ -95,8 +95,8 @@ private:
     QList<KDevelop::ProjectBaseItem*> m_ctxUrlList; ///< selected files when the contextmenu was requested
 
     KActionMenu* m_projectUploadActionMenu; ///< upload ActionMenu, displayed in the Project-Menu
-    KAction* m_quickUploadCurrentFile;
-    QMap<KDevelop::IProject*, KAction*> m_projectUploadActions; ///< upload actions for every open project
+    QAction* m_quickUploadCurrentFile;
+    QMap<KDevelop::IProject*, QAction*> m_projectUploadActions; ///< upload actions for every open project
     QMap<KDevelop::IProject*, UploadProfileModel*> m_projectProfileModels; ///< UploadProfileModels for every open project
     QSignalMapper* m_signalMapper; ///< signal mapper for upload actions, to get the correct project
     QStandardItemModel* m_outputModel; ///< model for log-output
