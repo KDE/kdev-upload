@@ -10,10 +10,9 @@
 #include "uploadprofilemodel.h"
 
 #include <kdebug.h>
-#include <KConfigGroup>
+#include <kconfiggroup.h>
 #include <ksettings/dispatcher.h>
 #include <kcomponentdata.h>
-#include <kurl.h>
 
 #include <interfaces/iproject.h>
 
@@ -22,7 +21,7 @@
 UploadProfileModel::UploadProfileModel(QObject* parent)
     : QStandardItemModel(parent)
 {
-//     KSettings::Dispatcher::registerComponent(KComponentData("kdevupload").componentName(), this, "revert");
+    KSettings::Dispatcher::registerComponent(KComponentData("kdevupload"), this, "revert");
 }
 
 bool UploadProfileModel::removeRow(int row, const QModelIndex & parent)
@@ -67,7 +66,7 @@ void UploadProfileModel::revert()
     int row = 0;
     Q_FOREACH (QString g, group.groupList()) {
         if (g.startsWith("Profile")) {
-            KUrl url = KUrl(group.group(g).readEntry("url", QString()));
+            KUrl url = group.group(g).readEntry("url", KUrl());
             QString name = group.group(g).readEntry("name", QString());
             UploadProfileItem* i = uploadItem(row);
             if (!i) {
@@ -108,7 +107,7 @@ bool UploadProfileModel::submit()
                 item->setProfileNr(QString::number(++maxProfileNr));
             }
             KConfigGroup profileGroup = group.group("Profile" + item->profileNr());
-            profileGroup.writeEntry("url", item->url().pathOrUrl());
+            profileGroup.writeEntry("url", item->url());
             profileGroup.writeEntry("name", item->text());
             if (item->isDefault()) {
                 defaultProfileNr = item->profileNr();

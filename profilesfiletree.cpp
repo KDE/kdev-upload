@@ -20,13 +20,11 @@
 #include <QDesktopServices>
 
 #include <kdebug.h>
-// #include <kfiletreeview.h>
+#include <kfiletreeview.h>
 #include <klocale.h>
-#include <kurl.h>
 #include <KDirOperator>
 #include <KFileWidget>
 #include <KActionCollection>
-#include <kfileitem.h>
 
 #include <interfaces/icore.h>
 #include <interfaces/idocument.h>

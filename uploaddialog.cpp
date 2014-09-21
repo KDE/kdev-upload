@@ -15,8 +15,6 @@
 #include <QMenu>
 #include <QContextMenuEvent>
 
-#include <KLocalizedString>
-
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
@@ -65,15 +63,15 @@ UploadDialog::UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QW
 
 
     m_treeContextMenu = new QMenu(this);
-    QAction* action = new QAction(i18nc("Select all items in the tree", "All"), this);
+    KAction* action = new KAction(i18nc("Select all items in the tree", "All"), this);
     connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkAll()));
     m_treeContextMenu->addAction(action);
 
-    action = new QAction(i18n("Modified"), this);
+    action = new KAction(i18n("Modified"), this);
     connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkModified()));
     m_treeContextMenu->addAction(action);
 
-    action = new QAction(i18n("Invert"), this);
+    action = new KAction(i18n("Invert"), this);
     connect(action, SIGNAL(triggered()), m_uploadProjectModel, SLOT(checkInvert()));
     m_treeContextMenu->addAction(action);
 

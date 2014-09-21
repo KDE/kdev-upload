@@ -13,7 +13,6 @@
 #include <kfileitem.h>
 #include <kdatetime.h>
 #include <kdebug.h>
-#include <kurl.h>
 
 #include <interfaces/iproject.h>
 
@@ -73,10 +72,10 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
                 kDebug() << "file url" << i->file()->url();
                 QString url = KUrl::relativeUrl(m_project->folder(), i->file()->url());
                 kDebug() << "resulting url" << url;
-                QDateTime uploadTime = QDateTime(m_profileConfigGroup.readEntry(url, QDateTime()));
+                KDateTime uploadTime = KDateTime(m_profileConfigGroup.readEntry(url, QDateTime()));
                 if (uploadTime.isValid()) {
                     KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, i->file()->url());
-                    QDateTime modTime = fileItem.time(KFileItem::ModificationTime);
+                    KDateTime modTime = fileItem.time(KFileItem::ModificationTime);
                     if (modTime > uploadTime) {
                         return Qt::Checked;
                     } else {
@@ -94,7 +93,7 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
                 } else {
                     //don't check for ModificationTime as we do for files
                     QString url = KUrl::relativeUrl(m_project->folder(), i->folder()->url());
-                    QDateTime uploadTime = QDateTime(m_profileConfigGroup.readEntry(url, QDateTime()));
+                    KDateTime uploadTime = KDateTime(m_profileConfigGroup.readEntry(url, QDateTime()));
                     if (uploadTime.isValid()) {
                         return Qt::Unchecked;
                     } else {
@@ -227,7 +226,7 @@ QString UploadProjectModel::currentProfileName()
 
 KUrl UploadProjectModel::currentProfileUrl()
 {
-    return KUrl(m_profileConfigGroup.readEntry("url", QString()));
+    return m_profileConfigGroup.readEntry("url", KUrl());
 }
 
 void UploadProjectModel::checkAll()

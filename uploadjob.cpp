@@ -22,8 +22,6 @@
 #include <kio/jobuidelegate.h>
 #include <kio/netaccess.h>
 #include <klocale.h>
-#include <kurl.h>
-#include <KF5/KJobWidgets/kjobwidgets.h>
 
 #include <interfaces/iproject.h>
 #include <interfaces/iprojectcontroller.h>
@@ -156,7 +154,7 @@ void UploadJob::uploadNext()
         return;
     }
 
-    KJobWidgets::setWindow(job, m_progressDialog);
+    job->ui()->setWindow(m_progressDialog);
     connect(job, SIGNAL(result(KJob*)),
             this, SLOT(uploadResult(KJob*)));
     connect(job, SIGNAL(processedSize(KJob*, qulonglong)),

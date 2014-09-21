@@ -12,7 +12,6 @@
 #define PROFILESFILETREE_H
 
 #include <QWidget>
-#include <kfileitem.h>
 
 class QMenu;
 class QModelIndex;
