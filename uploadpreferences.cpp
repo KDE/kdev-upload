@@ -31,14 +31,13 @@
 using namespace KDevelop;
 
 K_PLUGIN_FACTORY(UploadPreferencesFactory, registerPlugin<UploadPreferences>(); )
-K_EXPORT_PLUGIN(UploadPreferencesFactory("kcm_kdev_upload"))
 
 UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args )
-    : KCModule( UploadPreferencesFactory::componentData(), parent, args )
+    : KCModule( parent, args )
 {
     IProject* project = 0;
     Q_FOREACH (IProject* p, KDevelop::ICore::self()->projectController()->projects()) {
-        if (p->projectFileUrl() == args.at(1).toString()) {
+        if (p->projectFileUrl().path() == args.at(1).toString()) {
             project = p;
             break;
         }

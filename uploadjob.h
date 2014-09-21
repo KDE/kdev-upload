@@ -14,8 +14,14 @@
 #include <QDialog>
 #include <QModelIndex>
 
-class KProgressDialog;
+class QProgressDialog;
 class KJob;
+namespace KIO {
+    class Job;
+    class CopyJob;
+    class JobUiDelegate;
+    class NetAccess;
+}
 namespace KDevelop {
     class IProject;
     class ProjectBaseItem;
@@ -111,7 +117,7 @@ private:
     KDevelop::IProject* m_project; ///< the project of this job
     UploadProjectModel* m_uploadProjectModel;
 
-    KProgressDialog* m_progressDialog; ///< progress-dialog when the upload is running
+    QProgressDialog* m_progressDialog; ///< progress-dialog when the upload is running
     int m_progressBytesDone; ///< uploaded bytes, incremented when a file is fully uploaded. used for progress.
 
     bool m_onlyMarkUploaded; ///< if files should be only marked as uploaded

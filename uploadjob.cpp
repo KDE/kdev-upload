@@ -12,8 +12,9 @@
 #include <QPushButton>
 #include <QHeaderView>
 #include <QStandardItemModel>
+#include <QtWidgets/QProgressDialog>
+#include <QUrl>
 
-#include <kprogressdialog.h>
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
@@ -22,6 +23,9 @@
 #include <kio/jobuidelegate.h>
 #include <kio/netaccess.h>
 #include <klocale.h>
+#include <kurl.h>
+#include <kjob.h>
+#include <kjobwidgets.h>
 
 #include <interfaces/iproject.h>
 #include <interfaces/iprojectcontroller.h>
@@ -33,10 +37,10 @@ UploadJob::UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWi
     : QObject(parent), m_project(project), m_uploadProjectModel(model),
       m_onlyMarkUploaded(false), m_quickUpload(false), m_outputModel(0)
 {
-    m_progressDialog = new KProgressDialog(parent,
-                                            i18n("Uploading files"),
-                                            i18n("Preparing..."));
-    m_progressDialog->setWindowModality(Qt::WindowModal);
+    m_progressDialog = new QProgressDialog();
+    m_progressDialog->setWindowTitle(i18n("Uploading files"));
+    m_progressDialog->setLabelText(i18n("Preparing..."));
+    m_progressDialog->setModal(true);
     m_progressDialog->setAutoClose(false);
 }
 
@@ -49,7 +53,7 @@ void UploadJob::start()
 {
     m_progressBytesDone = 0;
     m_progressDialog->setLabelText(i18n("Calculating size..."));
-    m_progressDialog->progressBar()->setValue(0);
+    m_progressDialog->setValue(0);
     m_progressDialog->show();
 
     int sumSize = 0;
@@ -65,7 +69,7 @@ void UploadJob::start()
             }
         }
     }
-    m_progressDialog->progressBar()->setMaximum(sumSize);
+    m_progressDialog->setMaximum(sumSize);
 
     m_uploadIndex = QModelIndex();
     uploadNext();
@@ -73,7 +77,7 @@ void UploadJob::start()
 
 void UploadJob::uploadNext()
 {
-    if (m_progressDialog->wasCancelled()) return;
+    if (m_progressDialog->wasCanceled()) return;
 
     m_uploadIndex = m_uploadProjectModel->nextRecursionIndex(m_uploadIndex);
 
@@ -97,13 +101,14 @@ void UploadJob::uploadNext()
     Qt::CheckState checked = static_cast<Qt::CheckState>(m_uploadProjectModel
                             ->data(m_uploadIndex, Qt::CheckStateRole).toInt());
     KUrl url;
+    KUrl projectFolder(m_project->folder());
+    projectFolder.adjustPath(KUrl::AddTrailingSlash);
     if (item->folder()) url = item->folder()->url();
     else if (item->file()) url = item->file()->url();
-
     if (isQuickUpload() && checked == Qt::Unchecked) {
         appendLog(i18n("File was not modified for %1: %2",
                             m_uploadProjectModel->currentProfileName(),
-                            KUrl::relativeUrl(m_project->folder(), url)));
+                            KUrl::relativeUrl(projectFolder, url)));
     }
 
     if (!(item->file() || item->folder()) || checked == Qt::Unchecked) {
@@ -112,40 +117,41 @@ void UploadJob::uploadNext()
     }
 
     KUrl dest = m_uploadProjectModel->currentProfileUrl();
-    dest.addPath(KUrl::relativeUrl(m_project->folder(), url));
+    dest.addPath(KUrl::relativeUrl(projectFolder, url));
 
     KIO::Job* job = 0;
 
     if (m_onlyMarkUploaded) {
         appendLog(i18n("Marked as uploaded for %1: %2",
                             m_uploadProjectModel->currentProfileName(),
-                            KUrl::relativeUrl(m_project->folder(), url)));
+                            KUrl::relativeUrl(projectFolder, url)));
         m_uploadProjectModel->profileConfigGroup()
-                .writeEntry(KUrl::relativeUrl(m_project->folder(), url),
+                .writeEntry(KUrl::relativeUrl(projectFolder, url),
                             QDateTime::currentDateTime());
         uploadNext();
         return;
     } else if (item->file()) {
+        appendLog(KUrl::relativeUrl(projectFolder, url));
         appendLog(i18n("Uploading to %1: %2",
                             m_uploadProjectModel->currentProfileName(),
-                            KUrl::relativeUrl(m_project->folder(), url)));
+                            KUrl::relativeUrl(projectFolder, url)));
         kDebug() << "file_copy" << url << dest;
         job = KIO::file_copy(url, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
-        m_progressDialog->setLabelText(i18n("Uploading %1...", KUrl::relativeUrl(m_project->folder(), url)));
+        m_progressDialog->setLabelText(i18n("Uploading %1...", KUrl::relativeUrl(projectFolder, url)));
     } else if (item->folder()) {
         if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, m_progressDialog)) {
             appendLog(i18n("Directory in %1 already exists: %2", 
                                 m_uploadProjectModel->currentProfileName(),
-                                KUrl::relativeUrl(m_project->folder(), url)));
+                                KUrl::relativeUrl(projectFolder, url)));
             m_uploadProjectModel->profileConfigGroup()
-                    .writeEntry(KUrl::relativeUrl(m_project->folder(), url),
+                    .writeEntry(KUrl::relativeUrl(projectFolder, url),
                                 QDateTime::currentDateTime());
             uploadNext();
             return;
         } else {
             appendLog(i18n("Creating directory in %1: %2", 
                                 m_uploadProjectModel->currentProfileName(),
-                                KUrl::relativeUrl(m_project->folder(), url)));
+                                KUrl::relativeUrl(projectFolder, url)));
             kDebug() << "mkdir" << dest;
             job = KIO::mkdir(dest);
         }
@@ -154,7 +160,7 @@ void UploadJob::uploadNext()
         return;
     }
 
-    job->ui()->setWindow(m_progressDialog);
+    KJobWidgets::setWindow(job, m_progressDialog);
     connect(job, SIGNAL(result(KJob*)),
             this, SLOT(uploadResult(KJob*)));
     connect(job, SIGNAL(processedSize(KJob*, qulonglong)),
@@ -162,7 +168,7 @@ void UploadJob::uploadNext()
     connect(job, SIGNAL(infoMessage(KJob*, QString)),
             this, SLOT(uploadInfoMessage(KJob*, QString)));
 
-    connect(m_progressDialog, SIGNAL(cancelClicked()),
+    connect(m_progressDialog, SIGNAL(canceled()),
             this, SLOT(cancelClicked()));
     connect(m_progressDialog, SIGNAL(rejected()),
             job, SLOT(kill()));
@@ -185,7 +191,8 @@ void UploadJob::uploadResult(KJob* job)
         }
         appendLog(i18n("Upload error: %1", job->errorString()));
         m_progressDialog->close();
-        qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
+//TODO: Find out what next line doas as it crushes KDevelop
+//         qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
         delete this;
         return;
     }
@@ -205,14 +212,14 @@ void UploadJob::uploadResult(KJob* job)
     if (KIO::NetAccess::stat(url, entry, m_progressDialog)) {
         m_progressBytesDone += entry.numberValue(KIO::UDSEntry::UDS_SIZE);
     }
-    m_progressDialog->progressBar()->setValue(m_progressBytesDone);
+    m_progressDialog->setValue(m_progressBytesDone);
 
     uploadNext();
 }
 
 void UploadJob::processedSize(KJob*, qulonglong size)
 {
-    m_progressDialog->progressBar()->setValue(m_progressBytesDone + size);
+    m_progressDialog->setValue(m_progressBytesDone + size);
 }
 
 void UploadJob::uploadInfoMessage(KJob*, const QString& plain)
