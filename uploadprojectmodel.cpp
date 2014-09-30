@@ -13,9 +13,10 @@
 #include <kfileitem.h>
 #include <kdatetime.h>
 #include <kdebug.h>
-#include <kurl.h>
+#include <QDir>
 
 #include <interfaces/iproject.h>
+#include <util/path.h>
 
 #include <project/projectmodel.h>
 
@@ -69,13 +70,13 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
             if (m_checkStates.contains(indx)) {
                 return m_checkStates.value(indx);
             } else {
-                kDebug() << "project folder" << m_project->folder() << "file" << i << i->file();
-                kDebug() << "file url" << i->file()->url();
-                QString url = KUrl::relativeUrl(m_project->folder(), i->file()->url());
+                kDebug() << "project folder" << m_project->path().path() << "file" << i << i->file();
+                kDebug() << "file url" << i->file()->path().path();
+                QString url = m_project->path().relativePath(i->file()->path());
                 kDebug() << "resulting url" << url;
                 QDateTime uploadTime(m_profileConfigGroup.readEntry(url, QDateTime()));
                 if (uploadTime.isValid()) {
-                    KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, i->file()->url());
+                    KFileItem fileItem(i->file()->path().toUrl());
                     QDateTime modTime = fileItem.time(KFileItem::ModificationTime);
                     if (modTime > uploadTime) {
                         return Qt::Checked;
@@ -93,7 +94,7 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
                     return m_checkStates.value(indx);
                 } else {
                     //don't check for ModificationTime as we do for files
-                    QString url = KUrl::relativeUrl(m_project->folder(), i->folder()->url());
+                    QString url = m_project->path().relativePath(i->folder()->path());
                     QDateTime uploadTime(m_profileConfigGroup.readEntry(url, QDateTime()));
                     if (uploadTime.isValid()) {
                         return Qt::Unchecked;
@@ -225,9 +226,9 @@ QString UploadProjectModel::currentProfileName()
     return m_profileConfigGroup.readEntry("name", QString());
 }
 
-KUrl UploadProjectModel::currentProfileUrl()
+QUrl UploadProjectModel::currentProfileUrl()
 {
-    return KUrl(m_profileConfigGroup.readEntry("url", QString()));
+    return m_profileConfigGroup.readEntry("url", QUrl());
 }
 
 void UploadProjectModel::checkAll()

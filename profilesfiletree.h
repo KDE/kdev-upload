@@ -18,8 +18,8 @@ class QMenu;
 class QModelIndex;
 class QComboBox;
 class QLabel;
+class QUrl;
 
-class KUrl;
 class KDirOperator;
 class KFileItem;
 
@@ -48,7 +48,7 @@ private Q_SLOTS:
     /**
      * Open the Url in the editor
      */
-    void openUrl(const KUrl& url);
+    void openUrl(const QUrl& url);
 
     /**
      * Slot called when current profile has changed, sets the new root-url for
@@ -68,7 +68,7 @@ private Q_SLOTS:
     void modifyProfile();
 
     void fileSelected(const KFileItem& item);
-    void urlEntered(const KUrl&);
+    void urlEntered();
     void contextMenuAboutToShow(KFileItem,QMenu*);
     void copyUrl();
     void browseUrl();

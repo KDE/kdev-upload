@@ -26,15 +26,14 @@ find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
 include_directories(${KDEVPLATFORM_INCLUDE_DIR})
 
 include_directories(
-   ${KDE4_INCLUDES}
    ${CMAKE_CURRENT_BINARY_DIR}
    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# add_subdirectory(tests)
+add_subdirectory(tests)
 
 #plugin
-set(kdevupload_PART_SRCS 
+set(kdevupload_PART_SRCS
    kdevuploadplugin.cpp
    allprofilesmodel.cpp
    profilesfiletree.cpp
@@ -57,16 +56,15 @@ add_library(kdevupload MODULE ${kdevupload_PART_SRCS})
 target_link_libraries(kdevupload
     KDev::Interfaces
     KDev::Project
-    
+    KDev::Serialization
+
     KF5::JobWidgets
     KF5::KCMUtils
     KF5::KIOCore
     KF5::KIOFileWidgets
     KF5::KIOWidgets
+    KF5::KIONTLM
     KF5::CoreAddons
-    
-    # TODO: remove
-    KF5::KDELibs4Support
 )
 
 install(TARGETS kdevupload  DESTINATION ${PLUGIN_INSTALL_DIR})
@@ -78,7 +76,7 @@ install(FILES  kdevupload.rc DESTINATION ${DATA_INSTALL_DIR}/kdevupload)
 
 #preferences-plugin
 # add_executable(location_recognition ${SRC} ${UIS_HDRS})
-set(uploadpreferences_PART_SRCS 
+set(uploadpreferences_PART_SRCS
    uploadpreferences.cpp
    uploadprofilemodel.cpp
    uploadprofileitem.cpp
@@ -91,14 +89,16 @@ add_library(kcm_kdev_upload ${uploadpreferences_PART_SRCS})
 
 target_link_libraries(kcm_kdev_upload
     KDev::Interfaces
-    
+    KDev::Util
+
     KF5::I18n
     KF5::KCMUtils
     KF5::Service
     KF5::Parts
-    
-    # TODO: remove
-    KF5::KDELibs4Support
+    KF5::KIOCore
+    KF5::KIOFileWidgets
+    KF5::KIOWidgets
+    KF5::KIONTLM
 )
 
 install(TARGETS kcm_kdev_upload  DESTINATION ${PLUGIN_INSTALL_DIR})

@@ -33,6 +33,7 @@
 #include <interfaces/contextmenuextension.h>
 #include <project/projectmodel.h>
 #include <outputview/ioutputview.h>
+#include <serialization/indexedstring.h>
 
 #include "uploaddialog.h"
 #include "profilesfiletree.h"
@@ -159,7 +160,7 @@ void UploadPlugin::documentActivated(KDevelop::IDocument* doc)
         m_quickUploadCurrentFile->setEnabled(false);
         return;
     }
-    QList<KDevelop::ProjectFileItem*> files = project->filesForUrl(doc->url());
+    QList<KDevelop::ProjectFileItem*> files = project->filesForPath(KDevelop::IndexedString(doc->url()));
     if (files.isEmpty()) {
         m_quickUploadCurrentFile->setEnabled(false);
         return;
@@ -275,7 +276,7 @@ void UploadPlugin::quickUploadCurrentFile()
     if (!doc) return;
     KDevelop::IProject* project = KDevelop::ICore::self()->projectController()->findProjectForUrl(doc->url());
     if (!project) return;
-    QList<KDevelop::ProjectFileItem*> files = project->filesForUrl(doc->url());
+    QList<KDevelop::ProjectFileItem*> files = project->filesForPath(KDevelop::IndexedString(doc->url()));
     if (files.isEmpty()) return;
 
     UploadProjectModel* model = new UploadProjectModel(project);

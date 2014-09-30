@@ -21,7 +21,7 @@ namespace KDevelop {
     class ProjectModel;
     class ProjectBaseItem;
 }
-class KUrl;
+class QUrl;
 
 /**
  * ProxyModel that adds checkboxes for upload status to the ProjectModel.
@@ -81,9 +81,9 @@ public:
     /**
      * Returns the url of the current Upload Profile (which is set through setProfileConfigGroup)
      */
-    KUrl currentProfileUrl();
+    QUrl currentProfileUrl();
 
-public Q_SLOTS:    
+public Q_SLOTS:
     /**
      * Checks all items
      */

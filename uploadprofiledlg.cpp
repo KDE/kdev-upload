@@ -11,21 +11,30 @@
 
 #include <QListWidgetItem>
 #include <KLocalizedString>
+#include <QFileDialog>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <qglobal.h>
 
 #include <kdebug.h>
 #include <kprotocolmanager.h>
 #include <kprotocolinfo.h>
-#include <kurl.h>
-#include <kdirselectdialog.h>
-#include <kio/netaccess.h>
+#include <kio/statjob.h>
+#include <KJobWidgets>
 #include <kmessagebox.h>
 
 #include "ui_uploadprofiledlg.h"
 #include "uploadprofileitem.h"
 
 UploadProfileDlg::UploadProfileDlg(QWidget *parent)
-    : KDialog (parent)
+    : QDialog (parent)
 {
+    setWindowTitle(i18n("Upload Profile"));
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+
     QWidget* widget = new QWidget(this);
     m_ui = new Ui::UploadProfileDlg();
     m_ui->setupUi(widget);
@@ -33,20 +42,27 @@ UploadProfileDlg::UploadProfileDlg(QWidget *parent)
     m_ui->browseButton->setIcon(QIcon::fromTheme("document-open"));
     connect(m_ui->browseButton, SIGNAL(clicked()), this, SLOT(browse()));
 
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotAcceptButtonClicked()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    mainLayout->addWidget(widget);
+    mainLayout->addWidget(buttonBox);
+
     QStringList protocols = KProtocolInfo::protocols();
     protocols.sort();
     Q_FOREACH (QString p, protocols) {
-        KUrl u;
-        u.setProtocol(p);
+        QUrl u;
+        u.setScheme(p);
         if (KProtocolManager::supportsWriting(u) && KProtocolManager::supportsMakeDir(u)
             && KProtocolManager::supportsDeleting(u)) {
             m_ui->comboProtocol->addItem(p);
         }
     }
-
-    setMainWidget(widget);
-    setCaption(i18n("Upload Profile"));
-    setButtons(KDialog::Close | KDialog::Ok);
 }
 
 UploadProfileDlg::~UploadProfileDlg()
@@ -69,9 +85,9 @@ int UploadProfileDlg::editProfile(UploadProfileItem* item)
     return result;
 }
 
-KUrl UploadProfileDlg::currentUrl()
+QUrl UploadProfileDlg::currentUrl()
 {
-    KUrl url;
+    QUrl url;
     url.setHost(m_ui->lineHost->text());
     url.setUserName(m_ui->lineUser->text());
     url.setPath(m_ui->linePath->text());
@@ -80,7 +96,7 @@ KUrl UploadProfileDlg::currentUrl()
     return url;
 }
 
-void UploadProfileDlg::updateUrl(const KUrl& url)
+void UploadProfileDlg::updateUrl(const QUrl& url)
 {
     m_ui->lineHost->setText(url.host());
     m_ui->lineUser->setText(url.userName());
@@ -96,19 +112,30 @@ void UploadProfileDlg::updateUrl(const KUrl& url)
 
 void UploadProfileDlg::browse()
 {
-    KDirSelectDialog dialog(currentUrl(), false, this);
-    if (dialog.exec() == QDialog::Accepted && dialog.url().isValid()) {
-        updateUrl(dialog.url());
+#if QT_VERSION >= 0x050400
+    QUrl chosenDir = QFileDialog::getExistingDirectoryUrl(this, QString(), currentUrl());
+#else
+    QFileDialog dialog(this);
+    dialog.setDirectoryUrl(currentUrl());
+    dialog.setOptions(QFileDialog::ShowDirsOnly);
+    dialog.exec();
+    QUrl chosenDir = dialog.selectedUrls().first();
+#endif
+    if(chosenDir.isValid()) {
+        updateUrl(chosenDir);
     }
 }
-void UploadProfileDlg::slotButtonClicked(int button) {
-    if (button == KDialog::Ok) {
-        if (!KIO::NetAccess::exists(currentUrl(), KIO::NetAccess::DestinationSide, this)) {
-            KMessageBox::sorry(this, i18n("The specified URL does not exist."));
-            return;
-        }
+void UploadProfileDlg::slotAcceptButtonClicked()
+{
+    KIO::StatJob* statJob = KIO::stat(currentUrl());
+    statJob->setSide(KIO::StatJob::DestinationSide);
+    KJobWidgets::setWindow(statJob, this);
+    bool dirExists = statJob->exec();
+    if (!dirExists) {
+        KMessageBox::sorry(this, i18n("The specified URL does not exist."));
+        return;
     }
-    KDialog::slotButtonClicked(button);
+    QDialog::accept();
 }
 
 #include "uploadprofiledlg.moc"

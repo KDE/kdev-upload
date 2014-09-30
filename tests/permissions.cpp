@@ -1,14 +1,11 @@
 #include <QDebug>
 #include <kio/job.h>
-#include <kio/netaccess.h>
 #include <QApplication>
 #include <kaboutdata.h>
 #include <kcomponentdata.h>
 
 int main(int argc, char **argv)
 {
-    KAboutData about( "permissions", "permissions", ki18n("permissions test"), "0.1" );
-    KComponentData comonentData(&about);
     QApplication app(argc, argv);
 
     QStringList args;
@@ -18,9 +15,9 @@ int main(int argc, char **argv)
     if (args.count() != 2) {
         qFatal("Required parameters: source destination");
     }
-    qDebug() << KUrl(args[0]) << KUrl(args[1]);
-    KIO::FileCopyJob* job = KIO::file_copy(KUrl(args[0]), KUrl(args[1]), -1, KIO::Overwrite | KIO::HideProgressInfo);
-    if (KIO::NetAccess::synchronousRun(job, 0)) {
+    qDebug() << QUrl::fromUserInput(args[0]) << QUrl::fromUserInput(args[1]);
+    KIO::Job* job = KIO::file_copy(QUrl::fromUserInput(args[0]), QUrl::fromUserInput(args[1]), -1, KIO::Overwrite | KIO::HideProgressInfo);
+    if (job->exec()) {
         qDebug() << "successfully copied";
         return 0;
     } else {

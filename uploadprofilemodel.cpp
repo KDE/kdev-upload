@@ -13,7 +13,6 @@
 #include <KConfigGroup>
 #include <ksettings/dispatcher.h>
 #include <kcomponentdata.h>
-#include <kurl.h>
 
 #include <interfaces/iproject.h>
 
@@ -67,7 +66,7 @@ void UploadProfileModel::revert()
     int row = 0;
     Q_FOREACH (QString g, group.groupList()) {
         if (g.startsWith("Profile")) {
-            KUrl url = KUrl(group.group(g).readEntry("url", QString()));
+            QUrl url = group.group(g).readEntry("url", QUrl());
             QString name = group.group(g).readEntry("name", QString());
             UploadProfileItem* i = uploadItem(row);
             if (!i) {

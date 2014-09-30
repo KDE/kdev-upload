@@ -14,6 +14,7 @@
 #include <QStandardItemModel>
 #include <QtWidgets/QProgressDialog>
 #include <QUrl>
+#include <QDir>
 
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
@@ -23,13 +24,13 @@
 #include <kio/jobuidelegate.h>
 #include <kio/netaccess.h>
 #include <klocale.h>
-#include <kurl.h>
 #include <kjob.h>
 #include <kjobwidgets.h>
 
 #include <interfaces/iproject.h>
 #include <interfaces/iprojectcontroller.h>
 #include <project/projectmodel.h>
+#include <util/path.h>
 
 #include "uploadprojectmodel.h"
 
@@ -41,7 +42,6 @@ UploadJob::UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWi
     m_progressDialog->setWindowTitle(i18n("Uploading files"));
     m_progressDialog->setLabelText(i18n("Preparing..."));
     m_progressDialog->setModal(true);
-    m_progressDialog->setAutoClose(false);
 }
 
 UploadJob::~UploadJob()
@@ -64,7 +64,7 @@ void UploadJob::start()
                                 ->data(i, Qt::CheckStateRole).toInt());
         if (item->file() && checked != Qt::Unchecked) {
             KIO::UDSEntry entry;
-            if (KIO::NetAccess::stat(item->file()->url(), entry, m_progressDialog)) {
+            if (KIO::NetAccess::stat(item->path().toUrl(), entry, m_progressDialog)) {
                 sumSize += entry.numberValue(KIO::UDSEntry::UDS_SIZE);
             }
         }
@@ -84,7 +84,6 @@ void UploadJob::uploadNext()
     if (!m_uploadIndex.isValid()) {
         //last index reached - completed
         appendLog(i18n("Upload completed"));
-        m_progressDialog->close();
         emit uploadFinished();
         delete this;
         return;
@@ -100,15 +99,21 @@ void UploadJob::uploadNext()
 
     Qt::CheckState checked = static_cast<Qt::CheckState>(m_uploadProjectModel
                             ->data(m_uploadIndex, Qt::CheckStateRole).toInt());
-    KUrl url;
-    KUrl projectFolder(m_project->folder());
-    projectFolder.adjustPath(KUrl::AddTrailingSlash);
-    if (item->folder()) url = item->folder()->url();
-    else if (item->file()) url = item->file()->url();
+
+    KDevelop::Path url;
+
+    if (item->folder()) {
+        url = item->folder()->path();
+    } else if (item->file()) {
+        url = item->file()->path();
+    }
+
+    QString relativeUrl(m_project->path().relativePath(url));
+
     if (isQuickUpload() && checked == Qt::Unchecked) {
         appendLog(i18n("File was not modified for %1: %2",
                             m_uploadProjectModel->currentProfileName(),
-                            KUrl::relativeUrl(projectFolder, url)));
+                            relativeUrl));
     }
 
     if (!(item->file() || item->folder()) || checked == Qt::Unchecked) {
@@ -116,42 +121,40 @@ void UploadJob::uploadNext()
         return;
     }
 
-    KUrl dest = m_uploadProjectModel->currentProfileUrl();
-    dest.addPath(KUrl::relativeUrl(projectFolder, url));
-
+    QUrl dest = m_uploadProjectModel->currentProfileUrl().adjusted(QUrl::StripTrailingSlash);
+    dest.setPath(dest.path() + "/" + relativeUrl);
     KIO::Job* job = 0;
 
     if (m_onlyMarkUploaded) {
         appendLog(i18n("Marked as uploaded for %1: %2",
                             m_uploadProjectModel->currentProfileName(),
-                            KUrl::relativeUrl(projectFolder, url)));
+                            relativeUrl));
         m_uploadProjectModel->profileConfigGroup()
-                .writeEntry(KUrl::relativeUrl(projectFolder, url),
+                .writeEntry(relativeUrl,
                             QDateTime::currentDateTime());
         uploadNext();
         return;
     } else if (item->file()) {
-        appendLog(KUrl::relativeUrl(projectFolder, url));
         appendLog(i18n("Uploading to %1: %2",
                             m_uploadProjectModel->currentProfileName(),
-                            KUrl::relativeUrl(projectFolder, url)));
-        kDebug() << "file_copy" << url << dest;
-        job = KIO::file_copy(url, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
-        m_progressDialog->setLabelText(i18n("Uploading %1...", KUrl::relativeUrl(projectFolder, url)));
+                            relativeUrl));
+        kDebug() << "file_copy" << url.pathOrUrl() << dest;
+        job = KIO::file_copy(url.toUrl(), dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
+        m_progressDialog->setLabelText(i18n("Uploading %1...", relativeUrl));
     } else if (item->folder()) {
         if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, m_progressDialog)) {
-            appendLog(i18n("Directory in %1 already exists: %2", 
+            appendLog(i18n("Directory in %1 already exists: %2",
                                 m_uploadProjectModel->currentProfileName(),
-                                KUrl::relativeUrl(projectFolder, url)));
+                                relativeUrl));
             m_uploadProjectModel->profileConfigGroup()
-                    .writeEntry(KUrl::relativeUrl(projectFolder, url),
+                    .writeEntry(relativeUrl,
                                 QDateTime::currentDateTime());
             uploadNext();
             return;
         } else {
-            appendLog(i18n("Creating directory in %1: %2", 
+            appendLog(i18n("Creating directory in %1: %2",
                                 m_uploadProjectModel->currentProfileName(),
-                                KUrl::relativeUrl(projectFolder, url)));
+                                relativeUrl));
             kDebug() << "mkdir" << dest;
             job = KIO::mkdir(dest);
         }
@@ -190,22 +193,20 @@ void UploadJob::uploadResult(KJob* job)
             return;
         }
         appendLog(i18n("Upload error: %1", job->errorString()));
-        m_progressDialog->close();
-//TODO: Find out what next line doas as it crushes KDevelop
-//         qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
+        qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
         delete this;
         return;
     }
 
     KDevelop::ProjectBaseItem* item = m_uploadProjectModel->item(m_uploadIndex);
-    KUrl url;
+    QUrl url;
     if (item->file()) {
-        url = item->file()->url();
+        url = item->file()->path().toUrl();
     } else if (item->folder()) {
-        url = item->folder()->url();
+        url = item->folder()->path().toUrl();
     }
     m_uploadProjectModel->profileConfigGroup()
-        .writeEntry(KUrl::relativeUrl(m_project->folder(), url), QDateTime::currentDateTime());
+        .writeEntry(m_project->path().relativePath(KDevelop::Path(url)), QDateTime::currentDateTime());
     m_uploadProjectModel->profileConfigGroup().sync();
 
     KIO::UDSEntry entry;

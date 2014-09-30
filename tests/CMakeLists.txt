@@ -1,6 +1,10 @@
 
 add_executable(permssions permissions.cpp)
 target_link_libraries(permssions
-    #TODO: port away
-    KF5::KDELibs4Support
+    Qt5::Core
+    Qt5::Widgets
+
+    KF5::JobWidgets
+    KF5::KIOCore
+    KF5::KIOWidgets
 )
