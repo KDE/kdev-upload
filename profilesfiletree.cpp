@@ -20,11 +20,11 @@
 #include <QDesktopServices>
 
 #include <kdebug.h>
-#include <kfiletreeview.h>
 #include <klocale.h>
 #include <KDirOperator>
 #include <KFileWidget>
 #include <KActionCollection>
+#include <kfileitem.h>
 
 #include <interfaces/icore.h>
 #include <interfaces/idocument.h>
@@ -66,7 +66,7 @@ ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
     m_tree->setView(KFile::Tree);
     connect(m_tree, SIGNAL(fileSelected(const KFileItem &)),
            SLOT(fileSelected(KFileItem)));
-    connect(m_tree, SIGNAL(urlEntered(KUrl)), SLOT(urlEntered(KUrl)), Qt::QueuedConnection);
+    connect(m_tree, SIGNAL(urlEntered()), SLOT(urlEntered()), Qt::QueuedConnection);
     connect(m_tree, SIGNAL(contextMenuAboutToShow(KFileItem,QMenu*)), SLOT(contextMenuAboutToShow(KFileItem,QMenu*)));
 
     QAction* a = new QAction(i18n("&Copy URL"), this);
@@ -82,7 +82,7 @@ ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
 
 void ProfilesFileTree::browseUrl()
 {
-    KUrl url;
+    QUrl url;
     if (m_tree->selectedItems().isEmpty()) {
         url = m_tree->url();
     } else {
@@ -93,7 +93,7 @@ void ProfilesFileTree::browseUrl()
 
 void ProfilesFileTree::copyUrl()
 {
-    KUrl url;
+    QUrl url;
     if (m_tree->selectedItems().isEmpty()) {
         url = m_tree->url();
     } else {
@@ -114,7 +114,7 @@ void ProfilesFileTree::contextMenuAboutToShow(KFileItem item, QMenu* menu)
 }
 
 
-void ProfilesFileTree::urlEntered(const KUrl& url)
+void ProfilesFileTree::urlEntered()
 {
     profileIndexChanged(m_profilesCombo->currentIndex());
 }
@@ -148,7 +148,7 @@ void ProfilesFileTree::profileIndexChanged(int index)
     }
 }
 
-void ProfilesFileTree::openUrl(const KUrl& url)
+void ProfilesFileTree::openUrl(const QUrl& url)
 {
     kDebug(24000) << "openUrl" << url;
     KDevelop::ICore::self()->documentController()->openDocument(url);

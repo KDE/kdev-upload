@@ -1,5 +1,10 @@
 
-kde4_add_executable(permssions permissions.cpp)
+add_executable(permssions permissions.cpp)
 target_link_libraries(permssions
-    ${KDE4_KIO_LIBS}
+    Qt5::Core
+    Qt5::Widgets
+
+    KF5::JobWidgets
+    KF5::KIOCore
+    KF5::KIOWidgets
 )

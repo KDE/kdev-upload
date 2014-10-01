@@ -10,7 +10,7 @@
 #include "uploadprofilemodel.h"
 
 #include <kdebug.h>
-#include <kconfiggroup.h>
+#include <KConfigGroup>
 #include <ksettings/dispatcher.h>
 #include <kcomponentdata.h>
 
@@ -21,7 +21,7 @@
 UploadProfileModel::UploadProfileModel(QObject* parent)
     : QStandardItemModel(parent)
 {
-    KSettings::Dispatcher::registerComponent(KComponentData("kdevupload"), this, "revert");
+    KSettings::Dispatcher::registerComponent(QStringLiteral("kdevupload"), this, "revert");
 }
 
 bool UploadProfileModel::removeRow(int row, const QModelIndex & parent)
@@ -66,7 +66,7 @@ void UploadProfileModel::revert()
     int row = 0;
     Q_FOREACH (QString g, group.groupList()) {
         if (g.startsWith("Profile")) {
-            KUrl url = group.group(g).readEntry("url", KUrl());
+            QUrl url = group.group(g).readEntry("url", QUrl());
             QString name = group.group(g).readEntry("name", QString());
             UploadProfileItem* i = uploadItem(row);
             if (!i) {
@@ -107,7 +107,7 @@ bool UploadProfileModel::submit()
                 item->setProfileNr(QString::number(++maxProfileNr));
             }
             KConfigGroup profileGroup = group.group("Profile" + item->profileNr());
-            profileGroup.writeEntry("url", item->url());
+            profileGroup.writeEntry("url", item->url().toString());
             profileGroup.writeEntry("name", item->text());
             if (item->isDefault()) {
                 defaultProfileNr = item->profileNr();

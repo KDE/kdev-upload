@@ -75,8 +75,9 @@ X-KDevelop-Plugin-Copyright=(C) by Niko Sams
 X-KDevelop-Args=
 
 X-KDevelop-Category=Global
-X-KDE-Library=libkdevupload
+X-KDE-Library=kdevupload
 X-KDE-PluginInfo-Name=KDevUpload
 X-KDevelop-Version=@KDEV_PLUGIN_VERSION@
 X-KDevelop-IRequired=org.kdevelop.IOutputView
 X-KDevelop-Mode=GUI
+X-KDevelop-LoadMode=AlwaysOn

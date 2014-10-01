@@ -9,7 +9,6 @@
 ***************************************************************************/
 #include "uploadprofileitem.h"
 
-#include <kurl.h>
 #include <kicon.h>
 #include <kconfiggroup.h>
 
@@ -22,7 +21,7 @@ UploadProfileItem::UploadProfileItem()
     setEditable(false);
 }
 
-void UploadProfileItem::setUrl(const KUrl& url)
+void UploadProfileItem::setUrl(const QUrl& url)
 {
     setData(url, UrlRole);
 }
@@ -51,9 +50,9 @@ void UploadProfileItem::setProfileNr(const QString& nr)
     setData(nr, ProfileNrRole);
 }
 
-KUrl UploadProfileItem::url() const
+QUrl UploadProfileItem::url() const
 {
-    return data(UrlRole).value<KUrl>();
+    return data(UrlRole).value<QUrl>();
 }
 
 bool UploadProfileItem::isDefault() const

@@ -11,9 +11,9 @@
 #ifndef UPLOADPROFILEDLG_H
 #define UPLOADPROFILEDLG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
-class KUrl;
+class QUrl;
 class QListWidgetItem;
 namespace Ui {
     class UploadProfileDlg;
@@ -23,7 +23,7 @@ class UploadProfileItem;
 /**
  * Dialog to edit a upload profile
  */
-class UploadProfileDlg : public KDialog
+class UploadProfileDlg : public QDialog
 {
     Q_OBJECT
 public:
@@ -47,18 +47,18 @@ protected Q_SLOTS:
     /**
      * Implemented to accept() not if the entered url does not exist
      */
-    virtual void slotButtonClicked(int button);
+    virtual void slotAcceptButtonClicked();
 
 private:
     /**
      * Builds the Url from the current entered data
      */
-    KUrl currentUrl();
+    QUrl currentUrl();
 
     /**
      * Sets the values of the widgets to the given url
      */
-    void updateUrl(const KUrl& url);
+    void updateUrl( const QUrl& url );
 
     Ui::UploadProfileDlg* m_ui;
 };

@@ -13,7 +13,7 @@
 
 #include <QStandardItem>
 
-class KUrl;
+class QUrl;
 class KConfigGroup;
 
 class UploadProfileItem : public QStandardItem
@@ -27,7 +27,7 @@ public:
     UploadProfileItem();
     virtual ~UploadProfileItem() {}
 
-    void setUrl(const KUrl& url);
+    void setUrl(const QUrl& url);
 
     /**
      * Set if this item is the default upload-profile.
@@ -40,7 +40,7 @@ public:
      */
     void setProfileNr(const QString& nr);
 
-    KUrl url() const;
+    QUrl url() const;
     bool isDefault() const;
 
     /**
