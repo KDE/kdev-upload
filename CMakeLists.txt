@@ -52,6 +52,8 @@ add_library(kdevupload_PART_SRCS ${kdevupload_UI})
 
 add_library(kdevupload MODULE ${kdevupload_PART_SRCS})
 
+configure_file(kdevupload.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop)
+kcoreaddons_desktop_to_json(kdevupload ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop)
 
 target_link_libraries(kdevupload
     KDev::Interfaces
@@ -67,15 +69,12 @@ target_link_libraries(kdevupload
     KF5::CoreAddons
 )
 
-install(TARGETS kdevupload  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kdevupload DESTINATION ${PLUGIN_INSTALL_DIR}/kdevplatform/${KDEV_PLUGIN_VERSION})
 
-configure_file(kdevupload.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES  kdevupload.rc DESTINATION ${DATA_INSTALL_DIR}/kdevupload)
 
 
 #preferences-plugin
-# add_executable(location_recognition ${SRC} ${UIS_HDRS})
 set(uploadpreferences_PART_SRCS
    uploadpreferences.cpp
    uploadprofilemodel.cpp
