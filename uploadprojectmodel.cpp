@@ -134,19 +134,13 @@ bool UploadProjectModel::setData ( const QModelIndex & indx, const QVariant & va
             Qt::CheckState s = static_cast<Qt::CheckState>(value.toInt());
             m_checkStates.insert(indx, s);
 
-            //all parent nodes might have changed (the folders)
-            QModelIndex parent = indx;
-            while (parent.isValid()) {
-                emit dataChanged(parent, parent);
-                parent = parent.parent();
-            }
+            emit dataChanged(indx, indx);
             return true;
         } else if (i->folder()) {
             if (!rowCount(indx)) {
                 //empty folder - should be uploaded too
                 Qt::CheckState s = static_cast<Qt::CheckState>(value.toInt());
                 m_checkStates.insert(indx, s);
-                emit dataChanged(indx, indx);
             } else {
                 //recursive check/uncheck
                 QModelIndex i = indx;
@@ -155,12 +149,7 @@ bool UploadProjectModel::setData ( const QModelIndex & indx, const QVariant & va
                 }
             }
 
-            //this + all parent items might have changed (from PartiallyChecked)
-            QModelIndex parent = indx;
-            while (parent.isValid()) {
-                emit dataChanged(parent, parent);
-                parent = parent.parent();
-            }
+            emit dataChanged(indx, indx);
             return true;
         }
     }
