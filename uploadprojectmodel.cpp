@@ -12,8 +12,8 @@
 #include <kconfiggroup.h>
 #include <kfileitem.h>
 #include <kdatetime.h>
-#include <kdebug.h>
 #include <QDir>
+#include "kdevuploaddebug.h"
 
 #include <interfaces/iproject.h>
 #include <util/path.h>
@@ -70,10 +70,10 @@ QVariant UploadProjectModel::data(const QModelIndex & indx, int role) const
             if (m_checkStates.contains(indx)) {
                 return m_checkStates.value(indx);
             } else {
-                kDebug() << "project folder" << m_project->path().path() << "file" << i << i->file();
-                kDebug() << "file url" << i->file()->path().path();
+                qCDebug(KDEVUPLOAD) << "project folder" << m_project->path().path() << "file" << i << i->file();
+                qCDebug(KDEVUPLOAD) << "file url" << i->file()->path().path();
                 QString url = m_project->path().relativePath(i->file()->path());
-                kDebug() << "resulting url" << url;
+                qCDebug(KDEVUPLOAD) << "resulting url" << url;
                 QDateTime uploadTime(m_profileConfigGroup.readEntry(url, QDateTime()));
                 if (uploadTime.isValid()) {
                     KFileItem fileItem(i->file()->path().toUrl());

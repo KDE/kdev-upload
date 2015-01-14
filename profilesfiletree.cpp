@@ -18,8 +18,8 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QDesktopServices>
+#include "kdevuploaddebug.h"
 
-#include <kdebug.h>
 #include <klocale.h>
 #include <KDirOperator>
 #include <KFileWidget>
@@ -136,10 +136,10 @@ void ProfilesFileTree::profileIndexChanged(int index)
     UploadProfileItem* item = m_profilesModel->uploadItem(
                             m_profilesModel->index(index, 0, QModelIndex()));
     if (item) {
-        kDebug() << "item->url()" << item->url();
+        qCDebug(KDEVUPLOAD) << "item->url()" << item->url();
         m_tree->setVisible(true);
         m_pleaseSelectLabel->setVisible(false);
-        kDebug() << "m_tree->url()" << m_tree->url();
+        qCDebug(KDEVUPLOAD) << "m_tree->url()" << m_tree->url();
         if (m_tree->url() != item->url()) {
             m_tree->setUrl(item->url(), true);
         }
@@ -150,7 +150,7 @@ void ProfilesFileTree::profileIndexChanged(int index)
 
 void ProfilesFileTree::openUrl(const QUrl& url)
 {
-    kDebug(24000) << "openUrl" << url;
+    qCDebug(KDEVUPLOAD) << "openUrl" << url;
     KDevelop::ICore::self()->documentController()->openDocument(url);
 }
 void ProfilesFileTree::dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)

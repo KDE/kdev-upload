@@ -19,12 +19,11 @@
 
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
-#include <kdebug.h>
 #include <kio/job.h>
 #include <kio/copyjob.h>
 #include <kio/jobuidelegate.h>
-#include <kio/netaccess.h>
 #include <kparts/mainwindow.h>
+#include <kjobwidgets.h>
 
 #include <interfaces/icore.h>
 #include <interfaces/iuicontroller.h>

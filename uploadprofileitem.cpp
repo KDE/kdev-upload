@@ -30,7 +30,7 @@ void UploadProfileItem::setDefault(bool isDefault)
 {
     setData(isDefault, IsDefaultRole);
     if (isDefault) {
-        setIcon(KIcon("rating"));
+        setIcon(QIcon::fromTheme("rating"));
         UploadProfileModel* m;
         if (model() && (m = dynamic_cast<UploadProfileModel*>(model()))) {
             for (int i = 0; i < m->rowCount(); i++) {

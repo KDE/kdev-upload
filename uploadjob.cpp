@@ -15,14 +15,13 @@
 #include <QtWidgets/QProgressDialog>
 #include <QUrl>
 #include <QDir>
+#include "kdevuploaddebug.h"
 
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
-#include <kdebug.h>
 #include <kio/job.h>
 #include <kio/copyjob.h>
 #include <kio/jobuidelegate.h>
-#include <kio/netaccess.h>
 #include <klocale.h>
 #include <kjob.h>
 #include <kjobwidgets.h>
@@ -64,7 +63,10 @@ void UploadJob::start()
                                 ->data(i, Qt::CheckStateRole).toInt());
         if (item->file() && checked != Qt::Unchecked) {
             KIO::UDSEntry entry;
-            if (KIO::NetAccess::stat(item->path().toUrl(), entry, m_progressDialog)) {
+            KIO::StatJob *statjob = KIO::stat(item->path().toUrl());
+            KJobWidgets::setWindow(statjob, m_progressDialog);
+            if (statjob->exec()) {
+                entry = statjob->statResult();
                 sumSize += entry.numberValue(KIO::UDSEntry::UDS_SIZE);
             }
         }
@@ -138,11 +140,13 @@ void UploadJob::uploadNext()
         appendLog(i18n("Uploading to %1: %2",
                             m_uploadProjectModel->currentProfileName(),
                             relativeUrl));
-        kDebug() << "file_copy" << url.pathOrUrl() << dest;
+        qCDebug(KDEVUPLOAD) << "file_copy" << url.pathOrUrl() << dest;
         job = KIO::file_copy(url.toUrl(), dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
         m_progressDialog->setLabelText(i18n("Uploading %1...", relativeUrl));
     } else if (item->folder()) {
-        if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, m_progressDialog)) {
+        KIO::StatJob *statjob = KIO::stat(dest, KIO::StatJob::DestinationSide, 0);
+        KJobWidgets::setWindow(statjob, m_progressDialog);
+        if (statjob->exec()) {
             appendLog(i18n("Directory in %1 already exists: %2",
                                 m_uploadProjectModel->currentProfileName(),
                                 relativeUrl));
@@ -155,7 +159,7 @@ void UploadJob::uploadNext()
             appendLog(i18n("Creating directory in %1: %2",
                                 m_uploadProjectModel->currentProfileName(),
                                 relativeUrl));
-            kDebug() << "mkdir" << dest;
+            qCDebug(KDEVUPLOAD) << "mkdir" << dest;
             job = KIO::mkdir(dest);
         }
     } else {
@@ -210,7 +214,10 @@ void UploadJob::uploadResult(KJob* job)
     m_uploadProjectModel->profileConfigGroup().sync();
 
     KIO::UDSEntry entry;
-    if (KIO::NetAccess::stat(url, entry, m_progressDialog)) {
+    KIO::StatJob *statjob = KIO::stat(url, 0);
+    KJobWidgets::setWindow(statjob, m_progressDialog);
+    if (statjob->exec()) {
+        entry = statjob->statResult();
         m_progressBytesDone += entry.numberValue(KIO::UDSEntry::UDS_SIZE);
     }
     m_progressDialog->setValue(m_progressBytesDone);

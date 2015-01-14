@@ -15,9 +15,9 @@
 #include <QSignalMapper>
 #include <QStandardItemModel>
 #include <QItemDelegate>
+#include "kdevuploaddebug.h"
 
 #include <KPluginFactory>
-#include <kdebug.h>
 #include <klocale.h>
 #include <kparts/mainwindow.h>
 #include <kactioncollection.h>
@@ -46,6 +46,8 @@
 #include "version.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(UploadFactory, "kdevupload.json", registerPlugin<UploadPlugin>(); )
+
+Q_LOGGING_CATEGORY(KDEVUPLOAD, "kdev.upload");
 
 class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
   public:

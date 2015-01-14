@@ -14,8 +14,6 @@
 
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
-#include <kurl.h>
-#include <kdebug.h>
 
 #include <interfaces/icore.h>
 #include <interfaces/iplugincontroller.h>

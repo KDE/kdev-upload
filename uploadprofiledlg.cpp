@@ -17,7 +17,6 @@
 #include <QPushButton>
 #include <qglobal.h>
 
-#include <kdebug.h>
 #include <kprotocolmanager.h>
 #include <kprotocolinfo.h>
 #include <kio/statjob.h>

@@ -9,7 +9,6 @@
 ***************************************************************************/
 #include "uploadprofilemodel.h"
 
-#include <kdebug.h>
 #include <KConfigGroup>
 #include <ksettings/dispatcher.h>
 #include <kcomponentdata.h>
