@@ -2,6 +2,7 @@
 Type=Service
 Exec=blubb
 Name=KDevUpload
+Name[ast]=KDevUpload
 Name[bs]=KDevUpload
 Name[ca]=KDevUpload
 Name[ca@valencia]=KDevUpload
