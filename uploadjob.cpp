@@ -197,8 +197,8 @@ void UploadJob::uploadResult(KJob* job)
             return;
         }
         appendLog(i18n("Upload error: %1", job->errorString()));
-        qobject_cast<KIO::Job*>(job)->ui()->showErrorMessage();
-        delete this;
+        job->uiDelegate()->showErrorMessage();
+        deleteLater();
         return;
     }
 
