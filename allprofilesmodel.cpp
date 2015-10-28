@@ -58,6 +58,8 @@ int AllProfilesModel::rowCount(const QModelIndex & parent) const
 
 void AllProfilesModel::addModel(UploadProfileModel* model)
 {
+    beginResetModel();
+    
     connect(model, SIGNAL(modelReset()), this, SLOT(sourceReset()));
     connect(model, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
             this, SLOT(sourceDataChanged(QModelIndex, QModelIndex)));
@@ -71,18 +73,20 @@ void AllProfilesModel::addModel(UploadProfileModel* model)
             this, SLOT(sourceRowsRemoved()));
 
     m_sourceModels.append(model);
-    reset();
+    endResetModel();
 }
 
 void AllProfilesModel::removeModel(UploadProfileModel* model)
 {
+    beginResetModel();
     m_sourceModels.removeAt(m_sourceModels.indexOf(model));
-    reset();
+    endResetModel();
 }
 
 void AllProfilesModel::sourceReset()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void AllProfilesModel::sourceDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)

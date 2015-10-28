@@ -161,9 +161,10 @@ bool UploadProjectModel::setData ( const QModelIndex & indx, const QVariant & va
 
 void UploadProjectModel::setProfileConfigGroup(const KConfigGroup& group)
 {
+    beginResetModel();
     m_profileConfigGroup = group;
     m_checkStates.clear();
-    reset();
+    endResetModel();
 }
 
 KConfigGroup UploadProjectModel::profileConfigGroup() const
@@ -207,8 +208,9 @@ QModelIndex UploadProjectModel::nextRecursionIndex(const QModelIndex& current, c
 
 void UploadProjectModel::setRootItem(KDevelop::ProjectBaseItem* item)
 {
+    beginResetModel();
     m_rootItem = item;
-    reset();
+    endResetModel();
 }
 
 QString UploadProjectModel::currentProfileName()
