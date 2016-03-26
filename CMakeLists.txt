@@ -19,7 +19,7 @@ include(KDECompilerSettings)
 include(KDECMakeSettings)
 include(FeatureSummary)
 
-find_package(Qt5 REQUIRED Core Widgets Test)
+find_package(Qt5 REQUIRED Core Widgets)
 find_package(KF5 REQUIRED COMPONENTS TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels)
 find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
 
