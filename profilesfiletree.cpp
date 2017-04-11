@@ -20,7 +20,7 @@
 #include <QDesktopServices>
 #include "kdevuploaddebug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KDirOperator>
 #include <KFileWidget>
 #include <KActionCollection>

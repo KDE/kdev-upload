@@ -9,9 +9,10 @@
 ***************************************************************************/
 #include "uploadprofilemodel.h"
 
+#include <QUrl>
+
 #include <KConfigGroup>
 #include <ksettings/dispatcher.h>
-#include <kcomponentdata.h>
 
 #include <interfaces/iproject.h>
 

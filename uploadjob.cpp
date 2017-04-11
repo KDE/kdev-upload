@@ -22,7 +22,7 @@
 #include <kio/job.h>
 #include <kio/copyjob.h>
 #include <kio/jobuidelegate.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kjob.h>
 #include <kjobwidgets.h>
 

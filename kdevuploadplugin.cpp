@@ -18,7 +18,7 @@
 #include "kdevuploaddebug.h"
 
 #include <KPluginFactory>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kparts/mainwindow.h>
 #include <kactioncollection.h>
 #include <kactionmenu.h>

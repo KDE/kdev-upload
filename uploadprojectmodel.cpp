@@ -11,7 +11,6 @@
 
 #include <kconfiggroup.h>
 #include <kfileitem.h>
-#include <kdatetime.h>
 #include <QDir>
 #include "kdevuploaddebug.h"
 

@@ -9,7 +9,8 @@
 ***************************************************************************/
 #include "uploadprofileitem.h"
 
-#include <kicon.h>
+#include <QUrl>
+
 #include <kconfiggroup.h>
 
 #include <interfaces/iproject.h>

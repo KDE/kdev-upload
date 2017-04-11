@@ -17,7 +17,6 @@
 
 #include <kconfiggroup.h>
 #include <kfileitem.h>
-#include <kdatetime.h>
 
 AllProfilesModel::AllProfilesModel(UploadPlugin* plugin, QObject *parent)
     : QAbstractListModel(parent), m_plugin(plugin)

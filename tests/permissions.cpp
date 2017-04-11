@@ -2,7 +2,6 @@
 #include <kio/job.h>
 #include <QApplication>
 #include <kaboutdata.h>
-#include <kcomponentdata.h>
 
 int main(int argc, char **argv)
 {

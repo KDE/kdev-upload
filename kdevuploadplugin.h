@@ -14,8 +14,6 @@
 #include <QList>
 #include <QtCore/QVariant>
 
-#include <kurl.h>
-
 #include <interfaces/iplugin.h>
 
 class QSignalMapper;
