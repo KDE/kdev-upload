@@ -19,7 +19,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(FeatureSummary)
 
-set(QT_MIN_VERSION "5.4.0")
+set(QT_MIN_VERSION "5.5.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets)
 set(KF5_DEP_VERSION "5.15.0")
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels)
