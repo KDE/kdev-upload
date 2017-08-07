@@ -39,7 +39,7 @@ UploadProfileItem* UploadProfileModel::uploadItem(int row, int column) const
     if (i) {
         return dynamic_cast<UploadProfileItem*>(i);
     }
-    return 0;
+    return nullptr;
 }
 UploadProfileItem* UploadProfileModel::uploadItem(const QModelIndex& index) const
 {
@@ -47,7 +47,7 @@ UploadProfileItem* UploadProfileModel::uploadItem(const QModelIndex& index) cons
     if (i) {
         return dynamic_cast<UploadProfileItem*>(i);
     }
-    return 0;
+    return nullptr;
 }
 void UploadProfileModel::setProject(KDevelop::IProject* project)
 {

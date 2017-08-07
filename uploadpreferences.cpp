@@ -34,7 +34,7 @@ K_PLUGIN_FACTORY(UploadPreferencesFactory, registerPlugin<UploadPreferences>(); 
 UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args )
     : KCModule( parent, args )
 {
-    IProject* project = 0;
+    IProject* project = nullptr;
     Q_FOREACH (IProject* p, KDevelop::ICore::self()->projectController()->projects()) {
         if (p->projectFile().path() == args.at(1).toString()) {
             project = p;

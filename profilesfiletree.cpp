@@ -35,7 +35,7 @@
 #include "uploadprofiledlg.h"
 
 ProfilesFileTree::ProfilesFileTree(UploadPlugin* plugin, QWidget *parent)
-    : QWidget(parent), m_plugin(plugin), m_editProfileDlg(0)
+    : QWidget(parent), m_plugin(plugin), m_editProfileDlg(nullptr)
 {
     QVBoxLayout *l = new QVBoxLayout();
     setLayout(l);

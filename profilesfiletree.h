@@ -37,7 +37,7 @@ class ProfilesFileTree : public QWidget
     Q_OBJECT
 
 public:
-    ProfilesFileTree( UploadPlugin* plugin, QWidget *parent = 0 );
+    ProfilesFileTree( UploadPlugin* plugin, QWidget *parent = nullptr );
 
     /**
      * Sets the Model for this widget

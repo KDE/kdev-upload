@@ -38,7 +38,7 @@ class UploadDialog : public QDialog
     Q_OBJECT
 
 public:
-    UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QWidget *parent = 0);
+    UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QWidget *parent = nullptr);
     ~UploadDialog() override;
 
     /**

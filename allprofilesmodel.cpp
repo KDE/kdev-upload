@@ -140,7 +140,7 @@ void AllProfilesModel::sourceRowsRemoved()
 
 UploadProfileItem* AllProfilesModel::uploadItem(const QModelIndex& index) const
 {
-    if (!index.isValid() || index.parent().isValid()) return 0;
+    if (!index.isValid() || index.parent().isValid()) return nullptr;
     int rowOffset = 0;
     Q_FOREACH (UploadProfileModel* model, m_sourceModels) {
         int rowCount = model->rowCount(index.parent());
@@ -149,7 +149,7 @@ UploadProfileItem* AllProfilesModel::uploadItem(const QModelIndex& index) const
         }
         rowOffset += rowCount;
     }
-    return 0;
+    return nullptr;
 }
 
 UploadProfileItem* AllProfilesModel::uploadItem(int row, int column) const

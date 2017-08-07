@@ -34,7 +34,7 @@ class UploadProjectModel : public QSortFilterProxyModel
     Q_OBJECT
 
 public:
-    UploadProjectModel( KDevelop::IProject* project, QObject *parent = 0 );
+    UploadProjectModel( KDevelop::IProject* project, QObject *parent = nullptr );
     ~UploadProjectModel() override;
 
     QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const override;

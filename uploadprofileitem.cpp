@@ -68,7 +68,7 @@ QString UploadProfileItem::profileNr() const
 
 KConfigGroup UploadProfileItem::profileConfigGroup() const
 {
-    UploadProfileModel* m = 0;
+    UploadProfileModel* m = nullptr;
     if (!profileNr().isEmpty() && model() && (m = dynamic_cast<UploadProfileModel*>(model()))) {
         return m->project()->projectConfiguration()->group("Upload").group("Profile"+profileNr());
     }

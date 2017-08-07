@@ -40,7 +40,7 @@ class UploadJob : public QObject
     Q_OBJECT
 
 public:
-    UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWidget *parent = 0);
+    UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWidget *parent = nullptr);
     ~UploadJob() override;
 
     /**

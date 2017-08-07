@@ -25,7 +25,7 @@ class UploadProfileModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    UploadProfileModel(QObject* parent = 0);
+    UploadProfileModel(QObject* parent = nullptr);
     ~UploadProfileModel() override {}
 
     /**

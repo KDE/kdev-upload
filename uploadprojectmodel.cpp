@@ -20,7 +20,7 @@
 #include <project/projectmodel.h>
 
 UploadProjectModel::UploadProjectModel(KDevelop::IProject* project, QObject *parent)
-    : QSortFilterProxyModel(parent), m_project(project), m_rootItem(0)
+    : QSortFilterProxyModel(parent), m_project(project), m_rootItem(nullptr)
 {
 }
 

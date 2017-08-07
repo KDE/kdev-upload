@@ -33,7 +33,7 @@ class AllProfilesModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    AllProfilesModel(UploadPlugin* plugin, QObject *parent = 0);
+    AllProfilesModel(UploadPlugin* plugin, QObject *parent = nullptr);
     ~AllProfilesModel() override;
 
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;

@@ -35,7 +35,7 @@
 
 UploadJob::UploadJob(KDevelop::IProject* project, UploadProjectModel* model, QWidget *parent)
     : QObject(parent), m_project(project), m_uploadProjectModel(model),
-      m_onlyMarkUploaded(false), m_quickUpload(false), m_outputModel(0)
+      m_onlyMarkUploaded(false), m_quickUpload(false), m_outputModel(nullptr)
 {
     m_progressDialog = new QProgressDialog();
     m_progressDialog->setWindowTitle(i18n("Uploading files"));
@@ -125,7 +125,7 @@ void UploadJob::uploadNext()
 
     QUrl dest = m_uploadProjectModel->currentProfileUrl().adjusted(QUrl::StripTrailingSlash);
     dest.setPath(dest.path() + "/" + relativeUrl);
-    KIO::Job* job = 0;
+    KIO::Job* job = nullptr;
 
     if (m_onlyMarkUploaded) {
         appendLog(i18n("Marked as uploaded for %1: %2",
@@ -214,7 +214,7 @@ void UploadJob::uploadResult(KJob* job)
     m_uploadProjectModel->profileConfigGroup().sync();
 
     KIO::UDSEntry entry;
-    KIO::StatJob *statjob = KIO::stat(url, 0);
+    KIO::StatJob *statjob = KIO::stat(url, nullptr);
     KJobWidgets::setWindow(statjob, m_progressDialog);
     if (statjob->exec()) {
         entry = statjob->statResult();
@@ -250,7 +250,7 @@ QStandardItem* UploadJob::appendLog(const QString& message)
         m_outputModel->appendRow(item);
         return item;
     } else {
-        return 0;
+        return nullptr;
     }
 }
 void UploadJob::setQuickUpload(bool v)
