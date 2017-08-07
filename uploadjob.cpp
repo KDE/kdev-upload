@@ -263,5 +263,4 @@ bool UploadJob::isQuickUpload()
     return m_quickUpload;
 }
 
-#include "uploadjob.moc"
 // kate: space-indent on; indent-width 4; tab-width 4; replace-tabs on
