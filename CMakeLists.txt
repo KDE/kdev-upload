@@ -25,8 +25,6 @@ set(KF5_DEP_VERSION "5.15.0")
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels)
 find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
 
-include_directories(${KDEVPLATFORM_INCLUDE_DIR})
-
 include_directories(
    ${CMAKE_CURRENT_BINARY_DIR}
    ${CMAKE_CURRENT_SOURCE_DIR}
