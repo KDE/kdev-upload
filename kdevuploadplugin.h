@@ -34,13 +34,13 @@ class UploadPlugin : public KDevelop::IPlugin
 Q_OBJECT
 public:
     UploadPlugin(QObject *parent, const QVariantList & = QVariantList() );
-    ~UploadPlugin();
-    void unload();
+    ~UploadPlugin() override;
+    void unload() override;
 
     /**
     * Returns the Upload-Action for the Contextmenu.
     */
-    KDevelop::ContextMenuExtension contextMenuExtension(KDevelop::Context* context, QWidget* parent);
+    KDevelop::ContextMenuExtension contextMenuExtension(KDevelop::Context* context, QWidget* parent) override;
 
     /**
     * Returns (and creates) the outputModel used for UploadPlugin.

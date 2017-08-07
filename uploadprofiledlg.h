@@ -28,7 +28,7 @@ class UploadProfileDlg : public QDialog
     Q_OBJECT
 public:
     UploadProfileDlg( QWidget *parent = 0 );
-    virtual ~UploadProfileDlg();
+    ~UploadProfileDlg() override;
 
 public Q_SLOTS:
     /**

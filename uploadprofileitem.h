@@ -25,7 +25,7 @@ class UploadProfileItem : public QStandardItem
     };
 public:
     UploadProfileItem();
-    virtual ~UploadProfileItem() {}
+    ~UploadProfileItem() override {}
 
     void setUrl(const QUrl& url);
 
@@ -53,7 +53,7 @@ public:
      */
     KConfigGroup profileConfigGroup() const;
 
-    int type() const {
+    int type() const override {
         return UserType+1;
     }
 };

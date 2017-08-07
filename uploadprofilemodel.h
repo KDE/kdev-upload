@@ -26,7 +26,7 @@ class UploadProfileModel : public QStandardItemModel
     Q_OBJECT
 public:
     UploadProfileModel(QObject* parent = 0);
-    virtual ~UploadProfileModel() {}
+    ~UploadProfileModel() override {}
 
     /**
      * Removes an upload item
@@ -54,12 +54,12 @@ public:
     /**
      * Reverts all changes made to the model
      */
-    void revert();
+    void revert() override;
 
     /**
      * Saves all changes made to the model in the config
      */
-    bool submit();
+    bool submit() override;
 
 private:
     KDevelop::IProject* m_project; ///< the project

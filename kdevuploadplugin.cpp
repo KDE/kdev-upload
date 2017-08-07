@@ -54,19 +54,19 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
     FilesTreeViewFactory(UploadPlugin* plugin, AllProfilesModel* model)
                 : m_plugin(plugin), m_allProfilesModel(model) {}
 
-    virtual QWidget* create(QWidget *parent = 0)
+    QWidget* create(QWidget *parent = 0) override
     {
         ProfilesFileTree* w = new ProfilesFileTree(m_plugin, parent);
         w->setModel(m_allProfilesModel);
         return w;
     }
 
-    virtual QString id() const
+    QString id() const override
     {
         return "org.quanta.UploadFactory";
     }
 
-    virtual Qt::DockWidgetArea defaultPosition()
+    Qt::DockWidgetArea defaultPosition() override
     {
         return Qt::RightDockWidgetArea;
     }

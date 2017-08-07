@@ -35,13 +35,13 @@ class UploadProjectModel : public QSortFilterProxyModel
 
 public:
     UploadProjectModel( KDevelop::IProject* project, QObject *parent = 0 );
-    virtual ~UploadProjectModel();
+    ~UploadProjectModel() override;
 
-    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
-    bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
-    Qt::ItemFlags flags ( const QModelIndex & index ) const;
+    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const override;
+    bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole ) override;
+    Qt::ItemFlags flags ( const QModelIndex & index ) const override;
 
-    bool filterAcceptsRow ( int source_row, const QModelIndex & source_parent ) const;
+    bool filterAcceptsRow ( int source_row, const QModelIndex & source_parent ) const override;
 
     /**
      * Sets the profile KConfigGroup where the uploadtimes are stored.

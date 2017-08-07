@@ -39,7 +39,7 @@ class UploadDialog : public QDialog
 
 public:
     UploadDialog(KDevelop::IProject* project, UploadPlugin* plugin, QWidget *parent = 0);
-    virtual ~UploadDialog();
+    ~UploadDialog() override;
 
     /**
      * Set the root-item, only items below this are displayed
@@ -76,7 +76,7 @@ protected:
     /**
      * Event-filter for tree context-menu.
      */
-    bool eventFilter(QObject* obj, QEvent* event);
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
     Ui::UploadDialog* m_ui;

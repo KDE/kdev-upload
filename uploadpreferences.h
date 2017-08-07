@@ -31,9 +31,9 @@ class UploadPreferences : public KCModule
 public:
 
     UploadPreferences( QWidget *parent, const QVariantList &args = QVariantList() );
-    virtual ~UploadPreferences();
+    ~UploadPreferences() override;
 
-    void save();
+    void save() override;
 
 private Q_SLOTS:
     void addProfile();
