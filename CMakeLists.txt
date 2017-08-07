@@ -1,4 +1,4 @@
-PROJECT(upload)
+project(upload)
 
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 9)
@@ -50,12 +50,11 @@ set(kdevupload_UI
     uploaddialog.ui
     uploadprofiledlg.ui
 )
+
 add_library(kdevupload_PART_SRCS ${kdevupload_UI})
 
-add_library(kdevupload MODULE ${kdevupload_PART_SRCS})
-
-configure_file(kdevupload.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop)
-kcoreaddons_desktop_to_json(kdevupload ${CMAKE_CURRENT_BINARY_DIR}/kdevupload.desktop)
+qt5_add_resources(kdevupload_PART_SRCS kdevupload.qrc)
+kdevplatform_add_plugin(kdevupload JSON kdevupload.json SOURCES ${kdevupload_PART_SRCS})
 
 target_link_libraries(kdevupload
     KDev::Interfaces
@@ -71,11 +70,6 @@ target_link_libraries(kdevupload
     KF5::CoreAddons
 )
 
-install(TARGETS kdevupload DESTINATION ${PLUGIN_INSTALL_DIR}/kdevplatform/${KDEV_PLUGIN_VERSION})
-
-install(FILES  kdevupload.rc DESTINATION ${DATA_INSTALL_DIR}/kdevupload)
-
-
 #preferences-plugin
 set(uploadpreferences_PART_SRCS
    uploadpreferences.cpp
@@ -83,7 +77,7 @@ set(uploadpreferences_PART_SRCS
    uploadprofileitem.cpp
    uploadprofiledlg.cpp
 )
-qt5_wrap_ui(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui uploaddialog.ui)
+ki18n_wrap_ui(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui uploaddialog.ui)
 add_library(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui uploaddialog.ui)
 
 add_library(kcm_kdev_upload ${uploadpreferences_PART_SRCS})

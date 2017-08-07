@@ -77,7 +77,7 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
 };
 
 UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
-: KDevelop::IPlugin(QStringLiteral("uploadplugin"), parent),  m_outputModel(0), m_filesTreeViewFactory(0)
+: KDevelop::IPlugin(QStringLiteral("kdevupload"), parent),  m_outputModel(0), m_filesTreeViewFactory(0)
 {
     connect(core()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
                    this, SLOT(projectOpened(KDevelop::IProject*)));
@@ -88,7 +88,7 @@ UploadPlugin::UploadPlugin(QObject *parent, const QVariantList &)
     connect(core()->documentController(), SIGNAL(documentClosed(KDevelop::IDocument*)),
                 SLOT(documentClosed(KDevelop::IDocument*)));
 
-    setXMLFile("kdevupload.rc");
+    setXMLFile( QStringLiteral( "kdevupload.rc" ) );
 
     m_allProfilesModel = new AllProfilesModel(this);
     connect(m_allProfilesModel, SIGNAL(rowsInserted(QModelIndex, int, int)),
