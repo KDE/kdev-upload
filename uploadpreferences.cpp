@@ -12,9 +12,6 @@
 #include <QVBoxLayout>
 #include <QStandardItemModel>
 
-#include <kpluginfactory.h>
-#include <kpluginloader.h>
-
 #include <interfaces/icore.h>
 #include <interfaces/iplugincontroller.h>
 #include <interfaces/iprojectcontroller.h>
@@ -25,38 +22,21 @@
 #include "ui_uploadpreferences.h"
 #include "uploadprofiledlg.h"
 #include "uploadprofileitem.h"
-#include "kdevuploadplugin.h"
 
 using namespace KDevelop;
 
-K_PLUGIN_FACTORY(UploadPreferencesFactory, registerPlugin<UploadPreferences>(); )
-
-UploadPreferences::UploadPreferences( QWidget *parent, const QVariantList &args )
-    : KCModule( parent, args )
+UploadPreferences::UploadPreferences( KDevelop::IPlugin* plugin, const KDevelop::ProjectConfigOptions& options, QWidget* parent )
+    : ProjectConfigPage<UploadSettings>(plugin, options, parent)
 {
-    IProject* project = nullptr;
-    Q_FOREACH (IProject* p, KDevelop::ICore::self()->projectController()->projects()) {
-        if (p->projectFile().path() == args.at(1).toString()) {
-            project = p;
-            break;
-        }
-    }
-    Q_ASSERT(project);
-
-
-    setButtons(Help | Apply);
-
-    QVBoxLayout * l = new QVBoxLayout( this );
-    setLayout(l);
-    QWidget* w = new QWidget();
-    l->addWidget(w);
+    IProject* project = options.project;
 
     m_ui = new Ui::UploadPreferences();
-    m_ui->setupUi(w);
+    m_ui->setupUi(this);
 
     m_model = new UploadProfileModel();
     m_model->setProject(project);
     m_ui->profilesList->setModel(m_model);
+
 
     connect(m_model, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
             this, SLOT(changed()));
@@ -80,9 +60,20 @@ UploadPreferences::~UploadPreferences( )
   delete m_ui;
 }
 
-void UploadPreferences::save()
+void UploadPreferences::reset()
+{
+    ProjectConfigPage::reset();
+}
+
+void UploadPreferences::apply()
 {
     m_model->submit();
+    ProjectConfigPage::apply();
+}
+
+void UploadPreferences::defaults()
+{
+    ProjectConfigPage::defaults();
 }
 
 void UploadPreferences::addProfile()
@@ -114,5 +105,19 @@ void UploadPreferences::modifyProfile()
     }
 }
 
-#include "uploadpreferences.moc"
+QString UploadPreferences::name() const
+{
+    return i18n("Upload");
+}
+
+QString UploadPreferences::fullName() const
+{
+    return i18n("Configure Upload settings");
+}
+
+QIcon UploadPreferences::icon() const
+{
+    return QIcon::fromTheme(QStringLiteral("go-up"));
+}
+
 // kate: space-indent on; indent-width 4; tab-width 4; replace-tabs on

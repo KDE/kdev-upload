@@ -1,0 +1,9 @@
+File=uploadconfig.kcfg
+ClassName=UploadSettings
+Singleton=true
+Mutators=true
+SetUserTexts=true
+ItemAccessors=true
+Inherits=KDevelop::ProjectConfigSkeleton
+IncludeFiles=project/projectconfigskeleton.h
+SourceIncludeFiles=uploadpreferences.h

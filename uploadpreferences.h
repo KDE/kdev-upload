@@ -11,9 +11,12 @@
 #ifndef UPLOADPREFERENCES_H
 #define UPLOADPREFERENCES_H
 
-#include <kcmodule.h>
 #include <ksharedconfig.h>
 #include <QVariant>
+
+#include <project/projectconfigpage.h>
+
+#include "uploadconfig.h"
 
 namespace Ui {
     class UploadPreferences;
@@ -25,15 +28,21 @@ class UploadProfileItem;
 /**
  * KCModule for upload profiles configuration
  */
-class UploadPreferences : public KCModule
+class UploadPreferences : public ProjectConfigPage<UploadSettings>
 {
     Q_OBJECT
 public:
 
-    UploadPreferences( QWidget *parent, const QVariantList &args = QVariantList() );
+    UploadPreferences(KDevelop::IPlugin* plugin, const KDevelop::ProjectConfigOptions& options, QWidget* parent);
     ~UploadPreferences() override;
 
-    void save() override;
+    void reset() override;
+    void apply() override;
+    void defaults() override;
+    
+    QString name() const override;
+    QString fullName() const override;
+    QIcon icon() const override;
 
 private Q_SLOTS:
     void addProfile();

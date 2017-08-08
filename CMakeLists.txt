@@ -18,11 +18,14 @@ include(ECMAddTests)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(FeatureSummary)
+include(ECMQtDeclareLoggingCategory)
+include(KDECMakeSettings)
+include(WriteBasicConfigVersionFile)
 
 set(QT_MIN_VERSION "5.5.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets)
 set(KF5_DEP_VERSION "5.15.0")
-find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels)
+find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS Config TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels XmlGui)
 find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
 
 include_directories(
@@ -43,11 +46,22 @@ set(kdevupload_PART_SRCS
    uploadprofileitem.cpp
    uploadprofilemodel.cpp
    uploadprojectmodel.cpp
+   uploadpreferences.cpp
 )
 set(kdevupload_UI
     uploaddialog.ui
     uploadprofiledlg.ui
+    uploadpreferences.ui
 )
+
+ecm_qt_declare_logging_category(projectfilter_SRCS
+    HEADER debug.h
+    IDENTIFIER PLUGIN_PROJECTFILTER
+    CATEGORY_NAME "kdevelop.plugins.upload"
+)
+
+ki18n_wrap_ui(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui uploaddialog.ui)
+kconfig_add_kcfg_files( kdevupload_PART_SRCS uploadconfig.kcfgc )
 
 add_library(kdevupload_PART_SRCS ${kdevupload_UI})
 
@@ -67,32 +81,3 @@ target_link_libraries(kdevupload
     KF5::KIONTLM
     KF5::CoreAddons
 )
-
-#preferences-plugin
-set(uploadpreferences_PART_SRCS
-   uploadpreferences.cpp
-   uploadprofilemodel.cpp
-   uploadprofileitem.cpp
-   uploadprofiledlg.cpp
-)
-ki18n_wrap_ui(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui uploaddialog.ui)
-add_library(uploadpreferences_PART_SRCS uploadpreferences.ui uploadprofiledlg.ui uploaddialog.ui)
-
-add_library(kcm_kdev_upload ${uploadpreferences_PART_SRCS})
-
-target_link_libraries(kcm_kdev_upload
-    KDev::Interfaces
-    KDev::Util
-
-    KF5::I18n
-    KF5::KCMUtils
-    KF5::Service
-    KF5::Parts
-    KF5::KIOCore
-    KF5::KIOFileWidgets
-    KF5::KIOWidgets
-    KF5::KIONTLM
-)
-
-install(TARGETS kcm_kdev_upload  DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES  kcm_kdev_upload.desktop  DESTINATION ${SERVICES_INSTALL_DIR})

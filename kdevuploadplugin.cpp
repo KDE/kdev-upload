@@ -30,6 +30,7 @@
 #include <interfaces/iplugincontroller.h>
 #include <interfaces/context.h>
 #include <interfaces/contextmenuextension.h>
+#include <project/projectconfigpage.h>
 #include <project/projectmodel.h>
 #include <outputview/ioutputview.h>
 #include <serialization/indexedstring.h>
@@ -40,6 +41,7 @@
 #include "uploadprojectmodel.h"
 #include "uploadprofilemodel.h"
 #include "uploadprofileitem.h"
+#include "uploadpreferences.h"
 #include "allprofilesmodel.h"
 #include <interfaces/idocumentcontroller.h>
 
@@ -193,10 +195,6 @@ void UploadPlugin::projectUpload(QObject* p)
     }
 }
 
-void UploadPlugin::unload()
-{
-}
-
 KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Context* context, QWidget* parent)
 {
     if (context->type() == KDevelop::Context::ProjectItemContext) {
@@ -230,6 +228,17 @@ KDevelop::ContextMenuExtension UploadPlugin::contextMenuExtension(KDevelop::Cont
         }
     }
     return KDevelop::IPlugin::contextMenuExtension(context, parent);
+}
+
+int UploadPlugin::perProjectConfigPages() const
+{
+    return 1;
+}
+
+
+KDevelop::ConfigPage* UploadPlugin::perProjectConfigPage(int number, const KDevelop::ProjectConfigOptions& options, QWidget* parent)
+{
+    return number == 0 ? new UploadPreferences(this, options, parent) : nullptr;
 }
 
 void UploadPlugin::upload()
