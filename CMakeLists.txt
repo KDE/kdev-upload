@@ -21,12 +21,16 @@ include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 include(KDECMakeSettings)
 include(WriteBasicConfigVersionFile)
+include(FeatureSummary)
 
 set(QT_MIN_VERSION "5.5.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets)
 set(KF5_DEP_VERSION "5.15.0")
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS Config TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels XmlGui)
-find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
+find_package(KDevPlatform ${KDEVPLATFORM_VERSION})
+set_package_properties(KDevPlatform PROPERTIES
+    TYPE REQUIRED
+)
 
 include_directories(
    ${CMAKE_CURRENT_BINARY_DIR}
@@ -81,3 +85,5 @@ target_link_libraries(kdevupload
     KF5::KIONTLM
     KF5::CoreAddons
 )
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
