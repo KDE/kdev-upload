@@ -67,6 +67,7 @@ void UploadProfileModel::revert()
     Q_FOREACH (QString g, group.groupList()) {
         if (g.startsWith("Profile")) {
             QUrl url = group.group(g).readEntry("url", QUrl());
+            QUrl localUrl = group.group(g).readEntry("localUrl", QUrl());
             QString name = group.group(g).readEntry("name", QString());
             UploadProfileItem* i = uploadItem(row);
             if (!i) {
@@ -75,6 +76,7 @@ void UploadProfileModel::revert()
             }
             i->setText(name);
             i->setUrl(url);
+            i->setLocalUrl(localUrl);
             i->setProfileNr(g.mid(7)); //group-name
             i->setDefault(i->profileNr() == defProfile);
             ++row;
@@ -108,6 +110,7 @@ bool UploadProfileModel::submit()
             }
             KConfigGroup profileGroup = group.group("Profile" + item->profileNr());
             profileGroup.writeEntry("url", item->url().toString());
+            profileGroup.writeEntry("localUrl", item->localUrl().toString());
             profileGroup.writeEntry("name", item->text());
             if (item->isDefault()) {
                 defaultProfileNr = item->profileNr();

@@ -42,6 +42,10 @@ private Q_SLOTS:
      * Opens a directory browser to select the path
      */
     void browse();
+    /**
+     * Opens a directory browser to select the local path
+     */
+    void browseLocal();
 
 protected Q_SLOTS:
     /**
@@ -61,6 +65,7 @@ private:
     void updateUrl( const QUrl& url );
 
     Ui::UploadProfileDlg* m_ui;
+
 };
 
 

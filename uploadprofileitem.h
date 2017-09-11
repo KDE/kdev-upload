@@ -20,14 +20,16 @@ class UploadProfileItem : public QStandardItem
 {
     enum {
         UrlRole = Qt::UserRole+1,
-        IsDefaultRole = Qt::UserRole+2,
-        ProfileNrRole = Qt::UserRole+3
+        IsDefaultRole,
+        ProfileNrRole,
+        LocalUrlRole
     };
 public:
     UploadProfileItem();
     ~UploadProfileItem() override {}
 
     void setUrl(const QUrl& url);
+    void setLocalUrl(const QUrl& url);
 
     /**
      * Set if this item is the default upload-profile.
@@ -41,6 +43,7 @@ public:
     void setProfileNr(const QString& nr);
 
     QUrl url() const;
+    QUrl localUrl() const;
     bool isDefault() const;
 
     /**

@@ -222,6 +222,11 @@ QUrl UploadProjectModel::currentProfileUrl()
     return m_profileConfigGroup.readEntry("url", QUrl());
 }
 
+QUrl UploadProjectModel::currentProfileLocalUrl()
+{
+    return m_profileConfigGroup.readEntry("localUrl", QUrl());
+}
+
 void UploadProjectModel::checkAll()
 {
     setData(index(0, 0), Qt::Checked, Qt::CheckStateRole);

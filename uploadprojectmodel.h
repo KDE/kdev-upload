@@ -82,6 +82,11 @@ public:
      * Returns the url of the current Upload Profile (which is set through setProfileConfigGroup)
      */
     QUrl currentProfileUrl();
+    
+    /**
+     * Returns the local url of the current Upload Profile (which is set through setProfileConfigGroup)
+     */
+    QUrl currentProfileLocalUrl();
 
 public Q_SLOTS:
     /**

@@ -68,6 +68,7 @@ void UploadPreferences::reset()
 void UploadPreferences::apply()
 {
     m_model->submit();
+    m_model->revert();
     ProjectConfigPage::apply();
 }
 
@@ -79,6 +80,7 @@ void UploadPreferences::defaults()
 void UploadPreferences::addProfile()
 {
     UploadProfileItem* i = new UploadProfileItem();
+    i->setLocalUrl(QUrl(m_model->project()->path().path()));
     if (m_model->rowCount() == 0) {
         i->setDefault(true);
     }

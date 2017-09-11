@@ -26,6 +26,10 @@ void UploadProfileItem::setUrl(const QUrl& url)
 {
     setData(url, UrlRole);
 }
+void UploadProfileItem::setLocalUrl(const QUrl& url)
+{
+    setData(url, LocalUrlRole);
+}
 
 void UploadProfileItem::setDefault(bool isDefault)
 {
@@ -54,6 +58,10 @@ void UploadProfileItem::setProfileNr(const QString& nr)
 QUrl UploadProfileItem::url() const
 {
     return data(UrlRole).value<QUrl>();
+}
+QUrl UploadProfileItem::localUrl() const
+{
+    return data(LocalUrlRole).value<QUrl>();
 }
 
 bool UploadProfileItem::isDefault() const

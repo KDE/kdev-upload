@@ -103,14 +103,21 @@ void UploadJob::uploadNext()
                             ->data(m_uploadIndex, Qt::CheckStateRole).toInt());
 
     KDevelop::Path url;
+    QUrl localUrl = m_uploadProjectModel->currentProfileLocalUrl().adjusted(QUrl::StripTrailingSlash);
 
+    KDevelop::Path localPath = KDevelop::Path(localUrl.path());
+    
     if (item->folder()) {
         url = item->folder()->path();
     } else if (item->file()) {
         url = item->file()->path();
     }
-
-    QString relativeUrl(m_project->path().relativePath(url));
+    
+    if(localPath.path().isEmpty()) {
+        localPath = m_project->path();        
+    }
+    
+    QString relativeUrl(localPath.relativePath(url));
 
     if (isQuickUpload() && checked == Qt::Unchecked) {
         appendLog(i18n("File was not modified for %1: %2",
