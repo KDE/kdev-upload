@@ -4,8 +4,6 @@ project(upload)
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 9)
 set(VERSION_PATCH 90)
-# KDevplatform dependency version
-set( KDEVPLATFORM_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
 
 configure_file( "${upload_SOURCE_DIR}/version.h.cmake" "${upload_BINARY_DIR}/version.h" @ONLY )
 
@@ -27,7 +25,8 @@ set(QT_MIN_VERSION "5.5.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets)
 set(KF5_DEP_VERSION "5.15.0")
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS Config TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels XmlGui)
-find_package(KDevPlatform ${KDEVPLATFORM_VERSION})
+set(KDEVPLATFORM_DEP_VERSION "5.1.0")
+find_package(KDevPlatform ${KDEVPLATFORM_DEP_VERSION} CONFIG)
 set_package_properties(KDevPlatform PROPERTIES
     TYPE REQUIRED
 )
