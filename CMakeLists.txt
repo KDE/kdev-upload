@@ -34,6 +34,8 @@ set_package_properties(KDevPlatform PROPERTIES
     TYPE REQUIRED
 )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"kdevupload\")
+
 add_subdirectory(tests)
 
 #plugin
