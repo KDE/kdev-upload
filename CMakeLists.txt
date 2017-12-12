@@ -22,7 +22,12 @@ include(ECMQtDeclareLoggingCategory)
 set(QT_MIN_VERSION "5.5.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets)
 set(KF5_DEP_VERSION "5.15.0")
-find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS Config TextEditor I18n KCMUtils JobWidgets Service Parts KIO CoreAddons ItemModels XmlGui)
+find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS
+    I18n
+    ItemModels # needed because missing in KDevPlatformConfig.cmake, remove once dep on kdevplatform >=5.2.2
+    KIO
+    KCMUtils
+)
 set(KDEVPLATFORM_DEP_VERSION "5.1.0")
 find_package(KDevPlatform ${KDEVPLATFORM_DEP_VERSION} CONFIG)
 set_package_properties(KDevPlatform PROPERTIES
@@ -69,13 +74,9 @@ target_link_libraries(kdevupload
     KDev::Project
     KDev::Serialization
 
-    KF5::JobWidgets
+    KF5::I18n
     KF5::KCMUtils
-    KF5::KIOCore
     KF5::KIOFileWidgets
-    KF5::KIOWidgets
-    KF5::KIONTLM
-    KF5::CoreAddons
 )
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
