@@ -18,8 +18,6 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
-include(KDECMakeSettings)
-include(WriteBasicConfigVersionFile)
 
 set(QT_MIN_VERSION "5.5.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets)
