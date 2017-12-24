@@ -23,6 +23,7 @@
         "Name[sv]": "Ladda upp",
         "Name[uk]": "Вивантаження",
         "Name[x-test]": "xxUploadxx",
+        "Name[zh_CN]": "上传",
         "ServiceTypes": [
             "KDevelop/Plugin"
         ]
