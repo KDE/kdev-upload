@@ -2,6 +2,7 @@
     "KPlugin": {
         "Category": "Utilities",
         "Description": "Upload project files to a remote server",
+        "Description[ast]": "Xube ficheros de proyeutos a un sirvidor remotu",
         "Description[ca@valencia]": "Puja fitxers de projecte a un servidor remot",
         "Description[ca]": "Puja fitxers de projecte a un servidor remot",
         "Description[es]": "Enviar archivos de proyectos a un servidor remoto",
@@ -15,6 +16,7 @@
         "Icon": "go-up",
         "Id": "KDevUpload",
         "Name": "Upload",
+        "Name[ast]": "Xuba",
         "Name[ca@valencia]": "Puja",
         "Name[ca]": "Puja",
         "Name[es]": "Enviar",
