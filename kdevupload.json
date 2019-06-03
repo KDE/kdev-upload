@@ -18,7 +18,7 @@
         "Description[pt]": "Enviar ficheiros do projecto para um servidor remoto",
         "Description[sk]": "Nahrať súbory projektu na vzdialený server",
         "Description[sv]": "Ladda upp projektfiler till en fjärrserver",
-        "Description[uk]": "Вивантаження файлів проекту на віддалений сервер",
+        "Description[uk]": "Вивантаження файлів проєкту на віддалений сервер",
         "Description[x-test]": "xxUpload project files to a remote serverxx",
         "Icon": "go-up",
         "Id": "KDevUpload",
