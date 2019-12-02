@@ -68,7 +68,7 @@ class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
         return "org.quanta.UploadFactory";
     }
 
-    Qt::DockWidgetArea defaultPosition() override
+    Qt::DockWidgetArea defaultPosition() const override
     {
         return Qt::RightDockWidgetArea;
     }
