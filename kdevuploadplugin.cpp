@@ -49,8 +49,6 @@
 
 K_PLUGIN_FACTORY_WITH_JSON(UploadFactory, "kdevupload.json", registerPlugin<UploadPlugin>(); )
 
-Q_LOGGING_CATEGORY(KDEVUPLOAD, "kdev.upload");
-
 class FilesTreeViewFactory: public KDevelop::IToolViewFactory{
   public:
     FilesTreeViewFactory(UploadPlugin* plugin, AllProfilesModel* model)

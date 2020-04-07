@@ -58,8 +58,8 @@ set(kdevupload_UI
 )
 
 ecm_qt_declare_logging_category(kdevupload_PART_SRCS
-    HEADER debug.h
-    IDENTIFIER PLUGIN_PROJECTFILTER
+    HEADER kdevuploaddebug.h
+    IDENTIFIER KDEVUPLOAD
     CATEGORY_NAME "kdevelop.plugins.upload"
 )
 
