@@ -5,6 +5,9 @@ set(VERSION_MAJOR 1)
 set(VERSION_MINOR 9)
 set(VERSION_PATCH 90)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+
 configure_file( "${upload_SOURCE_DIR}/version.h.cmake" "${upload_BINARY_DIR}/version.h" @ONLY )
 
 set(ECM_DEP_VERSION "5.15.0")
