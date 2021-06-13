@@ -3,7 +3,6 @@ Icon=go-up
 Type=Service
 ServiceTypes=KCModule
 
-X-KDE-ModuleType=Library
 X-KDE-Library=kcm_kdev_upload
 X-KDE-FactoryName=kcm_kdev_upload
 X-KDE-ParentApp=kdevplatformproject
