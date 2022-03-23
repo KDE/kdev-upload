@@ -2,7 +2,7 @@
     "KPlugin": {
         "Category": "Utilities",
         "Description": "Upload project files to a remote server",
-        "Description[ca@valencia]": "Puja fitxers de projecte a un servidor remot",
+        "Description[ca@valencia]": "Amunt fitxers de projecte a un servidor remot",
         "Description[ca]": "Puja fitxers de projecte a un servidor remot",
         "Description[cs]": "Odeslat soubory projektu na vzdálený server",
         "Description[de]": "Projektdateien auf einen entfernten Server hochladen",
@@ -28,7 +28,7 @@
         "Icon": "go-up",
         "Id": "KDevUpload",
         "Name": "Upload",
-        "Name[ca@valencia]": "Puja",
+        "Name[ca@valencia]": "Amunt",
         "Name[ca]": "Puja",
         "Name[cs]": "Odeslat",
         "Name[de]": "Hochladen",
