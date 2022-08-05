@@ -139,14 +139,14 @@ void UploadProfileDlg::slotAcceptButtonClicked()
     KJobWidgets::setWindow(statJob, this);
     bool dirExists = statJob->exec();
     if (!dirExists) {
-        KMessageBox::sorry(this, i18n("The specified URL does not exist."));
+        KMessageBox::error(this, i18n("The specified URL does not exist."));
         return;
     }
     
     //TODO: check if local dir is subpath of project dir
     QString selectedLocalPath = m_ui->lineLocalPath->text();
     if(!QDir(selectedLocalPath).exists()) {
-        KMessageBox::sorry(this, i18n("The specified local directory does not exist."));
+        KMessageBox::error(this, i18n("The specified local directory does not exist."));
         return;
     }
     
