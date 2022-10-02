@@ -1,0 +1,258 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-04-08 03:44+0200\n"
+"PO-Revision-Date: 2021-06-29 10:18+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: kdevuploadplugin.cpp:113
+#, kde-format
+msgid "&Upload Project"
+msgstr "&Lähetä projekti"
+
+#: kdevuploadplugin.cpp:115
+#, kde-format
+msgid "Upload project"
+msgstr "Lähetä projekti"
+
+#: kdevuploadplugin.cpp:120
+#, kde-format
+msgid "&Quick Upload Current File"
+msgstr "Nykyisen tiedoston &pikalähetys"
+
+#: kdevuploadplugin.cpp:213
+#, kde-format
+msgid "Upload..."
+msgstr "Lähetä…"
+
+#: kdevuploadplugin.cpp:218
+#, kde-format
+msgid "Quick Upload"
+msgstr "Pikalähetys"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UploadDialog)
+#: kdevuploadplugin.cpp:321 uploaddialog.ui:13 uploadpreferences.cpp:112
+#, kde-format
+msgid "Upload"
+msgstr "Lähetä"
+
+#: kdevuploadplugin.cpp:322
+#, kde-format
+msgid "Output"
+msgstr "Tuloste"
+
+#: kdevuploadplugin.cpp:338
+#, kde-format
+msgid "Upload Profiles"
+msgstr "Lähetysprofiilit"
+
+#: profilesfiletree.cpp:60
+#, kde-format
+msgid "Please choose an upload profile."
+msgstr "Valitse lähetysprofiili."
+
+#: profilesfiletree.cpp:72
+#, kde-format
+msgid "&Copy URL"
+msgstr "&Kopioi verkko-osoite"
+
+#: profilesfiletree.cpp:75
+#, kde-format
+msgid "&Open URL"
+msgstr "&Avaa verkko-osoite"
+
+#: uploaddialog.cpp:48
+#, kde-format
+msgid "&Upload"
+msgstr "&Lähetä"
+
+#: uploaddialog.cpp:67
+#, kde-format
+msgctxt "Select all items in the tree"
+msgid "All"
+msgstr "Kaikki"
+
+#: uploaddialog.cpp:71
+#, kde-format
+msgid "Modified"
+msgstr "Muokatut"
+
+#: uploaddialog.cpp:75
+#, kde-format
+msgid "Invert"
+msgstr "Käännä valinta"
+
+#: uploaddialog.cpp:121
+#, kde-format
+msgid "Cannot upload, no profile selected."
+msgstr "Ei voida lähettää: profiilia ei ole valittu."
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploaddialog.ui:37
+#, kde-format
+msgid "..."
+msgstr "…"
+
+#. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
+#: uploaddialog.ui:49
+#, kde-format
+msgid "Mark as uploaded, but do not upload"
+msgstr "Merkitse lähetetyksi mutta älä lähetä"
+
+#: uploadjob.cpp:41
+#, kde-format
+msgid "Uploading files"
+msgstr "Lähetetään tiedostoja"
+
+#: uploadjob.cpp:42
+#, kde-format
+msgid "Preparing..."
+msgstr "Valmistellaan…"
+
+#: uploadjob.cpp:54
+#, kde-format
+msgid "Calculating size..."
+msgstr "Lasketaan kokoa…"
+
+#: uploadjob.cpp:88
+#, kde-format
+msgid "Upload completed"
+msgstr "Lähetys valmis"
+
+#: uploadjob.cpp:123
+#, kde-format
+msgid "File was not modified for %1: %2"
+msgstr "Kohteen %1 tiedostoa ei muutettu: %2"
+
+#: uploadjob.cpp:138
+#, kde-format
+msgid "Marked as uploaded for %1: %2"
+msgstr "Merkitty lähetetyksi kohteeseen %1: %2"
+
+#: uploadjob.cpp:147
+#, kde-format
+msgid "Uploading to %1: %2"
+msgstr "Lähetetään kohteeseen %1: %2"
+
+#: uploadjob.cpp:152
+#, kde-format
+msgid "Uploading %1..."
+msgstr "Lähetetään: %1…"
+
+#: uploadjob.cpp:157
+#, kde-format
+msgid "Directory in %1 already exists: %2"
+msgstr "Kohteessa %1 on jo kansio: %2"
+
+#: uploadjob.cpp:166
+#, kde-format
+msgid "Creating directory in %1: %2"
+msgstr "Luodaan kansiota kohteeseen %1: %2"
+
+#: uploadjob.cpp:194
+#, kde-format
+msgid "Upload canceled"
+msgstr "Lähetys peruttu"
+
+#: uploadjob.cpp:206
+#, kde-format
+msgid "Upload error: %1"
+msgstr "Lähetysvirhe: %1"
+
+#: uploadpreferences.cpp:117
+#, kde-format
+msgid "Configure Upload settings"
+msgstr "Lähetyksen asetukset"
+
+#. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
+#: uploadpreferences.ui:21
+#, kde-format
+msgid "&Add Profile"
+msgstr "&Lisää profiili"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
+#: uploadpreferences.ui:28
+#, kde-format
+msgid "&Remove Profile"
+msgstr "&Poista profiili"
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploadpreferences.ui:35
+#, kde-format
+msgid "&Modify Profile"
+msgstr "&Muokkaa profiilia"
+
+#: uploadprofiledlg.cpp:32
+#, kde-format
+msgid "Upload Profile"
+msgstr "Lähetysprofiili"
+
+#: uploadprofiledlg.cpp:142
+#, kde-format
+msgid "The specified URL does not exist."
+msgstr "Määritetty verkko-osoitetta ei ole olemassa."
+
+#: uploadprofiledlg.cpp:149
+#, kde-format
+msgid "The specified local directory does not exist."
+msgstr "Määritettyä paikallista kansiota ei ole olemassa."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: uploadprofiledlg.ui:22
+#, kde-format
+msgid "Profile &name:"
+msgstr "Profiilin &nimi:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: uploadprofiledlg.ui:38
+#, kde-format
+msgid "&Protocol:"
+msgstr "&Yhteyskäytäntö:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel4)
+#: uploadprofiledlg.ui:56
+#, kde-format
+msgid "&Host:"
+msgstr "&Konenimi:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
+#: uploadprofiledlg.ui:79
+#, kde-format
+msgid "Po&rt:"
+msgstr "&Portti:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2)
+#: uploadprofiledlg.ui:104
+#, kde-format
+msgid "&User:"
+msgstr "&Käyttäjä:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
+#: uploadprofiledlg.ui:136
+#, kde-format
+msgid "&Local Path:"
+msgstr "P&aikallinen sijainti:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
+#: uploadprofiledlg.ui:166
+#, kde-format
+msgid "Pa&th:"
+msgstr "&Sijainti:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, defaultProfile)
+#: uploadprofiledlg.ui:196
+#, kde-format
+msgid "Use as &default profile"
+msgstr "Käytä &oletusprofiilina"

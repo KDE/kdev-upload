@@ -1,0 +1,280 @@
+# translation of kdevupload.po to Low Saxon
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Manfred Wiese <m.j.wiese@web.de>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdevupload\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-04-08 03:44+0200\n"
+"PO-Revision-Date: 2010-02-16 08:24+0100\n"
+"Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
+"Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
+"Language: nds\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdevuploadplugin.cpp:113
+#, kde-format
+msgid "&Upload Project"
+msgstr "Projekt &hoochladen"
+
+#: kdevuploadplugin.cpp:115
+#, kde-format
+msgid "Upload project"
+msgstr "Projekt hoochladen"
+
+#: kdevuploadplugin.cpp:120
+#, kde-format
+msgid "&Quick Upload Current File"
+msgstr "Aktuell Projekt &direktemang hoochladen"
+
+#: kdevuploadplugin.cpp:213
+#, kde-format
+msgid "Upload..."
+msgstr "Hoochladen..."
+
+#: kdevuploadplugin.cpp:218
+#, kde-format
+msgid "Quick Upload"
+msgstr "Fixhoochladen"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UploadDialog)
+#: kdevuploadplugin.cpp:321 uploaddialog.ui:13 uploadpreferences.cpp:112
+#, kde-format
+msgid "Upload"
+msgstr "Hoochladen"
+
+#: kdevuploadplugin.cpp:322
+#, kde-format
+msgid "Output"
+msgstr "Utgaav"
+
+#: kdevuploadplugin.cpp:338
+#, kde-format
+msgid "Upload Profiles"
+msgstr "Profilen hoochladen"
+
+#: profilesfiletree.cpp:60
+#, kde-format
+msgid "Please choose an upload profile."
+msgstr "Bitte en Hoochlaadprofil kören."
+
+#: profilesfiletree.cpp:72
+#, kde-format
+msgid "&Copy URL"
+msgstr "&URL koperen"
+
+#: profilesfiletree.cpp:75
+#, kde-format
+msgid "&Open URL"
+msgstr "URL &opmaken"
+
+#: uploaddialog.cpp:48
+#, kde-format
+msgid "&Upload"
+msgstr "&Hoochladen"
+
+#: uploaddialog.cpp:67
+#, kde-format
+msgctxt "Select all items in the tree"
+msgid "All"
+msgstr "All"
+
+#: uploaddialog.cpp:71
+#, kde-format
+msgid "Modified"
+msgstr "Ännert"
+
+#: uploaddialog.cpp:75
+#, kde-format
+msgid "Invert"
+msgstr "Ümdreihen"
+
+#: uploaddialog.cpp:121
+#, kde-format
+msgid "Cannot upload, no profile selected."
+msgstr "Hoochladen nich mööglich, keen Profil köört."
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploaddialog.ui:37
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
+#: uploaddialog.ui:49
+#, kde-format
+msgid "Mark as uploaded, but do not upload"
+msgstr "As \"hoochlaadt\" markeren, man nich hoochladen"
+
+#: uploadjob.cpp:41
+#, kde-format
+msgid "Uploading files"
+msgstr "Dateien warrt hoochlaadt"
+
+#: uploadjob.cpp:42
+#, kde-format
+msgid "Preparing..."
+msgstr "An't Rüsten..."
+
+#: uploadjob.cpp:54
+#, kde-format
+msgid "Calculating size..."
+msgstr "Grött warrt utreekt..."
+
+#: uploadjob.cpp:88
+#, kde-format
+msgid "Upload completed"
+msgstr "Hoochladen afslaten"
+
+#: uploadjob.cpp:123
+#, kde-format
+msgid "File was not modified for %1: %2"
+msgstr "Datei wöör nich ännert för %1: %2"
+
+#: uploadjob.cpp:138
+#, kde-format
+msgid "Marked as uploaded for %1: %2"
+msgstr "Markeert as hoochlaadt för %1: %2"
+
+#: uploadjob.cpp:147
+#, kde-format
+msgid "Uploading to %1: %2"
+msgstr "Hoochladen na %1: %2"
+
+#: uploadjob.cpp:152
+#, kde-format
+msgid "Uploading %1..."
+msgstr "%1 warrt hoochlaadt..."
+
+#: uploadjob.cpp:157
+#, kde-format
+msgid "Directory in %1 already exists: %2"
+msgstr "Orner in %1 gifft dat al: %2"
+
+#: uploadjob.cpp:166
+#, kde-format
+msgid "Creating directory in %1: %2"
+msgstr "Orner warrt in %1 opstellt: %2"
+
+#: uploadjob.cpp:194
+#, kde-format
+msgid "Upload canceled"
+msgstr "Hoochladen afbraken"
+
+#: uploadjob.cpp:206
+#, kde-format
+msgid "Upload error: %1"
+msgstr "Hoochlaadfehler: %1"
+
+#: uploadpreferences.cpp:117
+#, kde-format
+msgid "Configure Upload settings"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
+#: uploadpreferences.ui:21
+#, kde-format
+msgid "&Add Profile"
+msgstr "Profil &tofögen"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
+#: uploadpreferences.ui:28
+#, kde-format
+msgid "&Remove Profile"
+msgstr "Profil &wegdoon"
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploadpreferences.ui:35
+#, kde-format
+msgid "&Modify Profile"
+msgstr "Profil ä&nnern"
+
+#: uploadprofiledlg.cpp:32
+#, kde-format
+msgid "Upload Profile"
+msgstr "Profil hoochladen"
+
+#: uploadprofiledlg.cpp:142
+#, kde-format
+msgid "The specified URL does not exist."
+msgstr "De angeven URL gifft dat nich."
+
+#: uploadprofiledlg.cpp:149
+#, fuzzy, kde-format
+#| msgid "The specified URL does not exist."
+msgid "The specified local directory does not exist."
+msgstr "De angeven URL gifft dat nich."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: uploadprofiledlg.ui:22
+#, kde-format
+msgid "Profile &name:"
+msgstr "Profil&naam:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: uploadprofiledlg.ui:38
+#, kde-format
+msgid "&Protocol:"
+msgstr "&Protokoll:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel4)
+#: uploadprofiledlg.ui:56
+#, kde-format
+msgid "&Host:"
+msgstr "&Reekner:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
+#: uploadprofiledlg.ui:79
+#, kde-format
+msgid "Po&rt:"
+msgstr "Po&rt:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2)
+#: uploadprofiledlg.ui:104
+#, kde-format
+msgid "&User:"
+msgstr "&Bruker:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
+#: uploadprofiledlg.ui:136
+#, kde-format
+msgid "&Local Path:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
+#: uploadprofiledlg.ui:166
+#, kde-format
+msgid "Pa&th:"
+msgstr "Pa&dd:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, defaultProfile)
+#: uploadprofiledlg.ui:196
+#, kde-format
+msgid "Use as &default profile"
+msgstr "As &Standardprofil bruken"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Manfred Wiese"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "m.j.wiese@web.de"
+
+#~ msgid "Upload project files to a remote server"
+#~ msgstr "Projektdateien na en feern Server hoochladen"
+
+#~ msgid "Niko Sams"
+#~ msgstr "Niko Sams"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgid "permissions test"
+#~ msgstr "Verlövenprööv"

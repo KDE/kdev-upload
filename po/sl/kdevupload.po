@@ -1,0 +1,259 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdev-upload package.
+#
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdev-upload\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-04-08 03:44+0200\n"
+"PO-Revision-Date: 2020-11-03 11:34+0100\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#: kdevuploadplugin.cpp:113
+#, kde-format
+msgid "&Upload Project"
+msgstr "Prenesi projekt"
+
+#: kdevuploadplugin.cpp:115
+#, kde-format
+msgid "Upload project"
+msgstr "Prenesi projekt"
+
+#: kdevuploadplugin.cpp:120
+#, kde-format
+msgid "&Quick Upload Current File"
+msgstr "Hitri prenos trenutne datoteke"
+
+#: kdevuploadplugin.cpp:213
+#, kde-format
+msgid "Upload..."
+msgstr "Prenos..."
+
+#: kdevuploadplugin.cpp:218
+#, kde-format
+msgid "Quick Upload"
+msgstr "Hitri prenos"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UploadDialog)
+#: kdevuploadplugin.cpp:321 uploaddialog.ui:13 uploadpreferences.cpp:112
+#, kde-format
+msgid "Upload"
+msgstr "Prenos"
+
+#: kdevuploadplugin.cpp:322
+#, kde-format
+msgid "Output"
+msgstr "Izhod"
+
+#: kdevuploadplugin.cpp:338
+#, kde-format
+msgid "Upload Profiles"
+msgstr "Profili prenosa"
+
+#: profilesfiletree.cpp:60
+#, kde-format
+msgid "Please choose an upload profile."
+msgstr "Izberite profil prenosa."
+
+#: profilesfiletree.cpp:72
+#, kde-format
+msgid "&Copy URL"
+msgstr "Kopiraj naslov"
+
+#: profilesfiletree.cpp:75
+#, kde-format
+msgid "&Open URL"
+msgstr "Odpri naslov"
+
+#: uploaddialog.cpp:48
+#, kde-format
+msgid "&Upload"
+msgstr "Prenesi"
+
+#: uploaddialog.cpp:67
+#, kde-format
+msgctxt "Select all items in the tree"
+msgid "All"
+msgstr "Vse"
+
+#: uploaddialog.cpp:71
+#, kde-format
+msgid "Modified"
+msgstr "Spremenjeno"
+
+#: uploaddialog.cpp:75
+#, kde-format
+msgid "Invert"
+msgstr "Invertiraj"
+
+#: uploaddialog.cpp:121
+#, kde-format
+msgid "Cannot upload, no profile selected."
+msgstr "Prenos ni mogoč brez izbranega profila."
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploaddialog.ui:37
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
+#: uploaddialog.ui:49
+#, kde-format
+msgid "Mark as uploaded, but do not upload"
+msgstr "Označi kot preneseno, a ne prenesi"
+
+#: uploadjob.cpp:41
+#, kde-format
+msgid "Uploading files"
+msgstr "Prenašam datoteke"
+
+#: uploadjob.cpp:42
+#, kde-format
+msgid "Preparing..."
+msgstr "Priprava..."
+
+#: uploadjob.cpp:54
+#, kde-format
+msgid "Calculating size..."
+msgstr "Preračunavam velikost..."
+
+#: uploadjob.cpp:88
+#, kde-format
+msgid "Upload completed"
+msgstr "Prenos končan"
+
+#: uploadjob.cpp:123
+#, kde-format
+msgid "File was not modified for %1: %2"
+msgstr "Datoteka ni bila spremenjena za %1: %2"
+
+#: uploadjob.cpp:138
+#, kde-format
+msgid "Marked as uploaded for %1: %2"
+msgstr "Označena kot prenesena za %1: %2"
+
+#: uploadjob.cpp:147
+#, kde-format
+msgid "Uploading to %1: %2"
+msgstr "Prenašam na %1: %2"
+
+#: uploadjob.cpp:152
+#, kde-format
+msgid "Uploading %1..."
+msgstr "Prenašam %1..."
+
+#: uploadjob.cpp:157
+#, kde-format
+msgid "Directory in %1 already exists: %2"
+msgstr "Imenik v %1 že obstaja: %2"
+
+#: uploadjob.cpp:166
+#, kde-format
+msgid "Creating directory in %1: %2"
+msgstr "Ustvarjam imenik v %1: %2"
+
+#: uploadjob.cpp:194
+#, kde-format
+msgid "Upload canceled"
+msgstr "Prenos preklican"
+
+#: uploadjob.cpp:206
+#, kde-format
+msgid "Upload error: %1"
+msgstr "Napaka pri prenosu: %1"
+
+#: uploadpreferences.cpp:117
+#, kde-format
+msgid "Configure Upload settings"
+msgstr "Nastavi prenos"
+
+#. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
+#: uploadpreferences.ui:21
+#, kde-format
+msgid "&Add Profile"
+msgstr "Dodaj profil"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
+#: uploadpreferences.ui:28
+#, kde-format
+msgid "&Remove Profile"
+msgstr "Odstrani profil"
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploadpreferences.ui:35
+#, kde-format
+msgid "&Modify Profile"
+msgstr "Spremeni profil"
+
+#: uploadprofiledlg.cpp:32
+#, kde-format
+msgid "Upload Profile"
+msgstr "Prenesi profil"
+
+#: uploadprofiledlg.cpp:142
+#, kde-format
+msgid "The specified URL does not exist."
+msgstr "Dani spletni naslov ne obstaja."
+
+#: uploadprofiledlg.cpp:149
+#, kde-format
+msgid "The specified local directory does not exist."
+msgstr "Dani lokalni imenik ne obstaja."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: uploadprofiledlg.ui:22
+#, kde-format
+msgid "Profile &name:"
+msgstr "Ime profila:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: uploadprofiledlg.ui:38
+#, kde-format
+msgid "&Protocol:"
+msgstr "Protokol:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel4)
+#: uploadprofiledlg.ui:56
+#, kde-format
+msgid "&Host:"
+msgstr "Gostitelj:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
+#: uploadprofiledlg.ui:79
+#, kde-format
+msgid "Po&rt:"
+msgstr "Vrata:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2)
+#: uploadprofiledlg.ui:104
+#, kde-format
+msgid "&User:"
+msgstr "Uporabnik:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
+#: uploadprofiledlg.ui:136
+#, kde-format
+msgid "&Local Path:"
+msgstr "Lokalna pot:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
+#: uploadprofiledlg.ui:166
+#, kde-format
+msgid "Pa&th:"
+msgstr "Pot:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, defaultProfile)
+#: uploadprofiledlg.ui:196
+#, kde-format
+msgid "Use as &default profile"
+msgstr "Uporabi privzeti profil"

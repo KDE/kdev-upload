@@ -1,0 +1,258 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdev-upload package.
+# Shinjo Park <kde@peremen.name>, 2019, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdev-upload\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-04-08 03:44+0200\n"
+"PO-Revision-Date: 2020-04-04 14:30+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 19.04.3\n"
+
+#: kdevuploadplugin.cpp:113
+#, kde-format
+msgid "&Upload Project"
+msgstr "프로젝트 업로드(&U)"
+
+#: kdevuploadplugin.cpp:115
+#, kde-format
+msgid "Upload project"
+msgstr "프로젝트 업로드"
+
+#: kdevuploadplugin.cpp:120
+#, kde-format
+msgid "&Quick Upload Current File"
+msgstr "현재 파일 빠르게 업로드(&Q)"
+
+#: kdevuploadplugin.cpp:213
+#, kde-format
+msgid "Upload..."
+msgstr "업로드..."
+
+#: kdevuploadplugin.cpp:218
+#, kde-format
+msgid "Quick Upload"
+msgstr "빠른 업로드"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UploadDialog)
+#: kdevuploadplugin.cpp:321 uploaddialog.ui:13 uploadpreferences.cpp:112
+#, kde-format
+msgid "Upload"
+msgstr "업로드"
+
+#: kdevuploadplugin.cpp:322
+#, kde-format
+msgid "Output"
+msgstr "출력"
+
+#: kdevuploadplugin.cpp:338
+#, kde-format
+msgid "Upload Profiles"
+msgstr "업로드 프로필"
+
+#: profilesfiletree.cpp:60
+#, kde-format
+msgid "Please choose an upload profile."
+msgstr "업로드 프로필을 선택하십시오."
+
+#: profilesfiletree.cpp:72
+#, kde-format
+msgid "&Copy URL"
+msgstr "URL 복사(&C)"
+
+#: profilesfiletree.cpp:75
+#, kde-format
+msgid "&Open URL"
+msgstr "URL 열기(&O)"
+
+#: uploaddialog.cpp:48
+#, kde-format
+msgid "&Upload"
+msgstr "업로드(&U)"
+
+#: uploaddialog.cpp:67
+#, kde-format
+msgctxt "Select all items in the tree"
+msgid "All"
+msgstr "모두"
+
+#: uploaddialog.cpp:71
+#, kde-format
+msgid "Modified"
+msgstr "수정됨"
+
+#: uploaddialog.cpp:75
+#, kde-format
+msgid "Invert"
+msgstr "반전"
+
+#: uploaddialog.cpp:121
+#, kde-format
+msgid "Cannot upload, no profile selected."
+msgstr "업로드할 수 없습니다. 프로필을 선택하지 않았습니다."
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploaddialog.ui:37
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
+#: uploaddialog.ui:49
+#, kde-format
+msgid "Mark as uploaded, but do not upload"
+msgstr "업로드하기로 표시했지만 업로드하지 않음"
+
+#: uploadjob.cpp:41
+#, kde-format
+msgid "Uploading files"
+msgstr "파일 업로드 중"
+
+#: uploadjob.cpp:42
+#, kde-format
+msgid "Preparing..."
+msgstr "준비 중..."
+
+#: uploadjob.cpp:54
+#, kde-format
+msgid "Calculating size..."
+msgstr "크기 계산 중..."
+
+#: uploadjob.cpp:88
+#, kde-format
+msgid "Upload completed"
+msgstr "업로드 완료됨"
+
+#: uploadjob.cpp:123
+#, kde-format
+msgid "File was not modified for %1: %2"
+msgstr "%1의 파일이 수정되지 않았음: %2"
+
+#: uploadjob.cpp:138
+#, kde-format
+msgid "Marked as uploaded for %1: %2"
+msgstr "%1에 업로드하기로 표시됨: %2"
+
+#: uploadjob.cpp:147
+#, kde-format
+msgid "Uploading to %1: %2"
+msgstr "%1(으)로 업로드 중: %2"
+
+#: uploadjob.cpp:152
+#, kde-format
+msgid "Uploading %1..."
+msgstr "%1 업로드 중..."
+
+#: uploadjob.cpp:157
+#, kde-format
+msgid "Directory in %1 already exists: %2"
+msgstr "%1에 디렉터리가 이미 존재함: %2"
+
+#: uploadjob.cpp:166
+#, kde-format
+msgid "Creating directory in %1: %2"
+msgstr "%1에 디렉터리 만드는 중: %2"
+
+#: uploadjob.cpp:194
+#, kde-format
+msgid "Upload canceled"
+msgstr "업로드 취소됨"
+
+#: uploadjob.cpp:206
+#, kde-format
+msgid "Upload error: %1"
+msgstr "업로드 오류: %1"
+
+#: uploadpreferences.cpp:117
+#, kde-format
+msgid "Configure Upload settings"
+msgstr "업로드 설정"
+
+#. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
+#: uploadpreferences.ui:21
+#, kde-format
+msgid "&Add Profile"
+msgstr "프로필 추가(&A)"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
+#: uploadpreferences.ui:28
+#, kde-format
+msgid "&Remove Profile"
+msgstr "프로필 삭제(&R)"
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploadpreferences.ui:35
+#, kde-format
+msgid "&Modify Profile"
+msgstr "프로필 수정(&M)"
+
+#: uploadprofiledlg.cpp:32
+#, kde-format
+msgid "Upload Profile"
+msgstr "업로드 프로필"
+
+#: uploadprofiledlg.cpp:142
+#, kde-format
+msgid "The specified URL does not exist."
+msgstr "지정한 URL이 없습니다."
+
+#: uploadprofiledlg.cpp:149
+#, kde-format
+msgid "The specified local directory does not exist."
+msgstr "지정한 로컬 디렉터리가 없습니다."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: uploadprofiledlg.ui:22
+#, kde-format
+msgid "Profile &name:"
+msgstr "프로필 이름(&N):"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: uploadprofiledlg.ui:38
+#, kde-format
+msgid "&Protocol:"
+msgstr "프로토콜(&P):"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel4)
+#: uploadprofiledlg.ui:56
+#, kde-format
+msgid "&Host:"
+msgstr "호스트(&H):"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
+#: uploadprofiledlg.ui:79
+#, kde-format
+msgid "Po&rt:"
+msgstr "포트(&R):"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2)
+#: uploadprofiledlg.ui:104
+#, kde-format
+msgid "&User:"
+msgstr "사용자(&U):"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
+#: uploadprofiledlg.ui:136
+#, kde-format
+msgid "&Local Path:"
+msgstr "로컬 경로(&L):"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
+#: uploadprofiledlg.ui:166
+#, kde-format
+msgid "Pa&th:"
+msgstr "경로(&T):"
+
+#. i18n: ectx: property (text), widget (QCheckBox, defaultProfile)
+#: uploadprofiledlg.ui:196
+#, kde-format
+msgid "Use as &default profile"
+msgstr "기본 프로필로 사용(&D)"

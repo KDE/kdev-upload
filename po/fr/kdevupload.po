@@ -1,0 +1,284 @@
+# translation of kdevupload.po to Français
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Joëlle Cornavin <jcornavin@laposte.net>, 2010.
+# xavier <xavier.besnard@neuf.fr>, 2013.
+# Simon Depiets <sdepiets@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdevupload\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-04-08 03:44+0200\n"
+"PO-Revision-Date: 2018-07-23 15:42+0800\n"
+"Last-Translator: Simon Depiets <sdepiets@gmail.com>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 2.0\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: kdevuploadplugin.cpp:113
+#, kde-format
+msgid "&Upload Project"
+msgstr "&Envoyer un projet"
+
+#: kdevuploadplugin.cpp:115
+#, kde-format
+msgid "Upload project"
+msgstr "Envoie un projet"
+
+#: kdevuploadplugin.cpp:120
+#, kde-format
+msgid "&Quick Upload Current File"
+msgstr "Envoyer &rapidement le fichier actuel"
+
+#: kdevuploadplugin.cpp:213
+#, kde-format
+msgid "Upload..."
+msgstr "Envoi..."
+
+#: kdevuploadplugin.cpp:218
+#, kde-format
+msgid "Quick Upload"
+msgstr "Envoi rapide"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UploadDialog)
+#: kdevuploadplugin.cpp:321 uploaddialog.ui:13 uploadpreferences.cpp:112
+#, kde-format
+msgid "Upload"
+msgstr "Envoyer"
+
+#: kdevuploadplugin.cpp:322
+#, kde-format
+msgid "Output"
+msgstr "Sortie"
+
+#: kdevuploadplugin.cpp:338
+#, kde-format
+msgid "Upload Profiles"
+msgstr "Profils d'envoi"
+
+#: profilesfiletree.cpp:60
+#, kde-format
+msgid "Please choose an upload profile."
+msgstr "Veuillez choisir un profil d'envoi."
+
+#: profilesfiletree.cpp:72
+#, kde-format
+msgid "&Copy URL"
+msgstr "&Copier une URL"
+
+#: profilesfiletree.cpp:75
+#, kde-format
+msgid "&Open URL"
+msgstr "&Ouvrir une URL"
+
+#: uploaddialog.cpp:48
+#, kde-format
+msgid "&Upload"
+msgstr "&Envoyer"
+
+#: uploaddialog.cpp:67
+#, kde-format
+msgctxt "Select all items in the tree"
+msgid "All"
+msgstr "Tout"
+
+#: uploaddialog.cpp:71
+#, kde-format
+msgid "Modified"
+msgstr "Modifié"
+
+#: uploaddialog.cpp:75
+#, kde-format
+msgid "Invert"
+msgstr "Inverser"
+
+#: uploaddialog.cpp:121
+#, kde-format
+msgid "Cannot upload, no profile selected."
+msgstr "Impossible de faire un envoi, aucun profil sélectionné."
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploaddialog.ui:37
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
+#: uploaddialog.ui:49
+#, kde-format
+msgid "Mark as uploaded, but do not upload"
+msgstr "Marquer comme envoyé, mais ne pas envoyer"
+
+#: uploadjob.cpp:41
+#, kde-format
+msgid "Uploading files"
+msgstr "Envoi des fichiers"
+
+#: uploadjob.cpp:42
+#, kde-format
+msgid "Preparing..."
+msgstr "Préparation..."
+
+#: uploadjob.cpp:54
+#, kde-format
+msgid "Calculating size..."
+msgstr "Calcul de la taille..."
+
+#: uploadjob.cpp:88
+#, kde-format
+msgid "Upload completed"
+msgstr "Envoi terminé"
+
+#: uploadjob.cpp:123
+#, kde-format
+msgid "File was not modified for %1: %2"
+msgstr "Le fichier n'a pas été modifié pour %1 : %2"
+
+#: uploadjob.cpp:138
+#, kde-format
+msgid "Marked as uploaded for %1: %2"
+msgstr "Marqué comme envoyé pour %1 : %2"
+
+#: uploadjob.cpp:147
+#, kde-format
+msgid "Uploading to %1: %2"
+msgstr "Envoi vers %1 : %2"
+
+#: uploadjob.cpp:152
+#, kde-format
+msgid "Uploading %1..."
+msgstr "Envoi de %1..."
+
+#: uploadjob.cpp:157
+#, kde-format
+msgid "Directory in %1 already exists: %2"
+msgstr "Le dossier présent dans %1 existe déjà : %2"
+
+#: uploadjob.cpp:166
+#, kde-format
+msgid "Creating directory in %1: %2"
+msgstr "Création du dossier dans %1 : %2"
+
+#: uploadjob.cpp:194
+#, kde-format
+msgid "Upload canceled"
+msgstr "Envoi annulé"
+
+#: uploadjob.cpp:206
+#, kde-format
+msgid "Upload error: %1"
+msgstr "Problème lors de l'envoi : %1"
+
+#: uploadpreferences.cpp:117
+#, kde-format
+msgid "Configure Upload settings"
+msgstr "Configure les paramètres d'envoi"
+
+#. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
+#: uploadpreferences.ui:21
+#, kde-format
+msgid "&Add Profile"
+msgstr "&Ajouter un profil"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
+#: uploadpreferences.ui:28
+#, kde-format
+msgid "&Remove Profile"
+msgstr "&Supprimer un profil"
+
+#. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
+#: uploadpreferences.ui:35
+#, kde-format
+msgid "&Modify Profile"
+msgstr "&Modifier un profil"
+
+#: uploadprofiledlg.cpp:32
+#, kde-format
+msgid "Upload Profile"
+msgstr "Profil d'envoi"
+
+#: uploadprofiledlg.cpp:142
+#, kde-format
+msgid "The specified URL does not exist."
+msgstr "L'URL spécifiée n'existe pas."
+
+#: uploadprofiledlg.cpp:149
+#, kde-format
+msgid "The specified local directory does not exist."
+msgstr "Le dossier local spécifié n'existe pas."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: uploadprofiledlg.ui:22
+#, kde-format
+msgid "Profile &name:"
+msgstr "&Nom du profil :"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: uploadprofiledlg.ui:38
+#, kde-format
+msgid "&Protocol:"
+msgstr "&Protocole :"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel4)
+#: uploadprofiledlg.ui:56
+#, kde-format
+msgid "&Host:"
+msgstr "&Hôte :"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
+#: uploadprofiledlg.ui:79
+#, kde-format
+msgid "Po&rt:"
+msgstr "Po&rt :"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2)
+#: uploadprofiledlg.ui:104
+#, kde-format
+msgid "&User:"
+msgstr "&Utilisateur :"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
+#: uploadprofiledlg.ui:136
+#, kde-format
+msgid "&Local Path:"
+msgstr "Emplacement &local :"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
+#: uploadprofiledlg.ui:166
+#, kde-format
+msgid "Pa&th:"
+msgstr "Emplacemen&t :"
+
+#. i18n: ectx: property (text), widget (QCheckBox, defaultProfile)
+#: uploadprofiledlg.ui:196
+#, kde-format
+msgid "Use as &default profile"
+msgstr "Utiliser comme profil par &défaut"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Joëlle Cornavin"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "jcornavin@laposte.net"
+
+#~ msgid "Upload project files to a remote server"
+#~ msgstr "Envoyer des fichiers de projets vers un serveur distant"
+
+#~ msgid "Niko Sams"
+#~ msgstr "Niko Sams"
+
+#~ msgid "Author"
+#~ msgstr "Auteur"
+
+#~ msgid "permissions test"
+#~ msgstr "test des droits d'accès"
