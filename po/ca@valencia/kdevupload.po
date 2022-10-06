@@ -76,7 +76,7 @@ msgstr "&Copia URL"
 #: profilesfiletree.cpp:75
 #, kde-format
 msgid "&Open URL"
-msgstr "&Obri URL"
+msgstr "O&bri URL"
 
 #: uploaddialog.cpp:48
 #, kde-format
@@ -185,7 +185,7 @@ msgstr "Configura les opcions de pujada"
 #: uploadpreferences.ui:21
 #, kde-format
 msgid "&Add Profile"
-msgstr "&Afig perfil"
+msgstr "Afi&g perfil"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
 #: uploadpreferences.ui:28
