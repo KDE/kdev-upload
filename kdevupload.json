@@ -27,6 +27,7 @@
         "Description[sv]": "Ladda upp projektfiler till en fjärrserver",
         "Description[tr]": "Proje dosyalarını uzak bir sunucuya yükleyin",
         "Description[uk]": "Вивантаження файлів проєкту на віддалений сервер",
+        "Description[x-test]": "xxUpload project files to a remote serverxx",
         "Description[zh_TW]": "將專案檔案上傳至遠端伺服器",
         "Icon": "go-up",
         "Id": "KDevUpload",
@@ -56,6 +57,7 @@
         "Name[sv]": "Ladda upp",
         "Name[tr]": "Yükle",
         "Name[uk]": "Вивантаження",
+        "Name[x-test]": "xxUploadxx",
         "Name[zh_CN]": "上传",
         "Name[zh_TW]": "上傳",
         "ServiceTypes": [
