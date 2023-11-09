@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdevupload\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2023-01-06 12:00+0100\n"
+"PO-Revision-Date: 2023-11-08 20:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -111,72 +111,72 @@ msgstr "..."
 #: uploaddialog.ui:49
 #, kde-format
 msgid "Mark as uploaded, but do not upload"
-msgstr ""
+msgstr "Marki kiel alŝutita, sed ne alŝuti"
 
 #: uploadjob.cpp:41
 #, kde-format
 msgid "Uploading files"
-msgstr ""
+msgstr "Alŝutante dosierojn"
 
 #: uploadjob.cpp:42
 #, kde-format
 msgid "Preparing..."
-msgstr ""
+msgstr "Preparante..."
 
 #: uploadjob.cpp:54
 #, kde-format
 msgid "Calculating size..."
-msgstr ""
+msgstr "Kalkulante grandecon..."
 
 #: uploadjob.cpp:88
 #, kde-format
 msgid "Upload completed"
-msgstr ""
+msgstr "Alŝuto finiĝis"
 
 #: uploadjob.cpp:123
 #, kde-format
 msgid "File was not modified for %1: %2"
-msgstr ""
+msgstr "Dosiero ne estis modifita por %1: %2"
 
 #: uploadjob.cpp:138
 #, kde-format
 msgid "Marked as uploaded for %1: %2"
-msgstr ""
+msgstr "Markis kiel alŝutita por %1: %2"
 
 #: uploadjob.cpp:147
 #, kde-format
 msgid "Uploading to %1: %2"
-msgstr ""
+msgstr "Alŝuto al %1: %2"
 
 #: uploadjob.cpp:152
 #, kde-format
 msgid "Uploading %1..."
-msgstr ""
+msgstr "Alŝutante %1..."
 
 #: uploadjob.cpp:157
 #, kde-format
 msgid "Directory in %1 already exists: %2"
-msgstr ""
+msgstr "Dosierujo en %1 jam ekzistas: %2"
 
 #: uploadjob.cpp:166
 #, kde-format
 msgid "Creating directory in %1: %2"
-msgstr ""
+msgstr "Kreante dosierujon en %1: %2"
 
 #: uploadjob.cpp:194
 #, kde-format
 msgid "Upload canceled"
-msgstr ""
+msgstr "Alŝuto nuligita"
 
 #: uploadjob.cpp:206
 #, kde-format
 msgid "Upload error: %1"
-msgstr ""
+msgstr "Alŝuta eraro: %1"
 
 #: uploadpreferences.cpp:117
 #, kde-format
 msgid "Configure Upload settings"
-msgstr ""
+msgstr "Agordi Alŝutajn agordojn"
 
 #. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
 #: uploadpreferences.ui:21
