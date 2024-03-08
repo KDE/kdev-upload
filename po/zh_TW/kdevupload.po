@@ -1,258 +1,258 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdev-upload package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdev-upload\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-03-07 20:20+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #: kdevuploadplugin.cpp:113
 #, kde-format
 msgid "&Upload Project"
-msgstr ""
+msgstr "上傳專案(&U)"
 
 #: kdevuploadplugin.cpp:115
 #, kde-format
 msgid "Upload project"
-msgstr ""
+msgstr "上傳專案"
 
 #: kdevuploadplugin.cpp:120
 #, kde-format
 msgid "&Quick Upload Current File"
-msgstr ""
+msgstr "快速上傳目前檔案(&Q)"
 
 #: kdevuploadplugin.cpp:213
 #, kde-format
 msgid "Upload..."
-msgstr ""
+msgstr "上傳..."
 
 #: kdevuploadplugin.cpp:218
 #, kde-format
 msgid "Quick Upload"
-msgstr ""
+msgstr "快速上傳"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, UploadDialog)
 #: kdevuploadplugin.cpp:321 uploaddialog.ui:13 uploadpreferences.cpp:112
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "上傳"
 
 #: kdevuploadplugin.cpp:322
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "輸出"
 
 #: kdevuploadplugin.cpp:338
 #, kde-format
 msgid "Upload Profiles"
-msgstr ""
+msgstr "上傳設定檔"
 
 #: profilesfiletree.cpp:60
 #, kde-format
 msgid "Please choose an upload profile."
-msgstr ""
+msgstr "請選擇一個上傳設定檔。"
 
 #: profilesfiletree.cpp:72
 #, kde-format
 msgid "&Copy URL"
-msgstr ""
+msgstr "複製網址(&C)"
 
 #: profilesfiletree.cpp:75
 #, kde-format
 msgid "&Open URL"
-msgstr ""
+msgstr "開啟網址(&O)"
 
 #: uploaddialog.cpp:48
 #, kde-format
 msgid "&Upload"
-msgstr ""
+msgstr "上傳(&U)"
 
 #: uploaddialog.cpp:67
 #, kde-format
 msgctxt "Select all items in the tree"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: uploaddialog.cpp:71
 #, kde-format
 msgid "Modified"
-msgstr ""
+msgstr "已修改"
 
 #: uploaddialog.cpp:75
 #, kde-format
 msgid "Invert"
-msgstr ""
+msgstr "反轉"
 
 #: uploaddialog.cpp:121
 #, kde-format
 msgid "Cannot upload, no profile selected."
-msgstr ""
+msgstr "無法上傳，未選擇設定檔。"
 
 #. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
 #: uploaddialog.ui:37
 #, kde-format
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
 #: uploaddialog.ui:49
 #, kde-format
 msgid "Mark as uploaded, but do not upload"
-msgstr ""
+msgstr "標記為已上傳但不要真的上傳"
 
 #: uploadjob.cpp:41
 #, kde-format
 msgid "Uploading files"
-msgstr ""
+msgstr "正在上傳檔案"
 
 #: uploadjob.cpp:42
 #, kde-format
 msgid "Preparing..."
-msgstr ""
+msgstr "準備中..."
 
 #: uploadjob.cpp:54
 #, kde-format
 msgid "Calculating size..."
-msgstr ""
+msgstr "正在計算大小..."
 
 #: uploadjob.cpp:88
 #, kde-format
 msgid "Upload completed"
-msgstr ""
+msgstr "上傳完成"
 
 #: uploadjob.cpp:123
 #, kde-format
 msgid "File was not modified for %1: %2"
-msgstr ""
+msgstr "檔案沒有為 %1 修改：%2"
 
 #: uploadjob.cpp:138
 #, kde-format
 msgid "Marked as uploaded for %1: %2"
-msgstr ""
+msgstr "標記為已上傳到 %1：%2"
 
 #: uploadjob.cpp:147
 #, kde-format
 msgid "Uploading to %1: %2"
-msgstr ""
+msgstr "正在上傳到 %1：%2"
 
 #: uploadjob.cpp:152
 #, kde-format
 msgid "Uploading %1..."
-msgstr ""
+msgstr "正在上傳 %1..."
 
 #: uploadjob.cpp:157
 #, kde-format
 msgid "Directory in %1 already exists: %2"
-msgstr ""
+msgstr "目錄已存在於 %1：%2"
 
 #: uploadjob.cpp:166
 #, kde-format
 msgid "Creating directory in %1: %2"
-msgstr ""
+msgstr "正在於 %1 建立目錄：%2"
 
 #: uploadjob.cpp:194
 #, kde-format
 msgid "Upload canceled"
-msgstr ""
+msgstr "上傳已取消"
 
 #: uploadjob.cpp:206
 #, kde-format
 msgid "Upload error: %1"
-msgstr ""
+msgstr "上傳錯誤：%1"
 
 #: uploadpreferences.cpp:117
 #, kde-format
 msgid "Configure Upload settings"
-msgstr ""
+msgstr "調整上傳設定"
 
 #. i18n: ectx: property (text), widget (QPushButton, addProfileButton)
 #: uploadpreferences.ui:21
 #, kde-format
 msgid "&Add Profile"
-msgstr ""
+msgstr "新增設定檔(&A)"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeProfileButton)
 #: uploadpreferences.ui:28
 #, kde-format
 msgid "&Remove Profile"
-msgstr ""
+msgstr "移除設定檔(&R)"
 
 #. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
 #: uploadpreferences.ui:35
 #, kde-format
 msgid "&Modify Profile"
-msgstr ""
+msgstr "修改設定檔(&M)"
 
 #: uploadprofiledlg.cpp:32
 #, kde-format
 msgid "Upload Profile"
-msgstr ""
+msgstr "上傳設定檔"
 
 #: uploadprofiledlg.cpp:142
 #, kde-format
 msgid "The specified URL does not exist."
-msgstr ""
+msgstr "指定的網址不存在。"
 
 #: uploadprofiledlg.cpp:149
 #, kde-format
 msgid "The specified local directory does not exist."
-msgstr ""
+msgstr "指定的本地目錄不存在。"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: uploadprofiledlg.ui:22
 #, kde-format
 msgid "Profile &name:"
-msgstr ""
+msgstr "設定檔名稱(&N)："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: uploadprofiledlg.ui:38
 #, kde-format
 msgid "&Protocol:"
-msgstr ""
+msgstr "協定(&P)："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: uploadprofiledlg.ui:56
 #, kde-format
 msgid "&Host:"
-msgstr ""
+msgstr "主機(&H)："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
 #: uploadprofiledlg.ui:79
 #, kde-format
 msgid "Po&rt:"
-msgstr ""
+msgstr "連接埠(&R)："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: uploadprofiledlg.ui:104
 #, kde-format
 msgid "&User:"
-msgstr ""
+msgstr "使用者(&U)："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
 #: uploadprofiledlg.ui:136
 #, kde-format
 msgid "&Local Path:"
-msgstr ""
+msgstr "本地路徑(&L)："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
 #: uploadprofiledlg.ui:166
 #, kde-format
 msgid "Pa&th:"
-msgstr ""
+msgstr "路徑(&T)："
 
 #. i18n: ectx: property (text), widget (QCheckBox, defaultProfile)
 #: uploadprofiledlg.ui:196
 #, kde-format
 msgid "Use as &default profile"
-msgstr ""
+msgstr "設為預設設定檔(&D)"
