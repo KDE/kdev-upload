@@ -11,3 +11,6 @@ Dependencies:
     'frameworks/kcmutils': '@stable'
     'frameworks/ktexteditor': '@stable'
     'kdevelop/kdevelop': '@stable'
+
+Options:
+  require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
