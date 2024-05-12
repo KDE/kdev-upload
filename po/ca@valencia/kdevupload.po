@@ -40,7 +40,7 @@ msgstr "&Puja ràpidament el fitxer actual"
 #: kdevuploadplugin.cpp:213
 #, kde-format
 msgid "Upload..."
-msgstr "Puja..."
+msgstr "Puja…"
 
 #: kdevuploadplugin.cpp:218
 #, kde-format
@@ -108,7 +108,7 @@ msgstr "No es pot pujar, no s'ha seleccionat cap perfil."
 #: uploaddialog.ui:37
 #, kde-format
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, markUploadedCheckBox)
 #: uploaddialog.ui:49
@@ -124,12 +124,12 @@ msgstr "S'estan pujant fitxers"
 #: uploadjob.cpp:42
 #, kde-format
 msgid "Preparing..."
-msgstr "S'està preparant..."
+msgstr "S'està preparant…"
 
 #: uploadjob.cpp:54
 #, kde-format
 msgid "Calculating size..."
-msgstr "S'està calculant la mida..."
+msgstr "S'està calculant la mida…"
 
 #: uploadjob.cpp:88
 #, kde-format
@@ -154,7 +154,7 @@ msgstr "S'està pujant a %1:%2"
 #: uploadjob.cpp:152
 #, kde-format
 msgid "Uploading %1..."
-msgstr "S'està pujant %1..."
+msgstr "S'està pujant %1…"
 
 #: uploadjob.cpp:157
 #, kde-format
