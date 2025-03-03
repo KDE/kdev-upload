@@ -98,7 +98,7 @@ msgstr "Inverter"
 #: uploaddialog.cpp:121
 #, kde-format
 msgid "Cannot upload, no profile selected."
-msgstr "Non é posíbel enviar, non seleccionou un perfil."
+msgstr "Non é posíbel subir, non seleccionou un perfil."
 
 #. i18n: ectx: property (text), widget (QPushButton, modifyProfileButton)
 #: uploaddialog.ui:37
