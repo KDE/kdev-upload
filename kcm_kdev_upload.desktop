@@ -10,6 +10,7 @@ X-KDE-ParentComponents=kdevplatformproject,kdevupload
 X-KDE-CfgDlgHierarchy=GENERAL
 
 Name=Upload Profiles
+Name[ar]=تشكيلات الرفع
 Name[bs]=Pošalji profilie
 Name[ca]=Pujada de perfils
 Name[ca@valencia]=Pujada de perfils
@@ -41,6 +42,7 @@ Name[tr]=Yükleme Profilleri
 Name[uk]=Профілі вивантаження
 Name[zh_TW]=上傳設定檔
 Comment=Configure Upload Profiles
+Comment[ar]=اضبط تشكيلات الرفع
 Comment[bs]=Podešavanje slanja profila
 Comment[ca]=Configura la pujada de perfils
 Comment[ca@valencia]=Configura la pujada de perfils
