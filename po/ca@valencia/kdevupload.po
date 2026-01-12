@@ -174,7 +174,7 @@ msgstr "S'ha cancel·lat la pujada"
 #: uploadjob.cpp:206
 #, kde-format
 msgid "Upload error: %1"
-msgstr "S'ha produït un error en pujar: %1"
+msgstr "S'ha produït un error mentre es pujava: %1"
 
 #: uploadpreferences.cpp:117
 #, kde-format
@@ -230,7 +230,7 @@ msgstr "&Protocol:"
 #: uploadprofiledlg.ui:56
 #, kde-format
 msgid "&Host:"
-msgstr "&Màquina:"
+msgstr "A&mfitrió:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
 #: uploadprofiledlg.ui:79
