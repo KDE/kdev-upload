@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kdev-upload package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdev-upload\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
-"PO-Revision-Date: 2022-11-24 17:01+0300\n"
+"PO-Revision-Date: 2026-05-02 18:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: kdevuploadplugin.cpp:113
 #, kde-format
@@ -154,7 +154,7 @@ msgstr "%1 yükleniyor..."
 #: uploadjob.cpp:157
 #, kde-format
 msgid "Directory in %1 already exists: %2"
-msgstr "%1 içinde dizin halihazırda var: %2"
+msgstr "%1 içinde dizin hâlihazırda var: %2"
 
 #: uploadjob.cpp:166
 #, kde-format
